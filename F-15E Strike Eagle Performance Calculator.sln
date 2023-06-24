@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "F-15E Strike Eagle Performance Calculator", "F-15E Strike Eagle Performance Calculator\F-15E Strike Eagle Performance Calculator.csproj", "{DF8F417F-9B30-4E23-9FB5-0B6DA454585E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DF8F417F-9B30-4E23-9FB5-0B6DA454585E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF8F417F-9B30-4E23-9FB5-0B6DA454585E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF8F417F-9B30-4E23-9FB5-0B6DA454585E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF8F417F-9B30-4E23-9FB5-0B6DA454585E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E3A2C94D-66CF-4765-B483-E765AFB974A1}
+	EndGlobalSection
+EndGlobal
