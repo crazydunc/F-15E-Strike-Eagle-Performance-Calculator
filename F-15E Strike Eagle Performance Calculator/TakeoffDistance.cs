@@ -60,7 +60,7 @@ namespace F_15E_Strike_Eagle_Performance_Calculator
                     {
                         var distance3 = Convert.ToDouble(weightReader["Distance"]);
 
-                        if (weightReader.Read())
+                        if (weightReader.Read()) //teste
                         {
                             var distance4 = Convert.ToDouble(weightReader["Distance"]);
 
