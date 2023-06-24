@@ -9,9 +9,9 @@ namespace F_15E_Strike_Eagle_Performance_Calculator
 {
     public static class TakeoffSpeeds
     {
-        public static void Calculate(double targetWeight, int centreGravity, int thrustSetting)
+        public static string Calculate(double targetWeight, int centreGravity, int thrustSetting)
         {
-            string livDBLoc = Worker.ReplaceExtraslashes("C:\\Users\\crazy\\Desktop\\F15EPerformance.db");
+            string livDBLoc = Worker.ReplaceExtraslashes(AppDomain.CurrentDomain.BaseDirectory + "\\F15EPerformance.db");
             string connectionString = "Data Source = " + livDBLoc + ";";
             using (SQLiteConnection connection = new SQLiteConnection(connectionString))
             {
@@ -32,6 +32,8 @@ namespace F_15E_Strike_Eagle_Performance_Calculator
                 Console.WriteLine("Interpolated Rotation Speed: " + interpolatedRotationSpeed + " KCAS");
                 Console.WriteLine("Interpolated Nosewheel Speed: " + interpolatedNosewheelSpeed + " KCAS");
                 Console.WriteLine("Interpolated Takeoff Speed: " + interpolatedTakeoffSpeed + " KCAS");
+
+                return interpolatedRotationSpeed + "/" + interpolatedNosewheelSpeed + "/" + interpolatedTakeoffSpeed; 
             }
         }
 

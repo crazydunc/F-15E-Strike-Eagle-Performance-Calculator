@@ -10,14 +10,27 @@ namespace F_15E_Strike_Eagle_Performance_Calculator
         private void button1_Click(object sender, EventArgs e)
         {
             int thrustSetting = 0; //0 = Max || 1 = Mil
+            if (radioButton1.Checked)
+            {
+                thrustSetting = 0;
+            }
+            else
+            {
+                thrustSetting = 1; 
+            }
             double takeoffWeight = Convert.ToDouble(takeoffWeightTextBox.Text);
-            TakeoffSpeeds.Calculate(takeoffWeight, 24, thrustSetting);
-            double oat = 25; // Actual OAT
-            double runwayElevation = 1000; // Actual Runway Elevation
+            label2.Text = TakeoffSpeeds.Calculate(takeoffWeight, 24, thrustSetting);
+            double oat = Convert.ToDouble(OATTextBox.Text); // Actual OAT
+            double runwayElevation = Convert.ToDouble(runwayElevationTextBox.Text); // Actual Runway Elevation
 
-            double takeoffDistance = TakeoffDistance.Calculate(oat, takeoffWeight, runwayElevation);
+            double takeoffDistance = TakeoffDistance.CalculateNew(takeoffWeight, oat, runwayElevation);
 
-            Console.WriteLine($"Calculated Takeoff Distance: {takeoffDistance} feet");
+            label4.Text = takeoffDistance + " ft";
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
