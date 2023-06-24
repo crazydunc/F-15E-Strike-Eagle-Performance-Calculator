@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.SQLite;
 
 namespace F_15E_Strike_Eagle_Performance_Calculator
 {
@@ -18,8 +13,8 @@ namespace F_15E_Strike_Eagle_Performance_Calculator
     {
         public static double CalculateNew(double weightInput, double temperatureInput, double altitudeInput)
         {
-            string livDBLoc = Worker.ReplaceExtraslashes(AppDomain.CurrentDomain.BaseDirectory + "\\F15EPerformance.db");
-            string connectionString = "Data Source = " + livDBLoc + ";";
+            var livDBLoc = Worker.ReplaceExtraslashes(AppDomain.CurrentDomain.BaseDirectory + "\\F15EPerformance.db");
+            var connectionString = "Data Source = " + livDBLoc + ";";
             List<DataPoint> dataset = new List<DataPoint>();
             //{
             //    new DataPoint { Weight = 45000, Temperature = 0, Altitude = 0, Distance = 1200 },
@@ -56,7 +51,7 @@ namespace F_15E_Strike_Eagle_Performance_Calculator
             // User inputs
 
             // Perform interpolation
-            double interpolatedDistance = InterpolateDistance(dataset, weightInput, temperatureInput, altitudeInput);
+            var interpolatedDistance = InterpolateDistance(dataset, weightInput, temperatureInput, altitudeInput);
 
             // Display the interpolated distance
             return RoundDown(interpolatedDistance);
@@ -65,7 +60,7 @@ namespace F_15E_Strike_Eagle_Performance_Calculator
 
         public static double RoundDown(double value)
         {
-            double roundedDown = Math.Floor(value / 10) * 10;
+            var roundedDown = Math.Floor(value / 10) * 10;
 
             return roundedDown;
         }
@@ -74,20 +69,20 @@ namespace F_15E_Strike_Eagle_Performance_Calculator
             double sumOfWeightsTimesDistances = 0;
             double sumOfWeights = 0;
 
-            foreach (DataPoint dataPoint in dataset)
+            foreach (var dataPoint in dataset)
             {
                 // Calculate the distance between the given values and the data point values
-                double weightDistance = Math.Abs(weight - dataPoint.Weight);
-                double temperatureDistance = Math.Abs(temperature - dataPoint.Temperature);
-                double altitudeDistance = Math.Abs(altitude - dataPoint.Altitude);
+                var weightDistance = Math.Abs(weight - dataPoint.Weight);
+                var temperatureDistance = Math.Abs(temperature - dataPoint.Temperature);
+                var altitudeDistance = Math.Abs(altitude - dataPoint.Altitude);
 
                 // Calculate the weight based on the inverse of the distances
-                double weightFactor = 1.0 / (weightDistance + 1);
-                double temperatureFactor = 1.0 / (temperatureDistance + 1);
-                double altitudeFactor = 1.0 / (altitudeDistance + 1);
+                var weightFactor = 1.0 / (weightDistance + 1);
+                var temperatureFactor = 1.0 / (temperatureDistance + 1);
+                var altitudeFactor = 1.0 / (altitudeDistance + 1);
 
                 // Calculate the weighted distance
-                double weightedDistance = weightFactor * temperatureFactor * altitudeFactor * dataPoint.Distance;
+                var weightedDistance = weightFactor * temperatureFactor * altitudeFactor * dataPoint.Distance;
 
                 // Accumulate the weighted distance and weights
                 sumOfWeightsTimesDistances += weightedDistance;
@@ -95,7 +90,7 @@ namespace F_15E_Strike_Eagle_Performance_Calculator
             }
 
             // Perform the interpolation
-            double interpolatedDistance = sumOfWeightsTimesDistances / sumOfWeights;
+            var interpolatedDistance = sumOfWeightsTimesDistances / sumOfWeights;
 
             return interpolatedDistance;
         }

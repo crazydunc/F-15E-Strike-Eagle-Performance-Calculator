@@ -46,6 +46,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.RotationCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -54,7 +55,7 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.SystemColors.GrayText;
-            this.button1.Location = new System.Drawing.Point(85, 191);
+            this.button1.Location = new System.Drawing.Point(86, 230);
             this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(107, 38);
@@ -174,6 +175,7 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.groupBox1.Controls.Add(this.RotationCheckBox);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.OATTextBox);
             this.groupBox1.Controls.Add(this.button1);
@@ -186,7 +188,7 @@
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.groupBox1.Location = new System.Drawing.Point(12, 279);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(310, 242);
+            this.groupBox1.Size = new System.Drawing.Size(310, 276);
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Data";
@@ -225,6 +227,16 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 17;
             this.pictureBox1.TabStop = false;
+            // 
+            // RotationCheckBox
+            // 
+            this.RotationCheckBox.AutoSize = true;
+            this.RotationCheckBox.Location = new System.Drawing.Point(6, 188);
+            this.RotationCheckBox.Name = "RotationCheckBox";
+            this.RotationCheckBox.Size = new System.Drawing.Size(137, 29);
+            this.RotationCheckBox.TabIndex = 14;
+            this.RotationCheckBox.Text = "10° Rotation";
+            this.RotationCheckBox.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -271,5 +283,6 @@
         private GroupBox groupBox2;
         private Panel panel1;
         private PictureBox pictureBox1;
+        private CheckBox RotationCheckBox;
     }
 }
