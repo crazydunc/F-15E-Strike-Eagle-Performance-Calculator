@@ -5,6 +5,9 @@ namespace F_15E_Strike_Eagle_Performance_Calculator
         public Form1()
         {
             InitializeComponent();
+            takeoffWeightTextBox.MaxLength = 5;
+            OATTextBox.MaxLength = 2;
+            runwayElevationTextBox.MaxLength = 4; 
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -38,8 +41,8 @@ namespace F_15E_Strike_Eagle_Performance_Calculator
                 case > 81000:
                     MessageBox.Show(@"Take off Weight exceeds MTOW");
                     return;
-                case < 41000:
-                    MessageBox.Show(@"Take off Weight is under Empty Weight");
+                case < 40000:
+                    MessageBox.Show(@"Minimum Weight Performance data is 40000lbs ");
                     return;
                 default:
                     try
@@ -55,7 +58,7 @@ namespace F_15E_Strike_Eagle_Performance_Calculator
                         {
                             MessageBox.Show(@"Performance Data is Limited above 40C OAT, Results may be inaccurate");
                         }
-                        var takeoffDistance = TakeoffDistance.CalculateNew(takeoffWeight, oat, runwayElevation);
+                        var takeoffDistance = TakeoffDistance.CalculateNew(takeoffWeight, oat, runwayElevation, thrustSetting);
                         if (RotationCheckBox.Checked)
                         {
                             takeoffDistance = Math.Round(takeoffDistance * 1.1);

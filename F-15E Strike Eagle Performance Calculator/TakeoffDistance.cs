@@ -12,7 +12,7 @@ internal class DataPoint
 
 public static class TakeoffDistance
 {
-    public static double CalculateNew(double weightInput, double temperatureInput, double altitudeInput)
+    public static double CalculateNew(double weightInput, double temperatureInput, double altitudeInput, int thrust)
     {
         var dbLoc = Worker.ReplaceExtraslashes(AppDomain.CurrentDomain.BaseDirectory + "\\F15EPerformance.db");
         var connectionString = "Data Source = " + dbLoc + ";";
@@ -28,8 +28,9 @@ public static class TakeoffDistance
             using (var command = new SQLiteCommand(connection))
             {
                 command.CommandText =
-                    @"SELECT ID, GrossWeight, OAT, Elevation, Distance FROM TakeoffDistance";
+                    @"SELECT ID, GrossWeight, OAT, Elevation, Distance FROM TakeoffDistance WHERE Thrust = @thrust";
 
+                command.Parameters.AddWithValue("@thrust", thrust);
 
                 using (var reader = command.ExecuteReader())
                 {
