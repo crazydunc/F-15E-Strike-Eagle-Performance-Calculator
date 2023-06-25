@@ -50,15 +50,55 @@ namespace F_15E_Strike_Eagle_Performance_Calculator
 
             // User inputs
 
-            // Perform interpolation
-            var interpolatedDistance = InterpolateDistance(dataset, weightInput, temperatureInput, altitudeInput);
+
+            // Calculate the weight differences
+            DataPoint nearestPoint1 = FindNearestDataPoint(dataset, weightInput, temperatureInput, altitudeInput);
+            DataPoint nearestPoint2 = FindNearestDataPoint(dataset, weightInput, temperatureInput, altitudeInput, nearestPoint1);
+
+            double weightFactor = (nearestPoint2.Weight - nearestPoint1.Weight) != 0 ? (weightInput - nearestPoint1.Weight) / (nearestPoint2.Weight - nearestPoint1.Weight) : 0;
+
+            // Calculate the OAT factors
+            double oatFactor = (nearestPoint2.Temperature - nearestPoint1.Temperature) != 0 ? (temperatureInput - nearestPoint1.Temperature) / (nearestPoint2.Temperature - nearestPoint1.Temperature) : 0;
+
+            // Calculate the altitude factors
+            double altitudeFactor = (nearestPoint2.Altitude - nearestPoint1.Altitude) != 0 ? (altitudeInput - nearestPoint1.Altitude) / (nearestPoint2.Altitude - nearestPoint1.Altitude) : 0;
+
+
+            // Interpolate the distance
+
+            double interpolatedDistance = nearestPoint1.Distance +
+                                          weightFactor * (nearestPoint2.Distance - nearestPoint1.Distance) +
+                                          oatFactor * (nearestPoint2.Distance - nearestPoint1.Distance) +
+                                          altitudeFactor * (nearestPoint2.Distance - nearestPoint1.Distance);
+
 
             // Display the interpolated distance
             return RoundDown(interpolatedDistance);
 
         }
+        static DataPoint FindNearestDataPoint(List<DataPoint> data, double weight, double oat, double altitude, DataPoint exclude = null)
+        {
+            double minDistance = double.MaxValue;
+            DataPoint nearestPoint = null;
 
-        public static double RoundDown(double value)
+
+            foreach (DataPoint dataPoint in data)
+            {
+                if (exclude != null && dataPoint.Weight == exclude.Weight && dataPoint.Temperature == exclude.Temperature && dataPoint.Altitude == exclude.Altitude)
+                    continue;
+
+                double distance = Math.Abs(weight - dataPoint.Weight) + Math.Abs(oat - dataPoint.Temperature) + Math.Abs(altitude - dataPoint.Altitude);
+
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    nearestPoint = dataPoint;
+                }
+            }
+
+            return nearestPoint;
+        }
+         static double RoundDown(double value)
         {
             var roundedDown = Math.Floor(value / 10) * 10;
 
