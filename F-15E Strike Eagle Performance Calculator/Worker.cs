@@ -5,32 +5,17 @@ namespace F_15E_Strike_Eagle_Performance_Calculator
 {
     public static class Worker
     {
-        /// <summary>
-        /// Linear Interpolation of weights to derive Speed. 
-        /// </summary>
-        /// <param name="weightLow">Weight data from below target</param>
-        /// <param name="speedLow">Speed data from below target</param>
-        /// <param name="weightHigh">Weight data from above target</param>
-        /// <param name="speedHigh">Speed data from above target</param>
-        /// <param name="targetSpeed">Interpolated Speed value</param>
-        /// <returns></returns>
-        public static double Interpolate(double weightLow, double speedLow, double weightHigh, double speedHigh, double targetSpeed)
-        {
-            // Perform linear interpolation
-            var slope = (speedHigh - speedLow) / (weightHigh - weightLow);
-            var interpolatedY = speedLow + slope * (targetSpeed - weightLow);
 
-            return interpolatedY;
-        }
+        /// <summary>
+        /// Interpolates the nearest two data points for the user entered values. 
+        /// </summary>
+        /// <param name="x"> List of Weight Parameters</param>
+        /// <param name="y">List of Speed Parameters</param>
+        /// <param name="targetX">User entered target weight</param>
+        /// <returns>A rounded value of Y interpolated from Target X</returns>
         public static double InterpolateNearestNeighbor(List<double> x, List<double> y, double targetX)
         {
             var nearestIndex = FindNearestIndex(x, targetX);
-
-            //if (nearestIndex == x.Count - 1 || nearestIndex == 0)
-            //{
-            //    If the nearest index is the first or last index, we cannot perform interpolation
-            //    return y[nearestIndex];
-            //}
 
             var x0 = x[nearestIndex];
             var x1 = x[nearestIndex + 1];

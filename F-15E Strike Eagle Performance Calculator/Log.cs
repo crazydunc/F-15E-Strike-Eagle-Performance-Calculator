@@ -8,7 +8,10 @@
 
             var path = folder + @"\v48th OG\F15E_PerfLog.txt";
             var logFolder = Path.GetDirectoryName(path);
-            Directory.CreateDirectory(logFolder);
+            if (!Directory.Exists(logFolder))
+            {
+                if (logFolder != null) Directory.CreateDirectory(logFolder);
+            }
 
             if (!File.Exists(path))
             {
@@ -20,9 +23,9 @@
                 w.WriteLine("[" + DateTime.Now + "] - " + line);
                 w.Close();
             }
-            catch (Exception eh)
+            catch (Exception)
             {
-//
+                // no action 
             }
         }
     }
