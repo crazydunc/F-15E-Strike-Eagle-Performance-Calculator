@@ -23,10 +23,6 @@ namespace F_15E_Strike_Eagle_Performance_Calculator
             var interpolatedNosewheelSpeed = Worker.InterpolateNearestNeighbor(rotationWeights, speedData["Nosewheel"], targetWeight);
             var interpolatedTakeoffSpeed = Worker.InterpolateNearestNeighbor(rotationWeights, speedData["Takeoff"], targetWeight);
 
-            Console.WriteLine(@"Interpolated Rotation Speed: " + interpolatedRotationSpeed + @" KCAS");
-            Console.WriteLine(@"Interpolated Nosewheel Speed: " + interpolatedNosewheelSpeed + @" KCAS");
-            Console.WriteLine(@"Interpolated Takeoff Speed: " + interpolatedTakeoffSpeed + @" KCAS");
-
             return interpolatedRotationSpeed + "/" + interpolatedNosewheelSpeed + "/" + interpolatedTakeoffSpeed;
         }
 

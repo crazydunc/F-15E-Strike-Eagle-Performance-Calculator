@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.button1 = new System.Windows.Forms.Button();
+            this.calcuateButton = new System.Windows.Forms.Button();
             this.takeoffWeightTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -47,21 +47,22 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // calcuateButton
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.GrayText;
-            this.button1.Location = new System.Drawing.Point(79, 138);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Calculate";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.calcuateButton.BackColor = System.Drawing.SystemColors.GrayText;
+            this.calcuateButton.Location = new System.Drawing.Point(79, 138);
+            this.calcuateButton.Name = "calcuateButton";
+            this.calcuateButton.Size = new System.Drawing.Size(75, 23);
+            this.calcuateButton.TabIndex = 0;
+            this.calcuateButton.Text = "Calculate";
+            this.calcuateButton.UseVisualStyleBackColor = false;
+            this.calcuateButton.Click += new System.EventHandler(this.button1_Click);
             // 
             // takeoffWeightTextBox
             // 
@@ -76,9 +77,9 @@
             this.label1.Location = new System.Drawing.Point(4, 24);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(241, 15);
+            this.label1.Size = new System.Drawing.Size(236, 15);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Rotation/Nosewheel Liftoff/Takeoff Speedss:";
+            this.label1.Text = "Rotation/Nosewheel Liftoff/Takeoff Speeds:";
             // 
             // label2
             // 
@@ -86,9 +87,9 @@
             this.label2.Location = new System.Drawing.Point(249, 24);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(62, 15);
+            this.label2.Size = new System.Drawing.Size(93, 15);
             this.label2.TabIndex = 3;
-            this.label2.Text = "---/---/---";
+            this.label2.Text = "---/---/--- KCAS";
             // 
             // label3
             // 
@@ -186,7 +187,7 @@
             this.groupBox1.Controls.Add(this.RotationCheckBox);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.OATTextBox);
-            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.calcuateButton);
             this.groupBox1.Controls.Add(this.radioButton2);
             this.groupBox1.Controls.Add(this.takeoffWeightTextBox);
             this.groupBox1.Controls.Add(this.radioButton1);
@@ -225,7 +226,7 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(339, 90);
+            this.groupBox2.Size = new System.Drawing.Size(356, 90);
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Output";
@@ -253,12 +254,23 @@
             this.pictureBox1.TabIndex = 17;
             this.pictureBox1.TabStop = false;
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.ForeColor = System.Drawing.SystemColors.Control;
+            this.label8.Location = new System.Drawing.Point(3, 378);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(144, 15);
+            this.label8.TabIndex = 18;
+            this.label8.Text = "© Duncan MacKellar 2023";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.ClientSize = new System.Drawing.Size(632, 397);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox2);
@@ -275,12 +287,13 @@
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private Button button1;
+        private Button calcuateButton;
         private TextBox takeoffWeightTextBox;
         private Label label1;
         private Label label2;
@@ -298,5 +311,6 @@
         private Panel panel1;
         private PictureBox pictureBox1;
         private CheckBox RotationCheckBox;
+        private Label label8;
     }
 }

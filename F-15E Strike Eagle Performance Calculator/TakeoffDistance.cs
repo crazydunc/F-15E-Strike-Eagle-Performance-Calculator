@@ -17,10 +17,7 @@ public static class TakeoffDistance
         var dbLoc = Worker.ReplaceExtraslashes(AppDomain.CurrentDomain.BaseDirectory + "\\F15EPerformance.db");
         var connectionString = "Data Source = " + dbLoc + ";";
         List<DataPoint?> data = new();
-        //{
-        //    new DataPoint { Weight = 45000, Temperature = 0, Altitude = 0, Distance = 1200 },
-        //    // Add the rest of your data points here...
-        //};
+
         using (var connection = new SQLiteConnection(connectionString))
         {
             connection.Open();
@@ -86,7 +83,15 @@ public static class TakeoffDistance
 
         return 0;
     }
-
+    /// <summary>
+    /// Finds nearest data point and returns it. 
+    /// </summary>
+    /// <param name="data">List of Data points</param>
+    /// <param name="weight">User entered Weight</param>
+    /// <param name="oat">user entered OAT</param>
+    /// <param name="altitude">user entered Altitude</param>
+    /// <param name="exclude">Data entry to be excluded from search</param>
+    /// <returns>instance of the nearest non excluded data point from List data</returns>
     private static DataPoint? FindNearestDataPoint(List<DataPoint?> data, double weight, double oat, double altitude,
         DataPoint? exclude = null)
     {

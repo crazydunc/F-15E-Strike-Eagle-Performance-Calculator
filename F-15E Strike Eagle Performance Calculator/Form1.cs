@@ -7,7 +7,11 @@ namespace F_15E_Strike_Eagle_Performance_Calculator
             InitializeComponent();
             takeoffWeightTextBox.MaxLength = 5;
             OATTextBox.MaxLength = 2;
-            runwayElevationTextBox.MaxLength = 4; 
+            runwayElevationTextBox.MaxLength = 4;
+            calcuateButton.Enabled = false; 
+            takeoffWeightTextBox.TextChanged += TextBox_TextChanged;
+            OATTextBox.TextChanged += TextBox_TextChanged;
+            runwayElevationTextBox.TextChanged += TextBox_TextChanged;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -47,7 +51,7 @@ namespace F_15E_Strike_Eagle_Performance_Calculator
                 default:
                     try
                     {
-                        label2.Text = TakeoffSpeeds.Calculate(takeoffWeight, 24, thrustSetting);
+                        label2.Text = TakeoffSpeeds.Calculate(takeoffWeight, 24, thrustSetting) + " KCAS";
                         var oat = Convert.ToDouble(OATTextBox.Text); // Actual OAT
                         var runwayElevation = Convert.ToDouble(runwayElevationTextBox.Text); // Actual Runway Elevation
                         if (runwayElevation > 2000)
@@ -78,7 +82,20 @@ namespace F_15E_Strike_Eagle_Performance_Calculator
                     break;
             }
         }
-
+        private void TextBox_TextChanged(object sender, EventArgs e)
+        {
+            // Check if all three textboxes have data
+            if (!string.IsNullOrEmpty(takeoffWeightTextBox.Text) &&
+                !string.IsNullOrEmpty(OATTextBox.Text) &&
+                !string.IsNullOrEmpty(runwayElevationTextBox.Text))
+            {
+                calcuateButton.Enabled = true; // Enable the button
+            }
+            else
+            {
+                calcuateButton.Enabled = false; // Disable the button
+            }
+        }
 
     }
 }
