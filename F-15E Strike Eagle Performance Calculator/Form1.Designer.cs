@@ -50,6 +50,17 @@
             this.label8 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.weightLabel = new System.Windows.Forms.Label();
+            this.DragLabel = new System.Windows.Forms.Label();
+            this.LatAsymLabel = new System.Windows.Forms.Label();
+            this.payloadLabel = new System.Windows.Forms.Label();
+            this.fuelLabel = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.comboBoxsta8b = new System.Windows.Forms.ComboBox();
             this.comboBoxsta8 = new System.Windows.Forms.ComboBox();
             this.comboBoxsta8a = new System.Windows.Forms.ComboBox();
@@ -62,24 +73,13 @@
             this.comboBoxsta2 = new System.Windows.Forms.ComboBox();
             this.comboBoxSta2a = new System.Windows.Forms.ComboBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.fuelLabel = new System.Windows.Forms.Label();
-            this.payloadLabel = new System.Windows.Forms.Label();
-            this.LatAsymLabel = new System.Windows.Forms.Label();
-            this.DragLabel = new System.Windows.Forms.Label();
-            this.weightLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // calcuateButton
@@ -317,121 +317,10 @@
             this.panel3.Controls.Add(this.comboBoxsta2);
             this.panel3.Controls.Add(this.comboBoxSta2a);
             this.panel3.Controls.Add(this.pictureBox2);
-            this.panel3.Location = new System.Drawing.Point(5, 335);
+            this.panel3.Location = new System.Drawing.Point(653, 21);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(627, 471);
+            this.panel3.Size = new System.Drawing.Size(1248, 792);
             this.panel3.TabIndex = 20;
-            // 
-            // comboBoxsta8b
-            // 
-            this.comboBoxsta8b.FormattingEnabled = true;
-            this.comboBoxsta8b.Location = new System.Drawing.Point(526, 304);
-            this.comboBoxsta8b.Name = "comboBoxsta8b";
-            this.comboBoxsta8b.Size = new System.Drawing.Size(100, 23);
-            this.comboBoxsta8b.TabIndex = 13;
-            this.comboBoxsta8b.SelectedIndexChanged += new System.EventHandler(this.comboBoxsta8b_SelectedIndexChanged);
-            // 
-            // comboBoxsta8
-            // 
-            this.comboBoxsta8.FormattingEnabled = true;
-            this.comboBoxsta8.Location = new System.Drawing.Point(493, 244);
-            this.comboBoxsta8.Name = "comboBoxsta8";
-            this.comboBoxsta8.Size = new System.Drawing.Size(100, 23);
-            this.comboBoxsta8.TabIndex = 12;
-            this.comboBoxsta8.SelectedIndexChanged += new System.EventHandler(this.comboBoxsta8_SelectedIndexChanged);
-            // 
-            // comboBoxsta8a
-            // 
-            this.comboBoxsta8a.FormattingEnabled = true;
-            this.comboBoxsta8a.Location = new System.Drawing.Point(447, 273);
-            this.comboBoxsta8a.Name = "comboBoxsta8a";
-            this.comboBoxsta8a.Size = new System.Drawing.Size(100, 23);
-            this.comboBoxsta8a.TabIndex = 11;
-            this.comboBoxsta8a.SelectedIndexChanged += new System.EventHandler(this.comboBoxsta8a_SelectedIndexChanged);
-            // 
-            // comboBoxrcft
-            // 
-            this.comboBoxrcft.FormattingEnabled = true;
-            this.comboBoxrcft.Location = new System.Drawing.Point(380, 244);
-            this.comboBoxrcft.Name = "comboBoxrcft";
-            this.comboBoxrcft.Size = new System.Drawing.Size(100, 23);
-            this.comboBoxrcft.TabIndex = 10;
-            this.comboBoxrcft.SelectedIndexChanged += new System.EventHandler(this.comboBoxrcft_SelectedIndexChanged);
-            // 
-            // comboBoxlnp
-            // 
-            this.comboBoxlnp.FormattingEnabled = true;
-            this.comboBoxlnp.Location = new System.Drawing.Point(316, 275);
-            this.comboBoxlnp.Name = "comboBoxlnp";
-            this.comboBoxlnp.Size = new System.Drawing.Size(100, 23);
-            this.comboBoxlnp.TabIndex = 8;
-            this.comboBoxlnp.SelectedIndexChanged += new System.EventHandler(this.comboBoxlnp_SelectedIndexChanged);
-            // 
-            // comboBoxsta5
-            // 
-            this.comboBoxsta5.FormattingEnabled = true;
-            this.comboBoxsta5.Location = new System.Drawing.Point(259, 244);
-            this.comboBoxsta5.Name = "comboBoxsta5";
-            this.comboBoxsta5.Size = new System.Drawing.Size(100, 23);
-            this.comboBoxsta5.TabIndex = 7;
-            this.comboBoxsta5.SelectedIndexChanged += new System.EventHandler(this.comboBoxsta5_SelectedIndexChanged);
-            // 
-            // comboBoxltp
-            // 
-            this.comboBoxltp.FormattingEnabled = true;
-            this.comboBoxltp.Location = new System.Drawing.Point(210, 275);
-            this.comboBoxltp.Name = "comboBoxltp";
-            this.comboBoxltp.Size = new System.Drawing.Size(100, 23);
-            this.comboBoxltp.TabIndex = 6;
-            this.comboBoxltp.SelectedIndexChanged += new System.EventHandler(this.comboBoxltp_SelectedIndexChanged);
-            // 
-            // comboBoxLcft
-            // 
-            this.comboBoxLcft.FormattingEnabled = true;
-            this.comboBoxLcft.Location = new System.Drawing.Point(140, 244);
-            this.comboBoxLcft.Name = "comboBoxLcft";
-            this.comboBoxLcft.Size = new System.Drawing.Size(100, 23);
-            this.comboBoxLcft.TabIndex = 4;
-            this.comboBoxLcft.SelectedIndexChanged += new System.EventHandler(this.comboBoxLcft_SelectedIndexChanged);
-            // 
-            // comboBoxsta2b
-            // 
-            this.comboBoxsta2b.FormattingEnabled = true;
-            this.comboBoxsta2b.Location = new System.Drawing.Point(74, 304);
-            this.comboBoxsta2b.Name = "comboBoxsta2b";
-            this.comboBoxsta2b.Size = new System.Drawing.Size(100, 23);
-            this.comboBoxsta2b.TabIndex = 3;
-            this.comboBoxsta2b.SelectedIndexChanged += new System.EventHandler(this.comboBoxsta2b_SelectedIndexChanged);
-            // 
-            // comboBoxsta2
-            // 
-            this.comboBoxsta2.FormattingEnabled = true;
-            this.comboBoxsta2.Location = new System.Drawing.Point(29, 244);
-            this.comboBoxsta2.Name = "comboBoxsta2";
-            this.comboBoxsta2.Size = new System.Drawing.Size(100, 23);
-            this.comboBoxsta2.TabIndex = 2;
-            this.comboBoxsta2.SelectedIndexChanged += new System.EventHandler(this.comboBoxsta2_SelectedIndexChanged);
-            // 
-            // comboBoxSta2a
-            // 
-            this.comboBoxSta2a.FormattingEnabled = true;
-            this.comboBoxSta2a.Location = new System.Drawing.Point(0, 275);
-            this.comboBoxSta2a.Name = "comboBoxSta2a";
-            this.comboBoxSta2a.Size = new System.Drawing.Size(100, 23);
-            this.comboBoxSta2a.TabIndex = 1;
-            this.comboBoxSta2a.SelectedIndexChanged += new System.EventHandler(this.comboBoxSta2a_SelectedIndexChanged);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox2.Image = global::F_15E_Strike_Eagle_Performance_Calculator.Properties.Resources.F15E_Stations;
-            this.pictureBox2.Location = new System.Drawing.Point(0, 3);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(627, 235);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 0;
-            this.pictureBox2.TabStop = false;
             // 
             // groupBox3
             // 
@@ -446,48 +335,52 @@
             this.groupBox3.Controls.Add(this.label10);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.groupBox3.Location = new System.Drawing.Point(210, 337);
+            this.groupBox3.Location = new System.Drawing.Point(1002, 605);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(224, 112);
             this.groupBox3.TabIndex = 14;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Loadout Information";
             // 
-            // label9
+            // weightLabel
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(30, 87);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(80, 15);
-            this.label9.TabIndex = 0;
-            this.label9.Text = "Gross Weight:";
+            this.weightLabel.AutoSize = true;
+            this.weightLabel.Location = new System.Drawing.Point(116, 87);
+            this.weightLabel.Name = "weightLabel";
+            this.weightLabel.Size = new System.Drawing.Size(0, 15);
+            this.weightLabel.TabIndex = 9;
             // 
-            // label10
+            // DragLabel
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(59, 36);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(52, 15);
-            this.label10.TabIndex = 1;
-            this.label10.Text = "Payload:";
+            this.DragLabel.AutoSize = true;
+            this.DragLabel.Location = new System.Drawing.Point(116, 70);
+            this.DragLabel.Name = "DragLabel";
+            this.DragLabel.Size = new System.Drawing.Size(0, 15);
+            this.DragLabel.TabIndex = 8;
             // 
-            // label11
+            // LatAsymLabel
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(79, 19);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(32, 15);
-            this.label11.TabIndex = 2;
-            this.label11.Text = "Fuel:";
+            this.LatAsymLabel.AutoSize = true;
+            this.LatAsymLabel.Location = new System.Drawing.Point(116, 53);
+            this.LatAsymLabel.Name = "LatAsymLabel";
+            this.LatAsymLabel.Size = new System.Drawing.Size(0, 15);
+            this.LatAsymLabel.TabIndex = 7;
             // 
-            // label12
+            // payloadLabel
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(2, 53);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(109, 15);
-            this.label12.TabIndex = 3;
-            this.label12.Text = "Lateral Asymmetry:";
+            this.payloadLabel.AutoSize = true;
+            this.payloadLabel.Location = new System.Drawing.Point(116, 36);
+            this.payloadLabel.Name = "payloadLabel";
+            this.payloadLabel.Size = new System.Drawing.Size(0, 15);
+            this.payloadLabel.TabIndex = 6;
+            // 
+            // fuelLabel
+            // 
+            this.fuelLabel.AutoSize = true;
+            this.fuelLabel.Location = new System.Drawing.Point(116, 19);
+            this.fuelLabel.Name = "fuelLabel";
+            this.fuelLabel.Size = new System.Drawing.Size(0, 15);
+            this.fuelLabel.TabIndex = 5;
             // 
             // label13
             // 
@@ -498,52 +391,169 @@
             this.label13.TabIndex = 4;
             this.label13.Text = "Drag Index:";
             // 
-            // fuelLabel
+            // label12
             // 
-            this.fuelLabel.AutoSize = true;
-            this.fuelLabel.Location = new System.Drawing.Point(116, 19);
-            this.fuelLabel.Name = "fuelLabel";
-            this.fuelLabel.Size = new System.Drawing.Size(0, 15);
-            this.fuelLabel.TabIndex = 5;
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(2, 53);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(109, 15);
+            this.label12.TabIndex = 3;
+            this.label12.Text = "Lateral Asymmetry:";
             // 
-            // payloadLabel
+            // label11
             // 
-            this.payloadLabel.AutoSize = true;
-            this.payloadLabel.Location = new System.Drawing.Point(116, 36);
-            this.payloadLabel.Name = "payloadLabel";
-            this.payloadLabel.Size = new System.Drawing.Size(0, 15);
-            this.payloadLabel.TabIndex = 6;
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(79, 19);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(32, 15);
+            this.label11.TabIndex = 2;
+            this.label11.Text = "Fuel:";
             // 
-            // LatAsymLabel
+            // label10
             // 
-            this.LatAsymLabel.AutoSize = true;
-            this.LatAsymLabel.Location = new System.Drawing.Point(116, 53);
-            this.LatAsymLabel.Name = "LatAsymLabel";
-            this.LatAsymLabel.Size = new System.Drawing.Size(0, 15);
-            this.LatAsymLabel.TabIndex = 7;
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(59, 36);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(52, 15);
+            this.label10.TabIndex = 1;
+            this.label10.Text = "Payload:";
             // 
-            // DragLabel
+            // label9
             // 
-            this.DragLabel.AutoSize = true;
-            this.DragLabel.Location = new System.Drawing.Point(116, 70);
-            this.DragLabel.Name = "DragLabel";
-            this.DragLabel.Size = new System.Drawing.Size(0, 15);
-            this.DragLabel.TabIndex = 8;
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(30, 87);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(80, 15);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "Gross Weight:";
             // 
-            // weightLabel
+            // comboBoxsta8b
             // 
-            this.weightLabel.AutoSize = true;
-            this.weightLabel.Location = new System.Drawing.Point(116, 87);
-            this.weightLabel.Name = "weightLabel";
-            this.weightLabel.Size = new System.Drawing.Size(0, 15);
-            this.weightLabel.TabIndex = 9;
+            this.comboBoxsta8b.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.comboBoxsta8b.FormattingEnabled = true;
+            this.comboBoxsta8b.Location = new System.Drawing.Point(370, 462);
+            this.comboBoxsta8b.Name = "comboBoxsta8b";
+            this.comboBoxsta8b.Size = new System.Drawing.Size(125, 21);
+            this.comboBoxsta8b.TabIndex = 13;
+            this.comboBoxsta8b.SelectedIndexChanged += new System.EventHandler(this.comboBoxsta8b_SelectedIndexChanged);
+            // 
+            // comboBoxsta8
+            // 
+            this.comboBoxsta8.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.comboBoxsta8.FormattingEnabled = true;
+            this.comboBoxsta8.Location = new System.Drawing.Point(311, 428);
+            this.comboBoxsta8.Name = "comboBoxsta8";
+            this.comboBoxsta8.Size = new System.Drawing.Size(125, 21);
+            this.comboBoxsta8.TabIndex = 12;
+            this.comboBoxsta8.SelectedIndexChanged += new System.EventHandler(this.comboBoxsta8_SelectedIndexChanged);
+            // 
+            // comboBoxsta8a
+            // 
+            this.comboBoxsta8a.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.comboBoxsta8a.FormattingEnabled = true;
+            this.comboBoxsta8a.Location = new System.Drawing.Point(225, 462);
+            this.comboBoxsta8a.Name = "comboBoxsta8a";
+            this.comboBoxsta8a.Size = new System.Drawing.Size(125, 21);
+            this.comboBoxsta8a.TabIndex = 11;
+            this.comboBoxsta8a.SelectedIndexChanged += new System.EventHandler(this.comboBoxsta8a_SelectedIndexChanged);
+            // 
+            // comboBoxrcft
+            // 
+            this.comboBoxrcft.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.comboBoxrcft.FormattingEnabled = true;
+            this.comboBoxrcft.Location = new System.Drawing.Point(402, 496);
+            this.comboBoxrcft.Name = "comboBoxrcft";
+            this.comboBoxrcft.Size = new System.Drawing.Size(125, 21);
+            this.comboBoxrcft.TabIndex = 10;
+            this.comboBoxrcft.SelectedIndexChanged += new System.EventHandler(this.comboBoxrcft_SelectedIndexChanged);
+            // 
+            // comboBoxlnp
+            // 
+            this.comboBoxlnp.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.comboBoxlnp.FormattingEnabled = true;
+            this.comboBoxlnp.Location = new System.Drawing.Point(649, 428);
+            this.comboBoxlnp.Name = "comboBoxlnp";
+            this.comboBoxlnp.Size = new System.Drawing.Size(125, 21);
+            this.comboBoxlnp.TabIndex = 8;
+            this.comboBoxlnp.SelectedIndexChanged += new System.EventHandler(this.comboBoxlnp_SelectedIndexChanged);
+            // 
+            // comboBoxsta5
+            // 
+            this.comboBoxsta5.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.comboBoxsta5.FormattingEnabled = true;
+            this.comboBoxsta5.Location = new System.Drawing.Point(563, 462);
+            this.comboBoxsta5.Name = "comboBoxsta5";
+            this.comboBoxsta5.Size = new System.Drawing.Size(125, 21);
+            this.comboBoxsta5.TabIndex = 7;
+            this.comboBoxsta5.SelectedIndexChanged += new System.EventHandler(this.comboBoxsta5_SelectedIndexChanged);
+            // 
+            // comboBoxltp
+            // 
+            this.comboBoxltp.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.comboBoxltp.FormattingEnabled = true;
+            this.comboBoxltp.Location = new System.Drawing.Point(479, 428);
+            this.comboBoxltp.Name = "comboBoxltp";
+            this.comboBoxltp.Size = new System.Drawing.Size(125, 21);
+            this.comboBoxltp.TabIndex = 6;
+            this.comboBoxltp.SelectedIndexChanged += new System.EventHandler(this.comboBoxltp_SelectedIndexChanged);
+            // 
+            // comboBoxLcft
+            // 
+            this.comboBoxLcft.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.comboBoxLcft.FormattingEnabled = true;
+            this.comboBoxLcft.Location = new System.Drawing.Point(735, 496);
+            this.comboBoxLcft.Name = "comboBoxLcft";
+            this.comboBoxLcft.Size = new System.Drawing.Size(125, 21);
+            this.comboBoxLcft.TabIndex = 4;
+            this.comboBoxLcft.SelectedIndexChanged += new System.EventHandler(this.comboBoxLcft_SelectedIndexChanged);
+            // 
+            // comboBoxsta2b
+            // 
+            this.comboBoxsta2b.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.comboBoxsta2b.FormattingEnabled = true;
+            this.comboBoxsta2b.Location = new System.Drawing.Point(761, 462);
+            this.comboBoxsta2b.Name = "comboBoxsta2b";
+            this.comboBoxsta2b.Size = new System.Drawing.Size(125, 21);
+            this.comboBoxsta2b.TabIndex = 3;
+            this.comboBoxsta2b.SelectedIndexChanged += new System.EventHandler(this.comboBoxsta2b_SelectedIndexChanged);
+            // 
+            // comboBoxsta2
+            // 
+            this.comboBoxsta2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.comboBoxsta2.FormattingEnabled = true;
+            this.comboBoxsta2.Location = new System.Drawing.Point(843, 428);
+            this.comboBoxsta2.Name = "comboBoxsta2";
+            this.comboBoxsta2.Size = new System.Drawing.Size(125, 21);
+            this.comboBoxsta2.TabIndex = 2;
+            this.comboBoxsta2.SelectedIndexChanged += new System.EventHandler(this.comboBoxsta2_SelectedIndexChanged);
+            // 
+            // comboBoxSta2a
+            // 
+            this.comboBoxSta2a.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.comboBoxSta2a.FormattingEnabled = true;
+            this.comboBoxSta2a.Location = new System.Drawing.Point(909, 462);
+            this.comboBoxSta2a.Name = "comboBoxSta2a";
+            this.comboBoxSta2a.Size = new System.Drawing.Size(125, 21);
+            this.comboBoxSta2a.TabIndex = 1;
+            this.comboBoxSta2a.SelectedIndexChanged += new System.EventHandler(this.comboBoxSta2a_SelectedIndexChanged);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(1248, 411);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 0;
+            this.pictureBox2.TabStop = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.ClientSize = new System.Drawing.Size(634, 926);
+            this.ClientSize = new System.Drawing.Size(1935, 926);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.label8);
@@ -562,9 +572,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
