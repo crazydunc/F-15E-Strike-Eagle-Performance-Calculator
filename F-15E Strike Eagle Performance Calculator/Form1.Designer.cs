@@ -50,6 +50,14 @@
             this.label8 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.label17 = new System.Windows.Forms.Label();
+            this.trackBarIntFuel = new System.Windows.Forms.TrackBar();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.trackBarsta5 = new System.Windows.Forms.TrackBar();
+            this.trackBarsta2 = new System.Windows.Forms.TrackBar();
+            this.trackBarsta8 = new System.Windows.Forms.TrackBar();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.weightLabel = new System.Windows.Forms.Label();
             this.DragLabel = new System.Windows.Forms.Label();
@@ -72,14 +80,17 @@
             this.comboBoxsta2b = new System.Windows.Forms.ComboBox();
             this.comboBoxsta2 = new System.Windows.Forms.ComboBox();
             this.comboBoxSta2a = new System.Windows.Forms.ComboBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.labelGW = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarIntFuel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarsta5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarsta2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarsta8)).BeginInit();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // calcuateButton
@@ -275,7 +286,7 @@
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pictureBox1.ErrorImage = global::F_15E_Strike_Eagle_Performance_Calculator.Properties.Resources._48th_Fighter_Wing;
             this.pictureBox1.Image = global::F_15E_Strike_Eagle_Performance_Calculator.Properties.Resources._48th_Fighter_Wing;
-            this.pictureBox1.Location = new System.Drawing.Point(531, 811);
+            this.pictureBox1.Location = new System.Drawing.Point(529, 690);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(103, 104);
@@ -287,7 +298,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.ForeColor = System.Drawing.SystemColors.Control;
-            this.label8.Location = new System.Drawing.Point(0, 902);
+            this.label8.Location = new System.Drawing.Point(14, 779);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(144, 15);
             this.label8.TabIndex = 18;
@@ -304,6 +315,16 @@
             // 
             // panel3
             // 
+            this.panel3.BackgroundImage = global::F_15E_Strike_Eagle_Performance_Calculator.Properties.Resources.F_15Headon;
+            this.panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel3.Controls.Add(this.label17);
+            this.panel3.Controls.Add(this.trackBarIntFuel);
+            this.panel3.Controls.Add(this.label16);
+            this.panel3.Controls.Add(this.label15);
+            this.panel3.Controls.Add(this.label14);
+            this.panel3.Controls.Add(this.trackBarsta5);
+            this.panel3.Controls.Add(this.trackBarsta2);
+            this.panel3.Controls.Add(this.trackBarsta8);
             this.panel3.Controls.Add(this.groupBox3);
             this.panel3.Controls.Add(this.comboBoxsta8b);
             this.panel3.Controls.Add(this.comboBoxsta8);
@@ -316,14 +337,105 @@
             this.panel3.Controls.Add(this.comboBoxsta2b);
             this.panel3.Controls.Add(this.comboBoxsta2);
             this.panel3.Controls.Add(this.comboBoxSta2a);
-            this.panel3.Controls.Add(this.pictureBox2);
-            this.panel3.Location = new System.Drawing.Point(653, 21);
+            this.panel3.Location = new System.Drawing.Point(636, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1248, 792);
+            this.panel3.Size = new System.Drawing.Size(1317, 792);
             this.panel3.TabIndex = 20;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("AmarilloUSAF", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label17.Location = new System.Drawing.Point(1099, 218);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(128, 17);
+            this.label17.TabIndex = 22;
+            this.label17.Text = "Internal Fuel";
+            // 
+            // trackBarIntFuel
+            // 
+            this.trackBarIntFuel.LargeChange = 100;
+            this.trackBarIntFuel.Location = new System.Drawing.Point(1101, 242);
+            this.trackBarIntFuel.Maximum = 22267;
+            this.trackBarIntFuel.Name = "trackBarIntFuel";
+            this.trackBarIntFuel.Size = new System.Drawing.Size(125, 45);
+            this.trackBarIntFuel.TabIndex = 21;
+            this.trackBarIntFuel.TickFrequency = 2000;
+            this.trackBarIntFuel.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.trackBarIntFuel.Scroll += new System.EventHandler(this.trackBarIntFuel_Scroll);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("AmarilloUSAF", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label16.Location = new System.Drawing.Point(893, 218);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(94, 17);
+            this.label16.TabIndex = 20;
+            this.label16.Text = "STA2 Fuel";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("AmarilloUSAF", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label15.Location = new System.Drawing.Point(617, 218);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(94, 17);
+            this.label15.TabIndex = 19;
+            this.label15.Text = "STA5 Fuel";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("AmarilloUSAF", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label14.Location = new System.Drawing.Point(335, 218);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(94, 17);
+            this.label14.TabIndex = 18;
+            this.label14.Text = "STA8 Fuel";
+            // 
+            // trackBarsta5
+            // 
+            this.trackBarsta5.Enabled = false;
+            this.trackBarsta5.LargeChange = 100;
+            this.trackBarsta5.Location = new System.Drawing.Point(599, 242);
+            this.trackBarsta5.Maximum = 3965;
+            this.trackBarsta5.Name = "trackBarsta5";
+            this.trackBarsta5.Size = new System.Drawing.Size(125, 45);
+            this.trackBarsta5.TabIndex = 17;
+            this.trackBarsta5.TickFrequency = 500;
+            this.trackBarsta5.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.trackBarsta5.Scroll += new System.EventHandler(this.trackBarsta5_Scroll);
+            // 
+            // trackBarsta2
+            // 
+            this.trackBarsta2.Enabled = false;
+            this.trackBarsta2.LargeChange = 100;
+            this.trackBarsta2.Location = new System.Drawing.Point(876, 242);
+            this.trackBarsta2.Maximum = 3965;
+            this.trackBarsta2.Name = "trackBarsta2";
+            this.trackBarsta2.Size = new System.Drawing.Size(125, 45);
+            this.trackBarsta2.TabIndex = 16;
+            this.trackBarsta2.TickFrequency = 500;
+            this.trackBarsta2.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.trackBarsta2.Scroll += new System.EventHandler(this.trackBarsta2_Scroll);
+            // 
+            // trackBarsta8
+            // 
+            this.trackBarsta8.Enabled = false;
+            this.trackBarsta8.LargeChange = 100;
+            this.trackBarsta8.Location = new System.Drawing.Point(317, 242);
+            this.trackBarsta8.Maximum = 3965;
+            this.trackBarsta8.Name = "trackBarsta8";
+            this.trackBarsta8.Size = new System.Drawing.Size(125, 45);
+            this.trackBarsta8.TabIndex = 15;
+            this.trackBarsta8.TickFrequency = 500;
+            this.trackBarsta8.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.trackBarsta8.Scroll += new System.EventHandler(this.trackBarsta8_Scroll);
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.labelGW);
             this.groupBox3.Controls.Add(this.weightLabel);
             this.groupBox3.Controls.Add(this.DragLabel);
             this.groupBox3.Controls.Add(this.LatAsymLabel);
@@ -335,9 +447,9 @@
             this.groupBox3.Controls.Add(this.label10);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.groupBox3.Location = new System.Drawing.Point(1002, 605);
+            this.groupBox3.Location = new System.Drawing.Point(1071, 488);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(224, 112);
+            this.groupBox3.Size = new System.Drawing.Size(234, 124);
             this.groupBox3.TabIndex = 14;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Loadout Information";
@@ -431,7 +543,7 @@
             // 
             this.comboBoxsta8b.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.comboBoxsta8b.FormattingEnabled = true;
-            this.comboBoxsta8b.Location = new System.Drawing.Point(370, 462);
+            this.comboBoxsta8b.Location = new System.Drawing.Point(354, 641);
             this.comboBoxsta8b.Name = "comboBoxsta8b";
             this.comboBoxsta8b.Size = new System.Drawing.Size(125, 21);
             this.comboBoxsta8b.TabIndex = 13;
@@ -441,7 +553,7 @@
             // 
             this.comboBoxsta8.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.comboBoxsta8.FormattingEnabled = true;
-            this.comboBoxsta8.Location = new System.Drawing.Point(311, 428);
+            this.comboBoxsta8.Location = new System.Drawing.Point(317, 597);
             this.comboBoxsta8.Name = "comboBoxsta8";
             this.comboBoxsta8.Size = new System.Drawing.Size(125, 21);
             this.comboBoxsta8.TabIndex = 12;
@@ -451,7 +563,7 @@
             // 
             this.comboBoxsta8a.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.comboBoxsta8a.FormattingEnabled = true;
-            this.comboBoxsta8a.Location = new System.Drawing.Point(225, 462);
+            this.comboBoxsta8a.Location = new System.Drawing.Point(209, 641);
             this.comboBoxsta8a.Name = "comboBoxsta8a";
             this.comboBoxsta8a.Size = new System.Drawing.Size(125, 21);
             this.comboBoxsta8a.TabIndex = 11;
@@ -461,7 +573,7 @@
             // 
             this.comboBoxrcft.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.comboBoxrcft.FormattingEnabled = true;
-            this.comboBoxrcft.Location = new System.Drawing.Point(402, 496);
+            this.comboBoxrcft.Location = new System.Drawing.Point(420, 687);
             this.comboBoxrcft.Name = "comboBoxrcft";
             this.comboBoxrcft.Size = new System.Drawing.Size(125, 21);
             this.comboBoxrcft.TabIndex = 10;
@@ -471,7 +583,7 @@
             // 
             this.comboBoxlnp.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.comboBoxlnp.FormattingEnabled = true;
-            this.comboBoxlnp.Location = new System.Drawing.Point(649, 428);
+            this.comboBoxlnp.Location = new System.Drawing.Point(496, 591);
             this.comboBoxlnp.Name = "comboBoxlnp";
             this.comboBoxlnp.Size = new System.Drawing.Size(125, 21);
             this.comboBoxlnp.TabIndex = 8;
@@ -481,7 +593,7 @@
             // 
             this.comboBoxsta5.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.comboBoxsta5.FormattingEnabled = true;
-            this.comboBoxsta5.Location = new System.Drawing.Point(563, 462);
+            this.comboBoxsta5.Location = new System.Drawing.Point(599, 618);
             this.comboBoxsta5.Name = "comboBoxsta5";
             this.comboBoxsta5.Size = new System.Drawing.Size(125, 21);
             this.comboBoxsta5.TabIndex = 7;
@@ -491,7 +603,7 @@
             // 
             this.comboBoxltp.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.comboBoxltp.FormattingEnabled = true;
-            this.comboBoxltp.Location = new System.Drawing.Point(479, 428);
+            this.comboBoxltp.Location = new System.Drawing.Point(696, 591);
             this.comboBoxltp.Name = "comboBoxltp";
             this.comboBoxltp.Size = new System.Drawing.Size(125, 21);
             this.comboBoxltp.TabIndex = 6;
@@ -501,7 +613,7 @@
             // 
             this.comboBoxLcft.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.comboBoxLcft.FormattingEnabled = true;
-            this.comboBoxLcft.Location = new System.Drawing.Point(735, 496);
+            this.comboBoxLcft.Location = new System.Drawing.Point(773, 687);
             this.comboBoxLcft.Name = "comboBoxLcft";
             this.comboBoxLcft.Size = new System.Drawing.Size(125, 21);
             this.comboBoxLcft.TabIndex = 4;
@@ -511,7 +623,7 @@
             // 
             this.comboBoxsta2b.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.comboBoxsta2b.FormattingEnabled = true;
-            this.comboBoxsta2b.Location = new System.Drawing.Point(761, 462);
+            this.comboBoxsta2b.Location = new System.Drawing.Point(843, 641);
             this.comboBoxsta2b.Name = "comboBoxsta2b";
             this.comboBoxsta2b.Size = new System.Drawing.Size(125, 21);
             this.comboBoxsta2b.TabIndex = 3;
@@ -521,7 +633,7 @@
             // 
             this.comboBoxsta2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.comboBoxsta2.FormattingEnabled = true;
-            this.comboBoxsta2.Location = new System.Drawing.Point(843, 428);
+            this.comboBoxsta2.Location = new System.Drawing.Point(876, 597);
             this.comboBoxsta2.Name = "comboBoxsta2";
             this.comboBoxsta2.Size = new System.Drawing.Size(125, 21);
             this.comboBoxsta2.TabIndex = 2;
@@ -531,29 +643,30 @@
             // 
             this.comboBoxSta2a.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.comboBoxSta2a.FormattingEnabled = true;
-            this.comboBoxSta2a.Location = new System.Drawing.Point(909, 462);
+            this.comboBoxSta2a.Location = new System.Drawing.Point(989, 641);
             this.comboBoxSta2a.Name = "comboBoxSta2a";
             this.comboBoxSta2a.Size = new System.Drawing.Size(125, 21);
             this.comboBoxSta2a.TabIndex = 1;
             this.comboBoxSta2a.SelectedIndexChanged += new System.EventHandler(this.comboBoxSta2a_SelectedIndexChanged);
             // 
-            // pictureBox2
+            // labelGW
             // 
-            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(1248, 411);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 0;
-            this.pictureBox2.TabStop = false;
+            this.labelGW.AutoSize = true;
+            this.labelGW.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelGW.ForeColor = System.Drawing.Color.Red;
+            this.labelGW.Location = new System.Drawing.Point(3, 105);
+            this.labelGW.Name = "labelGW";
+            this.labelGW.Size = new System.Drawing.Size(225, 15);
+            this.labelGW.TabIndex = 10;
+            this.labelGW.Text = "Gross Weight must be under 81000 Lbs";
+            this.labelGW.Visible = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.ClientSize = new System.Drawing.Size(1935, 926);
+            this.ClientSize = new System.Drawing.Size(1953, 801);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.label8);
@@ -572,9 +685,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarIntFuel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarsta5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarsta2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarsta8)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -614,7 +731,6 @@
         private ComboBox comboBoxsta2b;
         private ComboBox comboBoxsta2;
         private ComboBox comboBoxSta2a;
-        private PictureBox pictureBox2;
         private GroupBox groupBox3;
         private Label weightLabel;
         private Label DragLabel;
@@ -626,5 +742,14 @@
         private Label label11;
         private Label label10;
         private Label label9;
+        private Label label17;
+        private TrackBar trackBarIntFuel;
+        private Label label16;
+        private Label label15;
+        private Label label14;
+        private TrackBar trackBarsta5;
+        private TrackBar trackBarsta2;
+        private TrackBar trackBarsta8;
+        private Label labelGW;
     }
 }

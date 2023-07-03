@@ -113,6 +113,16 @@ namespace F_15E_Strike_Eagle_Performance_Calculator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap F_15Headon {
+            get {
+                object obj = ResourceManager.GetObject("F-15Headon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap F15E_Stations {
             get {
                 object obj = ResourceManager.GetObject("F15E_Stations", resourceCulture);

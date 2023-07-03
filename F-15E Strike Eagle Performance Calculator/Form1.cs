@@ -19,7 +19,8 @@ namespace F_15E_Strike_Eagle_Performance_Calculator
             OATTextBox.TextChanged += TextBox_TextChanged;
             runwayElevationTextBox.TextChanged += TextBox_TextChanged;
             _loadedData = StoresManagement.LoadStoresInfo();
-            _loaded = true; 
+            _loaded = true;
+            trackBarIntFuel.Value = F15EStrikeEagle.InternalFuel;
             StationDataLoad();
             _loaded = false;
             UpdateLoadoutUi();
@@ -324,7 +325,7 @@ namespace F_15E_Strike_Eagle_Performance_Calculator
             HandleStationComboBoxSelectionChange(comboBoxsta8b, F15EStrikeEagle.Station8B, s => s.Sta8B);
 
         }
-        const string Pounds = "Lbs"; 
+        const string Pounds = " Lbs"; 
         public void UpdateLoadoutUi()
         {
             if (!_loaded)
@@ -334,7 +335,76 @@ namespace F_15E_Strike_Eagle_Performance_Calculator
                 LatAsymLabel.Text = F15EStrikeEagle.LateralImbalance + Pounds;
                 DragLabel.Text = F15EStrikeEagle.TotalDragIndex.ToString(CultureInfo.InvariantCulture);
                 weightLabel.Text = F15EStrikeEagle.GrossWeight + Pounds;
+                if (F15EStrikeEagle.GrossWeight > 81000)
+                {
+                    labelGW.Visible = true;
+                }
+                else
+                {
+                    labelGW.Visible = false; 
+                }
             }
+
+            if (F15EStrikeEagle.Station2.StoreName.Contains("610"))
+            {
+                trackBarsta2.Enabled = true; 
+            }
+            else
+            {
+                trackBarsta2.Enabled = false;
+                F15EStrikeEagle.Station2Fuel = 0;
+                if (trackBarsta2.Value != 0) trackBarsta2.Value = 0;
+
+            }
+            if (F15EStrikeEagle.Station5.StoreName.Contains("610"))
+            {
+                trackBarsta5.Enabled = true;
+            }
+            else
+            {
+                trackBarsta5.Enabled = false;
+                F15EStrikeEagle.Station5Fuel = 0;
+                if (trackBarsta5.Value != 0) trackBarsta5.Value = 0;
+
+            }
+            if (F15EStrikeEagle.Station8.StoreName.Contains("610"))
+            {
+                trackBarsta8.Enabled = true;
+            }
+            else
+            {
+                trackBarsta8.Enabled = false;
+                F15EStrikeEagle.Station8Fuel = 0;
+                if(trackBarsta8.Value != 0) trackBarsta8.Value = 0;
+            }
+        }
+
+        private void trackBarIntFuel_Scroll(object sender, EventArgs e)
+        {
+            F15EStrikeEagle.InternalFuel = trackBarIntFuel.Value;
+            F15EStrikeEagle.Calculate(); // Assuming this is the method to recalculate the F15EStrikeEagle
+            UpdateLoadoutUi();
+        }
+
+        private void trackBarsta2_Scroll(object sender, EventArgs e)
+        {
+            F15EStrikeEagle.Station2Fuel = trackBarsta2.Value;
+            F15EStrikeEagle.Calculate(); // Assuming this is the method to recalculate the F15EStrikeEagle
+            UpdateLoadoutUi();
+        }
+
+        private void trackBarsta5_Scroll(object sender, EventArgs e)
+        {
+            F15EStrikeEagle.Station5Fuel = trackBarsta5.Value;
+            F15EStrikeEagle.Calculate(); // Assuming this is the method to recalculate the F15EStrikeEagle
+            UpdateLoadoutUi();
+        }
+
+        private void trackBarsta8_Scroll(object sender, EventArgs e)
+        {
+            F15EStrikeEagle.Station8Fuel = trackBarsta8.Value;
+            F15EStrikeEagle.Calculate(); // Assuming this is the method to recalculate the F15EStrikeEagle
+            UpdateLoadoutUi();
         }
     }
 }
