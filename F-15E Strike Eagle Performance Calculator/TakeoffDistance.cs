@@ -50,17 +50,20 @@ public static class TakeoffDistance
         var nearestPoint2 =
             FindNearestDataPoint(data, weightInput, temperatureInput, altitudeInput, nearestPoint1);
 
-        var weightFactor = nearestPoint1 != null && nearestPoint2 != null && nearestPoint2.Weight - nearestPoint1.Weight != 0
+        var weightFactor = nearestPoint1 != null && nearestPoint2 != null &&
+                           nearestPoint2.Weight - nearestPoint1.Weight != 0
             ? (weightInput - nearestPoint1.Weight) / (nearestPoint2.Weight - nearestPoint1.Weight)
             : 0;
 
         // Calculate the OAT factors
-        var oatFactor = nearestPoint1 != null && nearestPoint2 != null && nearestPoint2.Temperature - nearestPoint1.Temperature != 0
+        var oatFactor = nearestPoint1 != null && nearestPoint2 != null &&
+                        nearestPoint2.Temperature - nearestPoint1.Temperature != 0
             ? (temperatureInput - nearestPoint1.Temperature) / (nearestPoint2.Temperature - nearestPoint1.Temperature)
             : 0;
 
         // Calculate the altitude factors
-        var altitudeFactor = nearestPoint1 != null && nearestPoint2 != null && nearestPoint2.Altitude - nearestPoint1.Altitude != 0
+        var altitudeFactor = nearestPoint1 != null && nearestPoint2 != null &&
+                             nearestPoint2.Altitude - nearestPoint1.Altitude != 0
             ? (altitudeInput - nearestPoint1.Altitude) / (nearestPoint2.Altitude - nearestPoint1.Altitude)
             : 0;
 
@@ -69,22 +72,21 @@ public static class TakeoffDistance
 
         if (nearestPoint1 != null && nearestPoint2 != null)
         {
-        
-                var interpolatedDistance = nearestPoint1.Distance +
-                                           weightFactor * (nearestPoint2.Distance - nearestPoint1.Distance) +
-                                           oatFactor * (nearestPoint2.Distance - nearestPoint1.Distance) +
-                                           altitudeFactor * (nearestPoint2.Distance - nearestPoint1.Distance);
+            var interpolatedDistance = nearestPoint1.Distance +
+                                       weightFactor * (nearestPoint2.Distance - nearestPoint1.Distance) +
+                                       oatFactor * (nearestPoint2.Distance - nearestPoint1.Distance) +
+                                       altitudeFactor * (nearestPoint2.Distance - nearestPoint1.Distance);
 
 
             // Display the interpolated distance
             return RoundDown(interpolatedDistance);
-
         }
 
         return 0;
     }
+
     /// <summary>
-    /// Finds nearest data point and returns it. 
+    ///     Finds nearest data point and returns it.
     /// </summary>
     /// <param name="data">List of Data points</param>
     /// <param name="weight">User entered Weight</param>
@@ -101,7 +103,8 @@ public static class TakeoffDistance
 
         foreach (var dataPoint in data)
         {
-            if (dataPoint != null && exclude != null && dataPoint.Weight == exclude.Weight && dataPoint.Temperature == exclude.Temperature &&
+            if (dataPoint != null && exclude != null && dataPoint.Weight == exclude.Weight &&
+                dataPoint.Temperature == exclude.Temperature &&
                 dataPoint.Altitude == exclude.Altitude)
                 continue;
 
@@ -110,11 +113,9 @@ public static class TakeoffDistance
                 var distance = Math.Abs(weight - dataPoint.Weight) + Math.Abs(oat - dataPoint.Temperature) +
                                Math.Abs(altitude - dataPoint.Altitude);
 
-                if (distance < minDistance)
-                {
-                    minDistance = distance;
-                    nearestPoint = dataPoint;
-                }
+                if (!(distance < minDistance)) continue;
+                minDistance = distance;
+                nearestPoint = dataPoint;
             }
         }
 
