@@ -1,5 +1,8 @@
 using System.Globalization;
 using System.Linq;
+using F_15E_Strike_Eagle_Performance_Calculator.CF_DTS;
+using F_15E_Strike_Eagle_Performance_Calculator.Core;
+using Newtonsoft.Json;
 
 namespace F_15E_Strike_Eagle_Performance_Calculator
 {
@@ -40,7 +43,7 @@ namespace F_15E_Strike_Eagle_Performance_Calculator
         }
         private void PopulateComboBox<T>(ComboBox comboBox, IEnumerable<T> data, Func<T, string> displayMemberSelector, Func<T, object> valueMemberSelector, bool includeEmpty = false) where T : new()
         {
-            List<T> dataList = data.ToList();
+            var dataList = data.ToList();
 
             if (includeEmpty)
             {
@@ -52,7 +55,7 @@ namespace F_15E_Strike_Eagle_Performance_Calculator
                     // Set other properties as needed
 
                 };
-                T loose = emptyItem2; 
+                var loose = emptyItem2; 
                 dataList.Insert(0, loose);
 
             }
@@ -250,10 +253,10 @@ namespace F_15E_Strike_Eagle_Performance_Calculator
                 return; 
             }
             string displayText = selectedItem.DisplayText;
-            string[] displayParts = displayText.Split(" x ");
+            var displayParts = displayText.Split(" x ");
 
-            int sta = int.Parse(displayParts[0]);
-            string item = displayParts[1];
+            var sta = int.Parse(displayParts[0]);
+            var item = displayParts[1];
             var selectedData = _loadedData.FirstOrDefault(s => propertySelector(s) == sta && s.Item == item);
 
             if (selectedData != null && station != null)
@@ -405,6 +408,103 @@ namespace F_15E_Strike_Eagle_Performance_Calculator
             F15EStrikeEagle.Station8Fuel = trackBarsta8.Value;
             F15EStrikeEagle.Calculate(); // Assuming this is the method to recalculate the F15EStrikeEagle
             UpdateLoadoutUi();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            CF_DTS.Application? app = null; 
+            //LoadCombatFliteXml
+            string selectedFilePath = null; 
+            using (var openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "XML Files (*.xml)|*.xml|All Files (*.*)|*.*";
+                openFileDialog.Title = @"Select an CombatFlite export File";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    selectedFilePath = openFileDialog.FileName;
+                }
+                else
+                {
+                    return; 
+                }
+            }
+
+            if (!String.IsNullOrEmpty(selectedFilePath) && File.Exists(selectedFilePath))
+            {
+                try
+                {
+                    app = GenerateJson(selectedFilePath);
+                    if (app == null)
+                    {
+                        throw new Exception("Error Loading CF Plan");
+                    }
+                }
+                catch (Exception exception)
+                {
+                    Log.WriteLog(exception.ToString());
+                    MessageBox.Show(@"An Error occurred whilst parsing the CF File. Please send Dunc the logs");
+                    return; 
+                }
+
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                {
+                    saveFileDialog.Filter = "JSON Files (*.json)|*.json|All Files (*.*)|*.*";
+                    saveFileDialog.Title = @"Save DTC Json File As";
+
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        selectedFilePath = saveFileDialog.FileName;
+
+                        if (File.Exists(selectedFilePath))
+                        {
+                            File.Delete(selectedFilePath);
+                        }
+
+                        var json = JsonConvert.SerializeObject(app, Formatting.Indented);
+                        File.WriteAllText(selectedFilePath, json);
+
+                        Log.WriteLog(json);
+                        MessageBox.Show($@"File Saved: {selectedFilePath}");
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+
+            }
+
+        }
+
+        private static CF_DTS.Application GenerateJson(string filePath)
+        {
+            var waypoints = new CF_DTS.Waypoints();
+            waypoints.WaypointsWaypoints =
+                Core.ParseXml.LoadCombatFliteXml(filePath);
+            waypoints.EnableUpload = true;
+            waypoints.OverrideRange = false;
+            waypoints.SteerpointStart = 1;
+            waypoints.SteerpointEnd = (waypoints.WaypointsWaypoints.Count + 1);
+            waypoints.CaptureSettings = new CaptureSettings
+            {
+                AppendToWaypointList = true,
+                OverwriteFrom = 1,
+                OverwriteUntil = -1
+            };
+            if (waypoints.WaypointsWaypoints == null)
+            {
+                return null; 
+            }
+            var application = new CF_DTS.Application
+            {
+                Waypoints = waypoints,
+                Radios = null,
+                Displays = null, Misc = null
+            };
+
+
+            return application; 
         }
     }
 }

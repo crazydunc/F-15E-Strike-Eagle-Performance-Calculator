@@ -11,8 +11,8 @@
     <Title>F-15E Strike Eagle Performance Calculator</Title>
     <Company>Duncan MacKellar</Company>
     <Copyright>Duncan MacKellar 2023</Copyright>
-    <AssemblyVersion>0.9.0.0</AssemblyVersion>
-    <FileVersion>0.9.0.0</FileVersion>
+    <AssemblyVersion>0.9.0.3</AssemblyVersion>
+    <FileVersion>0.9.0.3</FileVersion>
     <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
  <PropertyGroup> 
@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Data.SQLite.Core" Version="1.0.118" />
   </ItemGroup>
 

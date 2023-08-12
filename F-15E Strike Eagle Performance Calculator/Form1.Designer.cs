@@ -45,11 +45,10 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.RotationCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.label17 = new System.Windows.Forms.Label();
             this.trackBarIntFuel = new System.Windows.Forms.TrackBar();
             this.label16 = new System.Windows.Forms.Label();
@@ -59,6 +58,7 @@
             this.trackBarsta2 = new System.Windows.Forms.TrackBar();
             this.trackBarsta8 = new System.Windows.Forms.TrackBar();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.labelGW = new System.Windows.Forms.Label();
             this.weightLabel = new System.Windows.Forms.Label();
             this.DragLabel = new System.Windows.Forms.Label();
             this.LatAsymLabel = new System.Windows.Forms.Label();
@@ -80,11 +80,9 @@
             this.comboBoxsta2b = new System.Windows.Forms.ComboBox();
             this.comboBoxsta2 = new System.Windows.Forms.ComboBox();
             this.comboBoxSta2a = new System.Windows.Forms.ComboBox();
-            this.labelGW = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarIntFuel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarsta5)).BeginInit();
@@ -235,7 +233,7 @@
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.runwayElevationTextBox);
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.groupBox1.Location = new System.Drawing.Point(7, 6);
+            this.groupBox1.Location = new System.Drawing.Point(2, 2);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
@@ -262,31 +260,21 @@
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.ForeColor = System.Drawing.SystemColors.Control;
-            this.groupBox2.Location = new System.Drawing.Point(264, 6);
+            this.groupBox2.Location = new System.Drawing.Point(223, 3);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(356, 90);
+            this.groupBox2.Size = new System.Drawing.Size(356, 76);
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Output";
-            // 
-            // panel1
-            // 
-            this.panel1.BackgroundImage = global::F_15E_Strike_Eagle_Performance_Calculator.Properties.Resources.DM_2220_2___Copy1;
-            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(632, 142);
-            this.panel1.TabIndex = 16;
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pictureBox1.ErrorImage = global::F_15E_Strike_Eagle_Performance_Calculator.Properties.Resources._48th_Fighter_Wing;
             this.pictureBox1.Image = global::F_15E_Strike_Eagle_Performance_Calculator.Properties.Resources._48th_Fighter_Wing;
-            this.pictureBox1.Location = new System.Drawing.Point(529, 690);
+            this.pictureBox1.Location = new System.Drawing.Point(1202, 9);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(103, 104);
@@ -298,26 +286,22 @@
             // 
             this.label8.AutoSize = true;
             this.label8.ForeColor = System.Drawing.SystemColors.Control;
-            this.label8.Location = new System.Drawing.Point(14, 779);
+            this.label8.Location = new System.Drawing.Point(3, 701);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(144, 15);
             this.label8.TabIndex = 18;
             this.label8.Text = "© Duncan MacKellar 2023";
             // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.groupBox2);
-            this.panel2.Controls.Add(this.groupBox1);
-            this.panel2.Location = new System.Drawing.Point(3, 147);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(629, 181);
-            this.panel2.TabIndex = 19;
-            // 
             // panel3
             // 
             this.panel3.BackgroundImage = global::F_15E_Strike_Eagle_Performance_Calculator.Properties.Resources.F_15Headon;
             this.panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel3.Controls.Add(this.button1);
+            this.panel3.Controls.Add(this.groupBox2);
+            this.panel3.Controls.Add(this.label8);
             this.panel3.Controls.Add(this.label17);
+            this.panel3.Controls.Add(this.pictureBox1);
+            this.panel3.Controls.Add(this.groupBox1);
             this.panel3.Controls.Add(this.trackBarIntFuel);
             this.panel3.Controls.Add(this.label16);
             this.panel3.Controls.Add(this.label15);
@@ -337,10 +321,22 @@
             this.panel3.Controls.Add(this.comboBoxsta2b);
             this.panel3.Controls.Add(this.comboBoxsta2);
             this.panel3.Controls.Add(this.comboBoxSta2a);
-            this.panel3.Location = new System.Drawing.Point(636, 3);
+            this.panel3.Location = new System.Drawing.Point(3, -3);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1317, 792);
             this.panel3.TabIndex = 20;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.GrayText;
+            this.button1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.button1.Location = new System.Drawing.Point(1057, 9);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(124, 41);
+            this.button1.TabIndex = 23;
+            this.button1.Text = "Convert a CF XML to DCS DTC";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // label17
             // 
@@ -453,6 +449,18 @@
             this.groupBox3.TabIndex = 14;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Loadout Information";
+            // 
+            // labelGW
+            // 
+            this.labelGW.AutoSize = true;
+            this.labelGW.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelGW.ForeColor = System.Drawing.Color.Red;
+            this.labelGW.Location = new System.Drawing.Point(3, 105);
+            this.labelGW.Name = "labelGW";
+            this.labelGW.Size = new System.Drawing.Size(225, 15);
+            this.labelGW.TabIndex = 10;
+            this.labelGW.Text = "Gross Weight must be under 81000 Lbs";
+            this.labelGW.Visible = false;
             // 
             // weightLabel
             // 
@@ -649,29 +657,13 @@
             this.comboBoxSta2a.TabIndex = 1;
             this.comboBoxSta2a.SelectedIndexChanged += new System.EventHandler(this.comboBoxSta2a_SelectedIndexChanged);
             // 
-            // labelGW
-            // 
-            this.labelGW.AutoSize = true;
-            this.labelGW.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelGW.ForeColor = System.Drawing.Color.Red;
-            this.labelGW.Location = new System.Drawing.Point(3, 105);
-            this.labelGW.Name = "labelGW";
-            this.labelGW.Size = new System.Drawing.Size(225, 15);
-            this.labelGW.TabIndex = 10;
-            this.labelGW.Text = "Gross Weight must be under 81000 Lbs";
-            this.labelGW.Visible = false;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.ClientSize = new System.Drawing.Size(1953, 801);
+            this.ClientSize = new System.Drawing.Size(1329, 722);
             this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -683,7 +675,6 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarIntFuel)).EndInit();
@@ -693,7 +684,6 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -714,11 +704,9 @@
         private TextBox OATTextBox;
         private GroupBox groupBox1;
         private GroupBox groupBox2;
-        private Panel panel1;
         private PictureBox pictureBox1;
         private CheckBox RotationCheckBox;
         private Label label8;
-        private Panel panel2;
         private Panel panel3;
         private ComboBox comboBoxsta8b;
         private ComboBox comboBoxsta8;
@@ -751,5 +739,6 @@
         private TrackBar trackBarsta2;
         private TrackBar trackBarsta8;
         private Label labelGW;
+        private Button button1;
     }
 }
