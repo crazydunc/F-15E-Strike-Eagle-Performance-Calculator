@@ -72,7 +72,7 @@ public static class TakeoffDistance
                                        altitudeFactor * (nearestPoint2.Distance - nearestPoint1.Distance);
 
 
-            return RoundDown(interpolatedDistance);
+            return Worker.RoundDown(interpolatedDistance);
         }
 
         return 0;
@@ -113,12 +113,5 @@ public static class TakeoffDistance
         }
 
         return nearestPoint;
-    }
-
-    private static double RoundDown(double value)
-    {
-        var roundedDown = Math.Floor(value / 10) * 10;
-
-        return roundedDown;
     }
 }

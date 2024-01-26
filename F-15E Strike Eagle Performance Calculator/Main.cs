@@ -1,8 +1,5 @@
 using System.Globalization;
-using F_15E_Strike_Eagle_Performance_Calculator.CF_DTS;
-using F_15E_Strike_Eagle_Performance_Calculator.Core;
-using Newtonsoft.Json;
-using Application = F_15E_Strike_Eagle_Performance_Calculator.CF_DTS.Application;
+using static System.Collections.Specialized.BitVector32;
 
 namespace F_15E_Strike_Eagle_Performance_Calculator;
 
@@ -12,7 +9,7 @@ public partial class Main : Form
     private readonly bool _loaded;
     private readonly List<Stores> _loadedData;
     private Stores emptyStores = new();
-
+    private static List<Station> StationList = new ();
     public Main()
     {
         InitializeComponent();
@@ -28,6 +25,19 @@ public partial class Main : Form
         trackBarIntFuel.Value = F15EStrikeEagle.InternalFuel;
         StationDataLoad();
         _loaded = false;
+        StationList.Add(F15EStrikeEagle.LeftCft);
+        StationList.Add(F15EStrikeEagle.RightCft);
+        StationList.Add(F15EStrikeEagle.Station2);
+        StationList.Add(F15EStrikeEagle.Station2A);
+        StationList.Add(F15EStrikeEagle.Station2B);
+        StationList.Add(F15EStrikeEagle.Station5);
+        StationList.Add(F15EStrikeEagle.Station8);
+        StationList.Add(F15EStrikeEagle.Station8A);
+        StationList.Add(F15EStrikeEagle.Station8B);
+        StationList.Add(F15EStrikeEagle.Lnp);
+        StationList.Add(F15EStrikeEagle.Ltp);
+        UpdateDragIndexForAll();
+        F15EStrikeEagle.Calculate();
         UpdateLoadoutUi();
     }
 
@@ -67,6 +77,7 @@ public partial class Main : Form
             var loose = emptyItem2;
             dataList.Insert(0, loose);
         }
+
         comboBox.DisplayMember = "DisplayText";
         comboBox.ValueMember = "Value";
         comboBox.DataSource = dataList.Select(d => new
@@ -127,11 +138,11 @@ public partial class Main : Form
         comboBoxSta2a.SelectedIndex = 6;
         comboBoxsta2.SelectedIndex = 12;
         comboBoxsta2b.SelectedIndex = 6;
-        comboBoxLcft.SelectedIndex = 23;
+        comboBoxLcft.SelectedIndex = 24;
         comboBoxltp.SelectedIndex = 0;
-        comboBoxsta5.SelectedIndex = 19;
+        comboBoxsta5.SelectedIndex = 20;
         comboBoxlnp.SelectedIndex = 0;
-        comboBoxrcft.SelectedIndex = 23;
+        comboBoxrcft.SelectedIndex = 24;
         comboBoxsta8a.SelectedIndex = 6;
         comboBoxsta8.SelectedIndex = 12;
         comboBoxsta8b.SelectedIndex = 6;
@@ -212,7 +223,6 @@ public partial class Main : Form
     private void comboBoxsta2_SelectedIndexChanged(object sender, EventArgs e)
     {
         HandleStationComboBoxSelectionChange(comboBoxsta2, F15EStrikeEagle.Station2, s => s.Sta2);
-        ;
     }
 
     private void HandleStationComboBoxSelectionChange(ComboBox comboBox, Station? station,
@@ -232,11 +242,89 @@ public partial class Main : Form
 
         if (selectedData != null && station != null)
         {
-            station.SetStore(selectedData.Item, selectedData.Weight, selectedData.DragIndexWing ?? 0, sta);
-            F15EStrikeEagle.Calculate(); 
+            var dragIndexToUse = station.GetDragIndexToUse(F15EStrikeEagle.Station2.StoreCategory, F15EStrikeEagle.Station8.StoreCategory);
+            double? dragIndex = 0; 
+            switch (dragIndexToUse)
+            {
+                case F15EStrikeEagle.DragOption.NoWingStores:
+                    dragIndex = selectedData.DragIndexCftNoBombOrTankWing;
+                    dragIndex = DragIndexValidation(dragIndex, selectedData);
+                    break;
+                case F15EStrikeEagle.DragOption.WingStores:
+                    dragIndex = selectedData.DragIndexCft;
+                    dragIndex = DragIndexValidation(dragIndex, selectedData);
+
+                    break;
+                default:
+                    dragIndex = 0;
+                    break;
+            }
+            if(selectedData.Item.Contains("LANTIRN"))
+            {
+                if (F15EStrikeEagle.RightCft.StoreCategory == CategoryType.Empty &&
+                    F15EStrikeEagle.LeftCft.StoreCategory == CategoryType.Empty)
+                {
+                    if (selectedData.Item.Contains("AAQ-13")) dragIndex = 8.3;
+                    if (selectedData.Item.Contains("AAQ-14")) dragIndex = 6.5;
+                }
+            }
+            station.SetStore(selectedData.Item, selectedData.Weight, dragIndex ?? 0, sta, selectedData.Category, selectedData);
+            F15EStrikeEagle.Calculate();
         }
 
         UpdateLoadoutUi();
+    }
+
+    public static void UpdateDragIndexForAll()
+    {
+        foreach (var station in StationList)
+        {
+            var dragIndexToUse = station.GetDragIndexToUse(F15EStrikeEagle.Station2.StoreCategory, F15EStrikeEagle.Station8.StoreCategory);
+            double? dragIndex = 0;
+            switch (dragIndexToUse)
+            {
+                case F15EStrikeEagle.DragOption.NoWingStores:
+                    dragIndex = station.StationStore.DragIndexCftNoBombOrTankWing;
+                    dragIndex = DragIndexValidation(dragIndex, station.StationStore);
+                    break;
+                case F15EStrikeEagle.DragOption.WingStores:
+                    dragIndex = station.StationStore.DragIndexCft;
+                    dragIndex = DragIndexValidation(dragIndex, station.StationStore);
+
+                    break;
+                default:
+                    dragIndex = 0;
+                    break;
+            }
+            if (station.StationStore.Item.Contains("LANTIRN"))
+            {
+                if (F15EStrikeEagle.RightCft.StoreCategory == CategoryType.Empty &&
+                    F15EStrikeEagle.LeftCft.StoreCategory == CategoryType.Empty)
+                {
+                    if (station.StationStore.Item.Contains("AAQ-13"))
+                    {
+                        dragIndex = 8.3;
+                    }
+                    if (station.StationStore.Item.Contains("AAQ-14")) dragIndex = 6.5;
+                }
+            }
+
+            int qty = 0;
+            station.SetStore(station.StationStore.Item, station.StationStore.Weight, dragIndex ?? 0, station.StoreQuantity, station.StationStore.Category);
+        }
+    }
+    private static double? DragIndexValidation(double? dragIndex, Stores selectedData)
+    {
+        if (dragIndex == null && selectedData.Category != CategoryType.Empty)
+        {
+            dragIndex = selectedData.DragIndexWing;
+            if (dragIndex == null && selectedData.Category != CategoryType.Empty)
+            {
+                dragIndex = selectedData.DragIndexCl;
+            }
+        }
+
+        return dragIndex;
     }
 
     private void comboBoxsta5_SelectedIndexChanged(object sender, EventArgs e)
@@ -298,15 +386,18 @@ public partial class Main : Form
             LatAsymLabel.Text = F15EStrikeEagle.LateralImbalance + Pounds;
             DragLabel.Text = F15EStrikeEagle.TotalDragIndex.ToString(CultureInfo.InvariantCulture);
             weightLabel.Text = F15EStrikeEagle.GrossWeight + Pounds;
-            if (F15EStrikeEagle.GrossWeight > 81000)
-                labelGW.Visible = true;
-            else
-                labelGW.Visible = false;
+            labelGW.Visible = F15EStrikeEagle.GrossWeight > 81000;
         }
 
         if (F15EStrikeEagle.Station2.StoreName.Contains("610"))
         {
-            trackBarsta2.Enabled = true;
+            if (trackBarsta2.Enabled == false)
+            {
+                trackBarsta2.Enabled = true;
+                trackBarsta2.Value = 3965;
+                F15EStrikeEagle.Station2Fuel = trackBarsta2.Value;
+                F15EStrikeEagle.Calculate();
+            }
         }
         else
         {
@@ -317,7 +408,13 @@ public partial class Main : Form
 
         if (F15EStrikeEagle.Station5.StoreName.Contains("610"))
         {
-            trackBarsta5.Enabled = true;
+            if (trackBarsta5.Enabled == false)
+            {
+                trackBarsta5.Enabled = true;
+                trackBarsta5.Value = 3965;
+                F15EStrikeEagle.Station5Fuel = trackBarsta5.Value;
+                F15EStrikeEagle.Calculate();
+            }
         }
         else
         {
@@ -328,7 +425,13 @@ public partial class Main : Form
 
         if (F15EStrikeEagle.Station8.StoreName.Contains("610"))
         {
-            trackBarsta8.Enabled = true;
+            if (trackBarsta8.Enabled == false)
+            {
+                trackBarsta8.Enabled = true;
+                trackBarsta8.Value = 3965;
+                F15EStrikeEagle.Station8Fuel = trackBarsta8.Value;
+                F15EStrikeEagle.Calculate();
+            }
         }
         else
         {
@@ -343,107 +446,29 @@ public partial class Main : Form
     private void trackBarIntFuel_Scroll(object sender, EventArgs e)
     {
         F15EStrikeEagle.InternalFuel = trackBarIntFuel.Value;
-        F15EStrikeEagle.Calculate(); // Assuming this is the method to recalculate the F15EStrikeEagle
+        F15EStrikeEagle.Calculate(); 
         UpdateLoadoutUi();
     }
 
     private void trackBarsta2_Scroll(object sender, EventArgs e)
     {
         F15EStrikeEagle.Station2Fuel = trackBarsta2.Value;
-        F15EStrikeEagle.Calculate(); // Assuming this is the method to recalculate the F15EStrikeEagle
+        F15EStrikeEagle.Calculate(); 
         UpdateLoadoutUi();
     }
 
     private void trackBarsta5_Scroll(object sender, EventArgs e)
     {
         F15EStrikeEagle.Station5Fuel = trackBarsta5.Value;
-        F15EStrikeEagle.Calculate(); // Assuming this is the method to recalculate the F15EStrikeEagle
+        F15EStrikeEagle.Calculate(); 
         UpdateLoadoutUi();
     }
 
     private void trackBarsta8_Scroll(object sender, EventArgs e)
     {
         F15EStrikeEagle.Station8Fuel = trackBarsta8.Value;
-        F15EStrikeEagle.Calculate(); // Assuming this is the method to recalculate the F15EStrikeEagle
+        F15EStrikeEagle.Calculate(); 
         UpdateLoadoutUi();
-    }
-
-    private void button1_Click_1(object sender, EventArgs e)
-    {
-        Application? app = null;
-        //LoadCombatFliteXml
-        string selectedFilePath = null;
-        using (var openFileDialog = new OpenFileDialog())
-        {
-            openFileDialog.Filter = "XML Files (*.xml)|*.xml|All Files (*.*)|*.*";
-            openFileDialog.Title = @"Select an CombatFlite export File";
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-                selectedFilePath = openFileDialog.FileName;
-            else
-                return;
-        }
-
-        if (!string.IsNullOrEmpty(selectedFilePath) && File.Exists(selectedFilePath))
-        {
-            try
-            {
-                app = GenerateJson(selectedFilePath);
-                if (app == null) throw new Exception("Error Loading CF Plan");
-            }
-            catch (Exception exception)
-            {
-                Log.WriteLog(exception.ToString());
-                MessageBox.Show(@"An Error occurred whilst parsing the CF File. Please send Dunc the logs");
-                return;
-            }
-
-            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
-            {
-                saveFileDialog.Filter = "JSON Files (*.json)|*.json|All Files (*.*)|*.*";
-                saveFileDialog.Title = @"Save DTC Json File As";
-
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    selectedFilePath = saveFileDialog.FileName;
-
-                    if (File.Exists(selectedFilePath)) File.Delete(selectedFilePath);
-
-                    var json = JsonConvert.SerializeObject(app, Formatting.Indented);
-                    File.WriteAllText(selectedFilePath, json);
-
-                    Log.WriteLog(json);
-                    MessageBox.Show($@"File Saved: {selectedFilePath}");
-                }
-            }
-        }
-    }
-
-    private static Application GenerateJson(string filePath)
-    {
-        var waypoints = new Waypoints();
-        waypoints.WaypointsWaypoints =
-            ParseXml.LoadCombatFliteXml(filePath);
-        waypoints.EnableUpload = true;
-        waypoints.OverrideRange = false;
-        waypoints.SteerpointStart = 1;
-        waypoints.SteerpointEnd = waypoints.WaypointsWaypoints.Count + 1;
-        waypoints.CaptureSettings = new CaptureSettings
-        {
-            AppendToWaypointList = true,
-            OverwriteFrom = 1,
-            OverwriteUntil = -1
-        };
-        if (waypoints.WaypointsWaypoints == null) return null;
-        var application = new Application
-        {
-            Waypoints = waypoints,
-            Radios = null,
-            Displays = null, Misc = null
-        };
-
-
-        return application;
     }
 
     private delegate int StationPropertySelector(Stores store);

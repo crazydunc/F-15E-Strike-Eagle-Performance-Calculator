@@ -30,13 +30,13 @@ public static class StoresManagement
                     store.DragIndexWing = reader["DragIndex-Wing"] == DBNull.Value
                         ? null
                         : Convert.ToDouble(reader["DragIndex-Wing"]);
-                    store.DragIndexCftNoBomborTankWing = reader["DragIndex-CFT(NoBomborTankWing)"] == DBNull.Value
+                    store.DragIndexCftNoBombOrTankWing = reader["DragIndex-CFT(NoBomborTankWing)"] == DBNull.Value
                         ? null
                         : Convert.ToDouble(reader["DragIndex-CFT(NoBomborTankWing)"]);
                     store.DragIndexCft = reader["DragIndex-CFT"] == DBNull.Value
                         ? null
                         : Convert.ToDouble(reader["DragIndex-CFT"]);
-                    store.DragIndexClNoCfta2GStores = reader["DragIndex-CL(NoCFTA2GStores)"] == DBNull.Value
+                    store.DragIndexClNoCftA2GStores = reader["DragIndex-CL(NoCFTA2GStores)"] == DBNull.Value
                         ? null
                         : Convert.ToDouble(reader["DragIndex-CL(NoCFTA2GStores)"]);
                     string categoryType = reader["Category"].ToString() ?? string.Empty;
@@ -61,6 +61,7 @@ public static class StoresManagement
                         "Guided Weapons" => CategoryType.GuidedWeapons,
                         "Dispensers/Rockets" => CategoryType.DispensersRockets,
                         "Fuel Tanks" => CategoryType.FuelTanks,
+                        "Empty" => CategoryType.Empty,
                         _ => CategoryType.Unknown
                     };
                     data.Add(store);

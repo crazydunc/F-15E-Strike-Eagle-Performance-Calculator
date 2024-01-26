@@ -2,13 +2,17 @@
 
 public static class F15EStrikeEagle
 {
+    public enum DragOption
+    {
+        NoWingStores,
+        WingStores
+    }
     public static int EmptyWeight = 34600 + 4386 + 430; // Empty Weight + 2 * -5 CFTs + 2 Crew. 
     public static int GrossWeight = EmptyWeight;
     public static double BasicDragIndex = 21.3;
     public static double TotalDragIndex = BasicDragIndex;
     public static int InternalFuel { get; set; } = 12915 + 9352; // Internal + CFT
     public static int PayloadWeight { get; set; }
-
     public static int TotalFuel { get; set; } = InternalFuel;
     public static int Station2Fuel { get; set; } = 0;
     public static int Station5Fuel { get; set; } = 0;
@@ -22,7 +26,6 @@ public static class F15EStrikeEagle
     public static Station Ltp { get; set; } = new("LTP");
     public static Station Station5 { get; set; } = new("STA5");
     public static Station Lnp { get; set; } = new("LNP");
-
     public static Station RightCft { get; set; } = new("RCFT");
     public static Station Station8A { get; set; } = new("STA8A");
     public static Station Station8 { get; set; } = new("STA8");
@@ -30,6 +33,7 @@ public static class F15EStrikeEagle
 
     public static void Calculate()
     {
+        Main.UpdateDragIndexForAll();
         TotalFuel = CalculateTotalFuel();
         GrossWeight = CalculateGrossWeight();
         PayloadWeight = GrossWeight - TotalFuel;

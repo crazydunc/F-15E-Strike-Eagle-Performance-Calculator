@@ -83,4 +83,11 @@ public static class Worker
         var regex = new Regex(@"^\d+$");
         return regex.IsMatch(inputStr);
     }
+
+    public static double RoundDown(double value)
+    {
+        var roundedDown = Math.Floor(value / 10) * 10;
+
+        return roundedDown;
+    }
 }

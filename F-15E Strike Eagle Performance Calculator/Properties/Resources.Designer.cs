@@ -73,59 +73,9 @@ namespace F_15E_Strike_Eagle_Performance_Calculator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap DM_2220_2 {
-            get {
-                object obj = ResourceManager.GetObject("DM-2220-2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap DM_2220_2___Copy {
-            get {
-                object obj = ResourceManager.GetObject("DM-2220-2 - Copy", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap DM_2220_2___Copy1 {
-            get {
-                object obj = ResourceManager.GetObject("DM-2220-2 - Copy1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap DM_2220_21 {
-            get {
-                object obj = ResourceManager.GetObject("DM-2220-21", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap F_15Headon {
             get {
                 object obj = ResourceManager.GetObject("F-15Headon", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap F15E_Stations {
-            get {
-                object obj = ResourceManager.GetObject("F15E_Stations", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

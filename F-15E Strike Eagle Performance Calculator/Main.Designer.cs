@@ -48,7 +48,6 @@
             pictureBox1 = new PictureBox();
             label8 = new Label();
             panel3 = new Panel();
-            button1 = new Button();
             label17 = new Label();
             trackBarIntFuel = new TrackBar();
             label16 = new Label();
@@ -288,15 +287,14 @@
             label8.ForeColor = SystemColors.Control;
             label8.Location = new Point(3, 701);
             label8.Name = "label8";
-            label8.Size = new Size(144, 15);
+            label8.Size = new Size(194, 15);
             label8.TabIndex = 18;
-            label8.Text = "© Duncan MacKellar 2023";
+            label8.Text = "© Duncan MacKellar 2023 - v1.0.0.1";
             // 
             // panel3
             // 
             panel3.BackgroundImage = Properties.Resources.F_15Headon;
             panel3.BackgroundImageLayout = ImageLayout.Zoom;
-            panel3.Controls.Add(button1);
             panel3.Controls.Add(groupBox2);
             panel3.Controls.Add(label8);
             panel3.Controls.Add(label17);
@@ -325,20 +323,6 @@
             panel3.Name = "panel3";
             panel3.Size = new Size(1317, 792);
             panel3.TabIndex = 20;
-            // 
-            // button1
-            // 
-            button1.BackColor = SystemColors.GrayText;
-            button1.Enabled = false;
-            button1.ForeColor = SystemColors.ButtonHighlight;
-            button1.Location = new Point(1057, 9);
-            button1.Name = "button1";
-            button1.Size = new Size(124, 41);
-            button1.TabIndex = 23;
-            button1.Text = "Convert a CF XML to DCS DTC";
-            button1.UseVisualStyleBackColor = false;
-            button1.Visible = false;
-            button1.Click += button1_Click_1;
             // 
             // label17
             // 
@@ -659,7 +643,7 @@
             comboBoxSta2a.TabIndex = 1;
             comboBoxSta2a.SelectedIndexChanged += comboBoxSta2a_SelectedIndexChanged;
             // 
-            // Form1
+            // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -669,7 +653,7 @@
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
-            Name = "Form1";
+            Name = "Main";
             SizeGripStyle = SizeGripStyle.Hide;
             Text = "F-15E Strike Eagle Performance Calculator";
             groupBox1.ResumeLayout(false);
@@ -740,6 +724,5 @@
         private TrackBar trackBarsta2;
         private TrackBar trackBarsta8;
         private Label labelGW;
-        private Button button1;
     }
 }

@@ -9,6 +9,7 @@ public enum CategoryType
     DispensersRockets,
     Pods,
     FuelTanks,
+    Empty,
     Unknown
 }
 
@@ -19,9 +20,9 @@ public class Stores
     public int Weight { get; set; }
     public double? DragIndexCl { get; set; }
     public double? DragIndexWing { get; set; }
-    public double? DragIndexCftNoBomborTankWing { get; set; }
+    public double? DragIndexCftNoBombOrTankWing { get; set; }
     public double? DragIndexCft { get; set; }
-    public double? DragIndexClNoCfta2GStores { get; set; }
+    public double? DragIndexClNoCftA2GStores { get; set; }
     public CategoryType Category { get; set; }
     public string? Description { get; set; }
     public int Sta2A { get; set; }
