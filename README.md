@@ -11,6 +11,7 @@ Please let me know if you have any issues here or via Discord.
 REQUIRES .NET 6
 
 Valid data for TO Performance 
-TOW: 45000-81000lb
-Elevation: 0-2000ft
-OAT: 0-40C
+
+- TOW: 45000-81000lb
+- Elevation: 0-2000ft
+- OAT: 0-40C
