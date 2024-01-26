@@ -1,4 +1,3 @@
-Welcome!
 
 This small utility is designed to be used with Razbams F-15E for DCS World. 
 
@@ -9,6 +8,8 @@ Fuel planning, etc, will come later.
 Please let me know if you have any issues here or via Discord. 
 
 REQUIRES .NET 6
+
+![F15ESEPC](https://github.com/crazydunc/F-15E-Strike-Eagle-Performance-Calculator/assets/12380846/c680bcd0-d048-4dbd-8607-166aad009022)
 
 Valid data for TO Performance 
 
