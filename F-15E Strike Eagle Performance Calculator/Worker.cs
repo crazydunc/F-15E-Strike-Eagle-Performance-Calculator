@@ -71,7 +71,7 @@ public static class Worker
         }
     }
 
-    public static string ReplaceExtraslashes(string filepath)
+    public static string ReplaceExtraSlashes(string filepath)
     {
         if (filepath.Contains("\\\\")) filepath = filepath.Replace("\\\\", "\\");
 

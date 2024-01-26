@@ -14,7 +14,7 @@ public static class TakeoffDistance
 {
     public static double CalculateNew(double weightInput, double temperatureInput, double altitudeInput, int thrust)
     {
-        var dbLoc = Worker.ReplaceExtraslashes(AppDomain.CurrentDomain.BaseDirectory + "\\F15EPerformance.db");
+        var dbLoc = Worker.ReplaceExtraSlashes(AppDomain.CurrentDomain.BaseDirectory + "\\F15EPerformance.db");
         var connectionString = "Data Source = " + dbLoc + ";";
         List<DataPoint?> data = new();
 
@@ -44,8 +44,6 @@ public static class TakeoffDistance
             }
         }
 
-        // User inputs
-        // Calculate the weight differences
         var nearestPoint1 = FindNearestDataPoint(data, weightInput, temperatureInput, altitudeInput);
         var nearestPoint2 =
             FindNearestDataPoint(data, weightInput, temperatureInput, altitudeInput, nearestPoint1);
@@ -55,20 +53,16 @@ public static class TakeoffDistance
             ? (weightInput - nearestPoint1.Weight) / (nearestPoint2.Weight - nearestPoint1.Weight)
             : 0;
 
-        // Calculate the OAT factors
         var oatFactor = nearestPoint1 != null && nearestPoint2 != null &&
                         nearestPoint2.Temperature - nearestPoint1.Temperature != 0
             ? (temperatureInput - nearestPoint1.Temperature) / (nearestPoint2.Temperature - nearestPoint1.Temperature)
             : 0;
 
-        // Calculate the altitude factors
         var altitudeFactor = nearestPoint1 != null && nearestPoint2 != null &&
                              nearestPoint2.Altitude - nearestPoint1.Altitude != 0
             ? (altitudeInput - nearestPoint1.Altitude) / (nearestPoint2.Altitude - nearestPoint1.Altitude)
             : 0;
 
-
-        // Interpolate the distance
 
         if (nearestPoint1 != null && nearestPoint2 != null)
         {
@@ -78,7 +72,6 @@ public static class TakeoffDistance
                                        altitudeFactor * (nearestPoint2.Distance - nearestPoint1.Distance);
 
 
-            // Display the interpolated distance
             return RoundDown(interpolatedDistance);
         }
 

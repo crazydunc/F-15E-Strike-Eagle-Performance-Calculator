@@ -7,7 +7,7 @@ public static class StoresManagement
     public static List<Stores> LoadStoresInfo()
     {
         var data = new List<Stores>();
-        var dbLoc = Worker.ReplaceExtraslashes(AppDomain.CurrentDomain.BaseDirectory + "\\F15EPerformance.db");
+        var dbLoc = Worker.ReplaceExtraSlashes(AppDomain.CurrentDomain.BaseDirectory + "\\F15EPerformance.db");
         var connectionString = "Data Source = " + dbLoc + ";";
         using var connection = new SQLiteConnection(connectionString);
         connection.Open();

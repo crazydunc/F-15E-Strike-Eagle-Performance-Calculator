@@ -6,14 +6,14 @@ using Application = F_15E_Strike_Eagle_Performance_Calculator.CF_DTS.Application
 
 namespace F_15E_Strike_Eagle_Performance_Calculator;
 
-public partial class Form1 : Form
+public partial class Main : Form
 {
     private const string Pounds = " Lbs";
     private readonly bool _loaded;
     private readonly List<Stores> _loadedData;
     private Stores emptyStores = new();
 
-    public Form1()
+    public Main()
     {
         InitializeComponent();
         takeoffWeightTextBox.MaxLength = 5;
@@ -40,8 +40,6 @@ public partial class Form1 : Form
     private void PopulateComboBox<T>(ComboBox comboBox, IEnumerable<T> data, Func<T, string> displayMemberSelector,
         Func<T, object> valueMemberSelector)
     {
-        //comboBox.DisplayMember = displayMemberSelector.Method.Name;
-        //comboBox.ValueMember = valueMemberSelector.Method.Name;
         comboBox.DisplayMember = "DisplayText";
         comboBox.ValueMember = "Value";
         comboBox.DataSource = data.Select(d => new
@@ -69,15 +67,6 @@ public partial class Form1 : Form
             var loose = emptyItem2;
             dataList.Insert(0, loose);
         }
-        //var comboData = new List<object>
-        //{
-        //    data.Select(d => new
-        //    {
-        //        DisplayText = displayMemberSelector(d),
-        //        Value = valueMemberSelector(d)
-        //    }).Distinct().ToList()
-        //};
-
         comboBox.DisplayMember = "DisplayText";
         comboBox.ValueMember = "Value";
         comboBox.DataSource = dataList.Select(d => new
@@ -94,13 +83,6 @@ public partial class Form1 : Form
             _loadedData.Where(s => s.Sta2A != 0 && s.Category != CategoryType.PylonsLaunchersAdaptors),
             s => $"{s.Sta2A} x {s.Item}",
             s => s);
-        //PopulateComboBox(
-        //    comboBoxsta2,
-        //    _loadedData.Where(s => s.Sta2 != 0 && s.Category != CategoryType.PylonsLaunchersAdaptors),
-        //    s => $"{s.Sta2} x {s.Item}".Replace("{ DisplayText =", "").Replace("Value =", "").Replace(" }", ""),
-        //    s => s.Sta2,
-        //    includeEmpty: true
-        //);
         PopulateComboBox(comboBoxsta2,
             _loadedData.Where(s => s.Sta2 != 0 && s.Category != CategoryType.PylonsLaunchersAdaptors),
             s => $"{s.Sta2} x {s.Item}",
@@ -145,11 +127,11 @@ public partial class Form1 : Form
         comboBoxSta2a.SelectedIndex = 6;
         comboBoxsta2.SelectedIndex = 12;
         comboBoxsta2b.SelectedIndex = 6;
-        comboBoxLcft.SelectedIndex = 19;
+        comboBoxLcft.SelectedIndex = 23;
         comboBoxltp.SelectedIndex = 0;
-        comboBoxsta5.SelectedIndex = 15;
+        comboBoxsta5.SelectedIndex = 19;
         comboBoxlnp.SelectedIndex = 0;
-        comboBoxrcft.SelectedIndex = 19;
+        comboBoxrcft.SelectedIndex = 23;
         comboBoxsta8a.SelectedIndex = 6;
         comboBoxsta8.SelectedIndex = 12;
         comboBoxsta8b.SelectedIndex = 6;
@@ -230,19 +212,7 @@ public partial class Form1 : Form
     private void comboBoxsta2_SelectedIndexChanged(object sender, EventArgs e)
     {
         HandleStationComboBoxSelectionChange(comboBoxsta2, F15EStrikeEagle.Station2, s => s.Sta2);
-
-        //    var selectedItem = comboBoxsta2.SelectedItem as dynamic;
-        //    string displayText = selectedItem.DisplayText;
-        //    string[] displayParts = displayText.Split(" x ");
-
-        //    int sta2 = int.Parse(displayParts[0]);
-        //    string item = displayParts[1];
-        //    var selectedData = _loadedData.FirstOrDefault(s => s.Sta2 == sta2 && s.Item == item);
-
-        //    if (selectedData != null)
-        //        F15EStrikeEagle.Station2.SetStore(selectedData.Item, selectedData.Weight,
-        //            selectedData.DragIndexWing ?? 0, selectedData.Sta2);
-        //    F15EStrikeEagle.Calcuate();
+        ;
     }
 
     private void HandleStationComboBoxSelectionChange(ComboBox comboBox, Station? station,
@@ -263,7 +233,7 @@ public partial class Form1 : Form
         if (selectedData != null && station != null)
         {
             station.SetStore(selectedData.Item, selectedData.Weight, selectedData.DragIndexWing ?? 0, sta);
-            F15EStrikeEagle.Calculate(); // Assuming this is the method to recalculate the F15EStrikeEagle
+            F15EStrikeEagle.Calculate(); 
         }
 
         UpdateLoadoutUi();
@@ -366,6 +336,8 @@ public partial class Form1 : Form
             F15EStrikeEagle.Station8Fuel = 0;
             if (trackBarsta8.Value != 0) trackBarsta8.Value = 0;
         }
+
+        takeoffWeightTextBox.Text = F15EStrikeEagle.GrossWeight.ToString();
     }
 
     private void trackBarIntFuel_Scroll(object sender, EventArgs e)
@@ -442,9 +414,6 @@ public partial class Form1 : Form
 
                     Log.WriteLog(json);
                     MessageBox.Show($@"File Saved: {selectedFilePath}");
-                }
-                else
-                {
                 }
             }
         }

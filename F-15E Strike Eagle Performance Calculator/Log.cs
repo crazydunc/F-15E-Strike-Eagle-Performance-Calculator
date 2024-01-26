@@ -6,7 +6,7 @@ public static class Log
     {
         var folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
-        var path = folder + @"\v48th OG\F15E_PerfLog.txt";
+        var path = folder + @"\F15EPerformanceCalculator\F15E_PerfLog.txt";
         var logFolder = Path.GetDirectoryName(path);
         if (!Directory.Exists(logFolder))
             if (logFolder != null)

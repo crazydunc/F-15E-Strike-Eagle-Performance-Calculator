@@ -6,7 +6,7 @@ public static class TakeoffSpeeds
 {
     public static string Calculate(double targetWeight, int centreGravity, int thrustSetting)
     {
-        var livDbLoc = Worker.ReplaceExtraslashes(AppDomain.CurrentDomain.BaseDirectory + "\\F15EPerformance.db");
+        var livDbLoc = Worker.ReplaceExtraSlashes(AppDomain.CurrentDomain.BaseDirectory + "\\F15EPerformance.db");
         var connectionString = "Data Source = " + livDbLoc + ";";
         using var connection = new SQLiteConnection(connectionString);
         connection.Open();
