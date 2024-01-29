@@ -289,7 +289,7 @@
             label8.Name = "label8";
             label8.Size = new Size(194, 15);
             label8.TabIndex = 18;
-            label8.Text = "© Duncan MacKellar 2023 - v1.0.0.1";
+            label8.Text = "© Duncan MacKellar 2024 - v1.0.0.2";
             // 
             // panel3
             // 
@@ -547,9 +547,9 @@
             // 
             comboBoxsta8.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxsta8.FormattingEnabled = true;
-            comboBoxsta8.Location = new Point(301, 597);
+            comboBoxsta8.Location = new Point(290, 597);
             comboBoxsta8.Name = "comboBoxsta8";
-            comboBoxsta8.Size = new Size(150, 21);
+            comboBoxsta8.Size = new Size(175, 21);
             comboBoxsta8.TabIndex = 12;
             comboBoxsta8.SelectedIndexChanged += comboBoxsta8_SelectedIndexChanged;
             // 
@@ -577,9 +577,9 @@
             // 
             comboBoxlnp.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxlnp.FormattingEnabled = true;
-            comboBoxlnp.Location = new Point(489, 591);
+            comboBoxlnp.Location = new Point(477, 591);
             comboBoxlnp.Name = "comboBoxlnp";
-            comboBoxlnp.Size = new Size(150, 21);
+            comboBoxlnp.Size = new Size(175, 21);
             comboBoxlnp.TabIndex = 8;
             comboBoxlnp.SelectedIndexChanged += comboBoxlnp_SelectedIndexChanged;
             // 
@@ -587,9 +587,9 @@
             // 
             comboBoxsta5.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxsta5.FormattingEnabled = true;
-            comboBoxsta5.Location = new Point(582, 618);
+            comboBoxsta5.Location = new Point(570, 618);
             comboBoxsta5.Name = "comboBoxsta5";
-            comboBoxsta5.Size = new Size(150, 21);
+            comboBoxsta5.Size = new Size(175, 21);
             comboBoxsta5.TabIndex = 7;
             comboBoxsta5.SelectedIndexChanged += comboBoxsta5_SelectedIndexChanged;
             // 
@@ -597,9 +597,9 @@
             // 
             comboBoxltp.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxltp.FormattingEnabled = true;
-            comboBoxltp.Location = new Point(696, 591);
+            comboBoxltp.Location = new Point(667, 591);
             comboBoxltp.Name = "comboBoxltp";
-            comboBoxltp.Size = new Size(150, 21);
+            comboBoxltp.Size = new Size(175, 21);
             comboBoxltp.TabIndex = 6;
             comboBoxltp.SelectedIndexChanged += comboBoxltp_SelectedIndexChanged;
             // 
@@ -627,9 +627,9 @@
             // 
             comboBoxsta2.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxsta2.FormattingEnabled = true;
-            comboBoxsta2.Location = new Point(864, 597);
+            comboBoxsta2.Location = new Point(857, 597);
             comboBoxsta2.Name = "comboBoxsta2";
-            comboBoxsta2.Size = new Size(150, 21);
+            comboBoxsta2.Size = new Size(175, 21);
             comboBoxsta2.TabIndex = 2;
             comboBoxsta2.SelectedIndexChanged += comboBoxsta2_SelectedIndexChanged;
             // 

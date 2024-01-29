@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.Runtime.CompilerServices;
 using static System.Collections.Specialized.BitVector32;
 
 namespace F_15E_Strike_Eagle_Performance_Calculator;
@@ -91,61 +92,113 @@ public partial class Main : Form
     private void StationDataLoad()
     {
         PopulateComboBox(comboBoxSta2a,
-            _loadedData.Where(s => s.Sta2A != 0 && s.Category != CategoryType.PylonsLaunchersAdaptors),
+            _loadedData
+                .Where(s => s.Sta2A != 0 && s.Category != CategoryType.PylonsLaunchersAdaptors)
+                .OrderBy(s => s.Category == CategoryType.Empty ? 0 : 1)
+                .ThenBy(s => s.Category)
+                .ThenBy(s => s.Item)
+                .ThenBy(s => s.Sta2A),
             s => $"{s.Sta2A} x {s.Item}",
             s => s);
         PopulateComboBox(comboBoxsta2,
-            _loadedData.Where(s => s.Sta2 != 0 && s.Category != CategoryType.PylonsLaunchersAdaptors),
+            _loadedData
+                .Where(s => s.Sta2 != 0 && s.Category != CategoryType.PylonsLaunchersAdaptors)
+                .OrderBy(s => s.Category == CategoryType.Empty ? 0 : 1)
+                .ThenBy(s => s.Category)
+                .ThenBy(s => s.Item)
+                .ThenBy(s => s.Sta2),
             s => $"{s.Sta2} x {s.Item}",
-            s => 0);
+            s => s);
         PopulateComboBox(comboBoxsta2b,
-            _loadedData.Where(s => s.Sta2B != 0 && s.Category != CategoryType.PylonsLaunchersAdaptors),
+            _loadedData
+                .Where(s => s.Sta2B != 0 && s.Category != CategoryType.PylonsLaunchersAdaptors)
+                .OrderBy(s => s.Category == CategoryType.Empty ? 0 : 1)
+                .ThenBy(s => s.Category)
+                .ThenBy(s => s.Item)
+                .ThenBy(s => s.Sta2B),
             s => $"{s.Sta2B} x {s.Item}",
             s => s);
         PopulateComboBox(comboBoxLcft,
-            _loadedData.Where(s => s.Lcft != 0 && s.Category != CategoryType.PylonsLaunchersAdaptors),
+            _loadedData
+                .Where(s => s.Lcft != 0 && s.Category != CategoryType.PylonsLaunchersAdaptors)
+                .OrderBy(s => s.Category == CategoryType.Empty ? 0 : 1)
+                .ThenBy(s => s.Category)
+                .ThenBy(s => s.Item)
+                .ThenBy(s => s.Lcft),
             s => $"{s.Lcft} x {s.Item}",
             s => s);
         PopulateComboBox(comboBoxltp,
-            _loadedData.Where(s => s.Ltp != 0 && s.Category != CategoryType.PylonsLaunchersAdaptors),
+            _loadedData
+                .Where(s => s.Ltp != 0 && s.Category != CategoryType.PylonsLaunchersAdaptors)
+                .OrderBy(s => s.Category == CategoryType.Empty ? 0 : 1)
+                .ThenBy(s => s.Category)
+                .ThenBy(s => s.Item)
+                .ThenBy(s => s.Ltp),
             s => $"{s.Ltp} x {s.Item}",
             s => s);
         PopulateComboBox(comboBoxsta5,
-            _loadedData.Where(s => s.Sta5 != 0 && s.Category != CategoryType.PylonsLaunchersAdaptors),
+            _loadedData
+                .Where(s => s.Sta5 != 0 && s.Category != CategoryType.PylonsLaunchersAdaptors)
+                .OrderBy(s => s.Category == CategoryType.Empty ? 0 : 1)
+                .ThenBy(s => s.Category)
+                .ThenBy(s => s.Item)
+                .ThenBy(s => s.Sta5),
             s => $"{s.Sta5} x {s.Item}",
             s => s);
         PopulateComboBox(comboBoxlnp,
-            _loadedData.Where(s => s.Lnp != 0 && s.Category != CategoryType.PylonsLaunchersAdaptors),
+            _loadedData
+                .Where(s => s.Lnp != 0 && s.Category != CategoryType.PylonsLaunchersAdaptors)
+                .OrderBy(s => s.Category == CategoryType.Empty ? 0 : 1)
+                .ThenBy(s => s.Category)
+                .ThenBy(s => s.Item)
+                .ThenBy(s => s.Lnp),
             s => $"{s.Lnp} x {s.Item}",
             s => s);
         PopulateComboBox(comboBoxrcft,
-            _loadedData.Where(s => s.Rcft != 0 && s.Category != CategoryType.PylonsLaunchersAdaptors),
+            _loadedData
+                .Where(s => s.Rcft != 0 && s.Category != CategoryType.PylonsLaunchersAdaptors)
+                .OrderBy(s => s.Category == CategoryType.Empty ? 0 : 1) 
+                .ThenBy(s => s.Category)
+                .ThenBy(s => s.Item)    
+                .ThenBy(s => s.Rcft),   
             s => $"{s.Rcft} x {s.Item}",
             s => s);
         PopulateComboBox(comboBoxsta8a,
-            _loadedData.Where(s => s.Sta8A != 0 && s.Category != CategoryType.PylonsLaunchersAdaptors),
+            _loadedData
+                .Where(s => s.Sta8A != 0 && s.Category != CategoryType.PylonsLaunchersAdaptors)
+                .OrderBy(s => s.Category == CategoryType.Empty ? 0 : 1)
+                .ThenBy(s => s.Category)
+                .ThenBy(s => s.Item)
+                .ThenBy(s => s.Sta8A),
             s => $"{s.Sta8A} x {s.Item}",
             s => s);
         PopulateComboBox(comboBoxsta8,
-            _loadedData.Where(s => s.Sta8 != 0 && s.Category != CategoryType.PylonsLaunchersAdaptors),
+            _loadedData
+                .Where(s => s.Sta8 != 0 && s.Category != CategoryType.PylonsLaunchersAdaptors)
+                .OrderBy(s => s.Category == CategoryType.Empty ? 0 : 1)
+                .ThenBy(s => s.Category)
+                .ThenBy(s => s.Item)
+                .ThenBy(s => s.Sta8),
             s => $"{s.Sta8} x {s.Item}",
             s => s);
         PopulateComboBox(comboBoxsta8b,
-            _loadedData.Where(s => s.Sta8B != 0 && s.Category != CategoryType.PylonsLaunchersAdaptors),
+            _loadedData
+                .Where(s => s.Sta8B != 0 && s.Category != CategoryType.PylonsLaunchersAdaptors)
+                .OrderBy(s => s.Category == CategoryType.Empty ? 0 : 1)
+                .ThenBy(s => s.Category)
+                .ThenBy(s => s.Item)
+                .ThenBy(s => s.Sta8B),
             s => $"{s.Sta8B} x {s.Item}",
             s => s);
 
-        comboBoxSta2a.SelectedIndex = 6;
-        comboBoxsta2.SelectedIndex = 12;
-        comboBoxsta2b.SelectedIndex = 6;
-        comboBoxLcft.SelectedIndex = 24;
-        comboBoxltp.SelectedIndex = 0;
-        comboBoxsta5.SelectedIndex = 20;
-        comboBoxlnp.SelectedIndex = 0;
-        comboBoxrcft.SelectedIndex = 24;
-        comboBoxsta8a.SelectedIndex = 6;
-        comboBoxsta8.SelectedIndex = 12;
-        comboBoxsta8b.SelectedIndex = 6;
+        comboBoxSta2a.SelectedIndex = 2;
+        comboBoxsta2.SelectedIndex = 21;
+        comboBoxsta2b.SelectedIndex = 4;
+        comboBoxltp.SelectedIndex = 1;
+        comboBoxlnp.SelectedIndex = 1;
+        comboBoxsta8a.SelectedIndex = 2;
+        comboBoxsta8.SelectedIndex = 21;
+        comboBoxsta8b.SelectedIndex = 4;
     }
 
     private void button1_Click(object sender, EventArgs e)
@@ -268,6 +321,11 @@ public partial class Main : Form
                     if (selectedData.Item.Contains("AAQ-14")) dragIndex = 6.5;
                 }
             }
+
+            if (station.StationName is "STA2" or "STA8")
+            {
+                dragIndex = FuelTankDragIndex(station);
+            }
             station.SetStore(selectedData.Item, selectedData.Weight, dragIndex ?? 0, sta, selectedData.Category, selectedData);
             F15EStrikeEagle.Calculate();
         }
@@ -279,22 +337,32 @@ public partial class Main : Form
     {
         foreach (var station in StationList)
         {
+
+
+
             var dragIndexToUse = station.GetDragIndexToUse(F15EStrikeEagle.Station2.StoreCategory, F15EStrikeEagle.Station8.StoreCategory);
             double? dragIndex = 0;
-            switch (dragIndexToUse)
+            if (station.StationName != "STA5")
             {
-                case F15EStrikeEagle.DragOption.NoWingStores:
-                    dragIndex = station.StationStore.DragIndexCftNoBombOrTankWing;
-                    dragIndex = DragIndexValidation(dragIndex, station.StationStore);
-                    break;
-                case F15EStrikeEagle.DragOption.WingStores:
-                    dragIndex = station.StationStore.DragIndexCft;
-                    dragIndex = DragIndexValidation(dragIndex, station.StationStore);
+                switch (dragIndexToUse)
+                {
+                    case F15EStrikeEagle.DragOption.NoWingStores:
+                        dragIndex = station.StationStore.DragIndexCftNoBombOrTankWing;
+                        dragIndex = DragIndexValidation(dragIndex, station.StationStore);
+                        break;
+                    case F15EStrikeEagle.DragOption.WingStores:
+                        dragIndex = station.StationStore.DragIndexCft;
+                        dragIndex = DragIndexValidation(dragIndex, station.StationStore);
 
-                    break;
-                default:
-                    dragIndex = 0;
-                    break;
+                        break;
+                    default:
+                        dragIndex = 0;
+                        break;
+                }
+            }
+            else
+            {
+                dragIndex = station.StationStore.DragIndexCl;
             }
             if (station.StationStore.Item.Contains("LANTIRN"))
             {
@@ -309,10 +377,70 @@ public partial class Main : Form
                 }
             }
 
+            if (station.StationName is "STA2" or "STA8")
+            {
+                dragIndex = FuelTankDragIndex(station);
+            }
+
             int qty = 0;
             station.SetStore(station.StationStore.Item, station.StationStore.Weight, dragIndex ?? 0, station.StoreQuantity, station.StationStore.Category);
         }
     }
+
+    private static double? FuelTankDragIndex(Station station)
+    {
+        double? dragIndex = 0;
+
+        if (station.StationName == "STA8")
+        {
+            if (F15EStrikeEagle.Station8.StoreName.Contains("610") && F15EStrikeEagle.RightCft.StoreQuantity > 3)
+            {
+                // CFI-O
+                dragIndex = 12.3;
+            }
+            else if (F15EStrikeEagle.Station8.StoreName.Contains("610") &&
+                     F15EStrikeEagle.RightCft.StoreQuantity <= 3 &&
+                     F15EStrikeEagle.RightCft.StoreCategory != CategoryType.AirToAirMissiles &&
+                     F15EStrikeEagle.RightCft.StoreCategory != CategoryType.Empty)
+            {
+                //CFT-I
+                dragIndex = 8.2;
+            }
+            else if (F15EStrikeEagle.Station8.StoreName.Contains("610") &&
+                     (F15EStrikeEagle.RightCft.StoreCategory == CategoryType.AirToAirMissiles ||
+                      F15EStrikeEagle.RightCft.StoreCategory == CategoryType.Empty))
+            {
+                //CFT
+                dragIndex = 6;
+            }
+        }
+        else if (station.StationName == "STA2")
+        {
+            if (F15EStrikeEagle.Station2.StoreName.Contains("610") && F15EStrikeEagle.LeftCft.StoreQuantity > 3)
+            {
+                // CFI-O
+                dragIndex = 12.3;
+            }
+            else if (F15EStrikeEagle.Station2.StoreName.Contains("610") &&
+                     F15EStrikeEagle.LeftCft.StoreQuantity <= 3 &&
+                     F15EStrikeEagle.LeftCft.StoreCategory != CategoryType.AirToAirMissiles &&
+                     F15EStrikeEagle.LeftCft.StoreCategory != CategoryType.Empty)
+            {
+                //CFT-I
+                dragIndex = 8.2;
+            }
+            else if (F15EStrikeEagle.Station2.StoreName.Contains("610") &&
+                     (F15EStrikeEagle.LeftCft.StoreCategory == CategoryType.AirToAirMissiles ||
+                      F15EStrikeEagle.LeftCft.StoreCategory == CategoryType.Empty))
+            {
+                //CFT
+                dragIndex = 6;
+            }
+        }
+
+        return dragIndex;
+    }
+
     private static double? DragIndexValidation(double? dragIndex, Stores selectedData)
     {
         if (dragIndex == null && selectedData.Category != CategoryType.Empty)
@@ -379,15 +507,7 @@ public partial class Main : Form
 
     public void UpdateLoadoutUi()
     {
-        if (!_loaded)
-        {
-            fuelLabel.Text = F15EStrikeEagle.TotalFuel + Pounds;
-            payloadLabel.Text = F15EStrikeEagle.PayloadWeight + Pounds;
-            LatAsymLabel.Text = F15EStrikeEagle.LateralImbalance + Pounds;
-            DragLabel.Text = F15EStrikeEagle.TotalDragIndex.ToString(CultureInfo.InvariantCulture);
-            weightLabel.Text = F15EStrikeEagle.GrossWeight + Pounds;
-            labelGW.Visible = F15EStrikeEagle.GrossWeight > 81000;
-        }
+
 
         if (F15EStrikeEagle.Station2.StoreName.Contains("610"))
         {
@@ -396,7 +516,6 @@ public partial class Main : Form
                 trackBarsta2.Enabled = true;
                 trackBarsta2.Value = 3965;
                 F15EStrikeEagle.Station2Fuel = trackBarsta2.Value;
-                F15EStrikeEagle.Calculate();
             }
         }
         else
@@ -413,7 +532,6 @@ public partial class Main : Form
                 trackBarsta5.Enabled = true;
                 trackBarsta5.Value = 3965;
                 F15EStrikeEagle.Station5Fuel = trackBarsta5.Value;
-                F15EStrikeEagle.Calculate();
             }
         }
         else
@@ -430,7 +548,6 @@ public partial class Main : Form
                 trackBarsta8.Enabled = true;
                 trackBarsta8.Value = 3965;
                 F15EStrikeEagle.Station8Fuel = trackBarsta8.Value;
-                F15EStrikeEagle.Calculate();
             }
         }
         else
@@ -440,7 +557,22 @@ public partial class Main : Form
             if (trackBarsta8.Value != 0) trackBarsta8.Value = 0;
         }
 
+        if (trackBarsta2.Value != F15EStrikeEagle.Station2Fuel && trackBarsta2.Enabled == true) F15EStrikeEagle.Station2Fuel = trackBarsta2.Value;
+        if (trackBarsta5.Value != F15EStrikeEagle.Station5Fuel && trackBarsta5.Enabled == true) F15EStrikeEagle.Station5Fuel = trackBarsta5.Value;
+        if (trackBarsta8.Value != F15EStrikeEagle.Station8Fuel && trackBarsta8.Enabled == true) F15EStrikeEagle.Station8Fuel = trackBarsta8.Value;
+        F15EStrikeEagle.Calculate();
+
+        if (!_loaded)
+        {
+            fuelLabel.Text = F15EStrikeEagle.TotalFuel + Pounds;
+            payloadLabel.Text = F15EStrikeEagle.PayloadWeight + Pounds;
+            LatAsymLabel.Text = F15EStrikeEagle.LateralImbalance + Pounds;
+            DragLabel.Text = F15EStrikeEagle.TotalDragIndex.ToString(CultureInfo.InvariantCulture);
+            weightLabel.Text = F15EStrikeEagle.GrossWeight + Pounds;
+            labelGW.Visible = F15EStrikeEagle.GrossWeight > 81000;
+        }
         takeoffWeightTextBox.Text = F15EStrikeEagle.GrossWeight.ToString();
+
     }
 
     private void trackBarIntFuel_Scroll(object sender, EventArgs e)

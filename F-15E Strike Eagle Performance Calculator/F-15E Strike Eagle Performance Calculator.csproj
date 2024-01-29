@@ -10,9 +10,9 @@
 		<ApplicationIcon>Images\9340_und_icon.ico</ApplicationIcon>
 		<Title>F-15E Strike Eagle Performance Calculator</Title>
 		<Company>Duncan MacKellar</Company>
-		<Copyright>Duncan MacKellar 2023</Copyright>
-		<AssemblyVersion>1.0.0.1</AssemblyVersion>
-		<FileVersion>1.0.0.1</FileVersion>
+		<Copyright>Duncan MacKellar 2024</Copyright>
+		<AssemblyVersion>1.0.0.2</AssemblyVersion>
+		<FileVersion>1.0.0.2</FileVersion>
 		<Platforms>AnyCPU;x64</Platforms>
 	</PropertyGroup>
 	<PropertyGroup>
