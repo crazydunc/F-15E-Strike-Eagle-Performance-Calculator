@@ -39,7 +39,7 @@ public static class StoresManagement
                     store.DragIndexClNoCftA2GStores = reader["DragIndex-CL(NoCFTA2GStores)"] == DBNull.Value
                         ? null
                         : Convert.ToDouble(reader["DragIndex-CL(NoCFTA2GStores)"]);
-                    string categoryType = reader["Category"].ToString() ?? string.Empty;
+                    var categoryType = reader["Category"].ToString() ?? string.Empty;
                     store.Description = reader["Description"].ToString();
                     store.Sta2A = Convert.IsDBNull(reader["STA2A"]) ? 0 : Convert.ToInt32(reader["STA2A"]);
                     store.Sta2 = Convert.IsDBNull(reader["STA2"]) ? 0 : Convert.ToInt32(reader["STA2"]);
@@ -54,7 +54,7 @@ public static class StoresManagement
                     store.Sta8B = Convert.IsDBNull(reader["STA8B"]) ? 0 : Convert.ToInt32(reader["STA8B"]);
                     store.Category = categoryType switch
                     {
-                        "Air to Air Missiles" => CategoryType.AirToAirMissiles,
+                        "Air-to-Air Missiles" => CategoryType.AirToAirMissiles,
                         "Pylons, Launchers and Adaptors" => CategoryType.PylonsLaunchersAdaptors,
                         "General Purpose Weapons" => CategoryType.GeneralPurposeWeapons,
                         "Pods" => CategoryType.Pods,
@@ -72,5 +72,100 @@ public static class StoresManagement
         connection.Close();
 
         return data;
+    }
+
+    public static double? DragIndexValidation(double? dragIndex, Stores selectedData)
+    {
+        if (dragIndex == null && selectedData.Category != CategoryType.Empty)
+        {
+            dragIndex = selectedData.DragIndexWing;
+            if (dragIndex == null && selectedData.Category != CategoryType.Empty) dragIndex = selectedData.DragIndexCl;
+        }
+
+        return dragIndex;
+    }
+
+    public static double? FuelTankDragIndex(Station station, double? dragIndex)
+    {
+        //double? dragIndex = 0;
+
+        if (station.StationName == "STA8")
+        {
+            if (F15EStrikeEagle.Station8.StoreName.Contains("610") && F15EStrikeEagle.RightCft.StoreQuantity > 3)
+                // CFI-O
+                dragIndex = 12.3;
+            else if (F15EStrikeEagle.Station8.StoreName.Contains("610") &&
+                     F15EStrikeEagle.RightCft.StoreQuantity <= 3 &&
+                     F15EStrikeEagle.RightCft.StoreCategory != CategoryType.AirToAirMissiles &&
+                     F15EStrikeEagle.RightCft.StoreCategory != CategoryType.Empty)
+                //CFT-I
+                dragIndex = 8.2;
+            else if (F15EStrikeEagle.Station8.StoreName.Contains("610") &&
+                     (F15EStrikeEagle.RightCft.StoreCategory == CategoryType.AirToAirMissiles ||
+                      F15EStrikeEagle.RightCft.StoreCategory == CategoryType.Empty))
+                //CFT
+                dragIndex = 6;
+        }
+        else if (station.StationName == "STA2")
+        {
+            if (F15EStrikeEagle.Station2.StoreName.Contains("610") && F15EStrikeEagle.LeftCft.StoreQuantity > 3)
+                // CFI-O
+                dragIndex = 12.3;
+            else if (F15EStrikeEagle.Station2.StoreName.Contains("610") &&
+                     F15EStrikeEagle.LeftCft.StoreQuantity <= 3 &&
+                     F15EStrikeEagle.LeftCft.StoreCategory != CategoryType.AirToAirMissiles &&
+                     F15EStrikeEagle.LeftCft.StoreCategory != CategoryType.Empty)
+                //CFT-I
+                dragIndex = 8.2;
+            else if (F15EStrikeEagle.Station2.StoreName.Contains("610") &&
+                     (F15EStrikeEagle.LeftCft.StoreCategory == CategoryType.AirToAirMissiles ||
+                      F15EStrikeEagle.LeftCft.StoreCategory == CategoryType.Empty))
+                //CFT
+                dragIndex = 6;
+        }
+
+        return dragIndex;
+    }
+
+    public static void UpdateDragIndexForAll()
+    {
+        foreach (var station in Main.StationList)
+        {
+            var dragIndexToUse = station.GetDragIndexToUse(F15EStrikeEagle.Station2.StoreCategory,
+                F15EStrikeEagle.Station8.StoreCategory);
+            double? dragIndex = 0;
+            if (station.StationName != "STA5")
+                switch (dragIndexToUse)
+                {
+                    case F15EStrikeEagle.DragOption.NoWingStores:
+                        dragIndex = station.StationStore.DragIndexCftNoBombOrTankWing;
+                        dragIndex = DragIndexValidation(dragIndex, station.StationStore);
+                        break;
+                    case F15EStrikeEagle.DragOption.WingStores:
+                        dragIndex = station.StationStore.DragIndexCft;
+                        dragIndex = DragIndexValidation(dragIndex, station.StationStore);
+
+                        break;
+                    default:
+                        dragIndex = 0;
+                        break;
+                }
+            else
+                dragIndex = station.StationStore.DragIndexCl;
+
+            if (station.StationStore.Item.Contains("LANTIRN"))
+                if (F15EStrikeEagle.RightCft.StoreCategory == CategoryType.Empty &&
+                    F15EStrikeEagle.LeftCft.StoreCategory == CategoryType.Empty)
+                {
+                    if (station.StationStore.Item.Contains("AAQ-13")) dragIndex = 8.3;
+                    if (station.StationStore.Item.Contains("AAQ-14")) dragIndex = 6.5;
+                }
+
+            if (station.StationName is "STA2" or "STA8") dragIndex = FuelTankDragIndex(station, dragIndex);
+
+            var qty = 0;
+            station.SetStore(station.StationStore.Item, station.StationStore.Weight, dragIndex ?? 0,
+                station.StoreQuantity, station.StationStore.Category);
+        }
     }
 }

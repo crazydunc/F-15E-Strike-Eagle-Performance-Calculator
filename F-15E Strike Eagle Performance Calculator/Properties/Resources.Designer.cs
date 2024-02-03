@@ -79,5 +79,25 @@ namespace F_15E_Strike_Eagle_Performance_Calculator.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_fighter_jet_48 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-fighter-jet-48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_jet_engine_48 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-jet-engine-48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

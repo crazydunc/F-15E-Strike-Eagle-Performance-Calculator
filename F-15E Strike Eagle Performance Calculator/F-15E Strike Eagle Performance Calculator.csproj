@@ -11,8 +11,8 @@
 		<Title>F-15E Strike Eagle Performance Calculator</Title>
 		<Company>Duncan MacKellar</Company>
 		<Copyright>Duncan MacKellar 2024</Copyright>
-		<AssemblyVersion>1.0.0.2</AssemblyVersion>
-		<FileVersion>1.0.0.2</FileVersion>
+		<AssemblyVersion>1.0.0.3</AssemblyVersion>
+		<FileVersion>1.0.0.3</FileVersion>
 		<Platforms>AnyCPU;x64</Platforms>
 	</PropertyGroup>
 	<PropertyGroup>
@@ -52,6 +52,10 @@
 		<None Update="F15EPerformance.db">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Fuel\" />
 	</ItemGroup>
 
 </Project>

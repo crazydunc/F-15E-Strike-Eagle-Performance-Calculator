@@ -7,10 +7,13 @@ public static class F15EStrikeEagle
         NoWingStores,
         WingStores
     }
+
     public static int EmptyWeight = 34600 + 4386 + 430; // Empty Weight + 2 * -5 CFTs + 2 Crew. 
     public static int GrossWeight = EmptyWeight;
     public static double BasicDragIndex = 21.3;
     public static double TotalDragIndex = BasicDragIndex;
+    public static double PayloadDragIndex;
+    public static int MaximumFuel = 12915 + 9352;
     public static int InternalFuel { get; set; } = 12915 + 9352; // Internal + CFT
     public static int PayloadWeight { get; set; }
     public static int TotalFuel { get; set; } = InternalFuel;
@@ -33,13 +36,14 @@ public static class F15EStrikeEagle
 
     public static void Calculate()
     {
-        Main.UpdateDragIndexForAll();
+        StoresManagement.UpdateDragIndexForAll();
         TotalFuel = CalculateTotalFuel();
         GrossWeight = CalculateGrossWeight();
-        PayloadWeight = GrossWeight - TotalFuel;
-        TotalDragIndex = CalculateDragIndex();
+        PayloadWeight = GrossWeight - (TotalFuel + EmptyWeight);
+        TotalDragIndex = CalculateDragIndex(1);
         var leftWing = CalculateLeftWing();
         var rightWing = CalculateRightWing();
+        PayloadDragIndex = CalculateDragIndex(2);
         LateralImbalance = rightWing - leftWing;
     }
 
@@ -72,25 +76,48 @@ public static class F15EStrikeEagle
         return weight;
     }
 
-    private static double CalculateDragIndex()
+    private static double CalculateDragIndex(int type)
     {
-        var dragIndex = BasicDragIndex + Station2A.StationDragIndex + Station2.StationDragIndex +
+        double dragIndex = 0;
+        if (type == 1)
+            dragIndex = BasicDragIndex + Station2A.StationDragIndex + Station2.StationDragIndex +
                         Station2B.StationDragIndex + LeftCft.StationDragIndex + Ltp.StationDragIndex +
                         Station5.StationDragIndex +
                         Lnp.StationDragIndex + RightCft.StationDragIndex + Station8A.StationDragIndex +
                         Station8.StationDragIndex +
                         Station8B.StationDragIndex;
-
-
+        if (type == 2)
+            dragIndex = Station2A.StationDragIndex + Station2.StationDragIndex +
+                        Station2B.StationDragIndex + LeftCft.StationDragIndex + Ltp.StationDragIndex +
+                        Station5.StationDragIndex +
+                        Lnp.StationDragIndex + RightCft.StationDragIndex + Station8A.StationDragIndex +
+                        Station8.StationDragIndex +
+                        Station8B.StationDragIndex;
         return Math.Round(dragIndex, 2);
     }
 
     private static int CalculateTotalFuel()
     {
+        MaximumFuel = 12915 + 9352;
         var fuel = InternalFuel;
-        if (Station2.StoreName.Contains("610")) fuel += Station2Fuel;
-        if (Station5.StoreName.Contains("610")) fuel += Station5Fuel;
-        if (Station8.StoreName.Contains("610")) fuel += Station8Fuel;
+        if (Station2.StoreName.Contains("610"))
+        {
+            fuel += Station2Fuel;
+            MaximumFuel = MaximumFuel += 3965;
+        }
+
+        if (Station5.StoreName.Contains("610"))
+        {
+            fuel += Station5Fuel;
+            MaximumFuel = MaximumFuel += 3965;
+        }
+
+        if (Station8.StoreName.Contains("610"))
+        {
+            fuel += Station8Fuel;
+            MaximumFuel = MaximumFuel += 3965;
+        }
+
         return fuel;
     }
 }

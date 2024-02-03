@@ -90,4 +90,28 @@ public static class Worker
 
         return roundedDown;
     }
+
+    public static double ConvertToDecimalDegrees(string input)
+    {
+        string[] parts = input.Split(new[] { ' ', '°', '\'', '’' }, StringSplitOptions.RemoveEmptyEntries);
+
+        if (parts.Length == 3)
+        {
+            var direction = parts[0];
+            var degrees = int.Parse(parts[1]);
+            var minutes = double.Parse(parts[2]);
+
+            var decimalDegrees = degrees + minutes / 60.0;
+
+            return direction == "S" || direction == "W" ? -decimalDegrees : decimalDegrees;
+        }
+
+        throw new ArgumentException("Invalid input format");
+    }
+
+
+    public static double ToRadians(double degrees)
+    {
+        return degrees * Math.PI / 180.0;
+    }
 }
