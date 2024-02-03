@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel;
-using F_15E_Strike_Eagle_Performance_Calculator.DTC;
+using F_15E_Strike_Eagle_Performance_Calculator.Imports;
 
 namespace F_15E_Strike_Eagle_Performance_Calculator.MissionPlanning;
 

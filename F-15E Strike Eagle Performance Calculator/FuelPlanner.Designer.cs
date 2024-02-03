@@ -53,6 +53,7 @@
             label2 = new Label();
             labelTotalDistance = new Label();
             label1 = new Label();
+            buttonCombatFlite = new Button();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -305,11 +306,24 @@
             label1.TabIndex = 0;
             label1.Text = "Total Distance:";
             // 
+            // buttonCombatFlite
+            // 
+            buttonCombatFlite.BackColor = SystemColors.GrayText;
+            buttonCombatFlite.ForeColor = SystemColors.ButtonHighlight;
+            buttonCombatFlite.Location = new Point(108, 3);
+            buttonCombatFlite.Name = "buttonCombatFlite";
+            buttonCombatFlite.Size = new Size(94, 39);
+            buttonCombatFlite.TabIndex = 27;
+            buttonCombatFlite.Text = "Import CF";
+            buttonCombatFlite.UseVisualStyleBackColor = false;
+            buttonCombatFlite.Click += buttonCombatFlite_Click;
+            // 
             // FuelPlanner
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.WindowFrame;
+            Controls.Add(buttonCombatFlite);
             Controls.Add(groupBox1);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(ImportDtcButton);
@@ -347,5 +361,6 @@
         private Label label8;
         private Label label10;
         private Label labelSpeeds;
+        private Button buttonCombatFlite;
     }
 }

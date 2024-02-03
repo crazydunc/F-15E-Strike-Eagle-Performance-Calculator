@@ -1,4 +1,4 @@
-﻿namespace F_15E_Strike_Eagle_Performance_Calculator.DTC;
+﻿namespace F_15E_Strike_Eagle_Performance_Calculator.Imports;
 
 // DTCImport myDeserializedClass = JsonConvert.DeserializeObject<DTCImport>(myJsonResponse);
 public class DTCImport
@@ -40,5 +40,6 @@ public class Waypoint
     public int Elevation { get; set; }
     public string TimeOverSteerpoint { get; set; }
     public bool Target { get; set; }
-    public int MEA { get; set; }
+    public int Mea { get; set; }
+    public int Ktas { get; set; }
 }

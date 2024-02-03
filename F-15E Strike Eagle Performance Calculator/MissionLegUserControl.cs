@@ -124,7 +124,7 @@ public partial class MissionLegUserControl : UserControl
         try
         {
             var a = Convert.ToInt32(AARtextBox.Text);
-            int max = F15EStrikeEagle.MaximumFuel + 1;
+            var max = F15EStrikeEagle.MaximumFuel + 1;
             if (a > 0 && a < max)
             {
                 MissionLeg.LegFuelAdded = a;
@@ -168,8 +168,8 @@ public partial class MissionLegUserControl : UserControl
 
     private void buttonStores_Click(object sender, EventArgs e)
     {
-        StoresEmployment stores = new StoresEmployment(Station2, Lcft, Station5, RCft, Station8);
-        DialogResult result = stores.ShowDialog();
+        var stores = new StoresEmployment(Station2, Lcft, Station5, RCft, Station8);
+        var result = stores.ShowDialog();
 
         if (result == DialogResult.OK)
         {
@@ -178,8 +178,8 @@ public partial class MissionLegUserControl : UserControl
             Station2 = stores.Station2;
             RCft = stores.RightCft;
             Lcft = stores.LeftCft;
-            double drag = stores.DragIndexRemoved;
-            double weight = stores.WeightRemoved;
+            var drag = stores.DragIndexRemoved;
+            var weight = stores.WeightRemoved;
             MissionLeg.LegDragIndexRemoved = drag;
             MissionLeg.LegPayloadReleased = (int)weight;
             RecalculateFuel();

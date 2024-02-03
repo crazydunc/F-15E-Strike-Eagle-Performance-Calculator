@@ -1,4 +1,4 @@
-﻿using F_15E_Strike_Eagle_Performance_Calculator.DTC;
+﻿using F_15E_Strike_Eagle_Performance_Calculator.Imports;
 
 namespace F_15E_Strike_Eagle_Performance_Calculator.MissionPlanning;
 
@@ -28,7 +28,7 @@ internal class MissionPlanner
     {
         try
         {
-            List<MissionLegs> missionLegs = new List<MissionLegs>();
+            var missionLegs = new List<MissionLegs>();
             var aircraftWeightAtStart = F15EStrikeEagle.GrossWeight;
             var dragIndex = F15EStrikeEagle.TotalDragIndex;
             var fuelWeight = F15EStrikeEagle.TotalFuel;
@@ -49,9 +49,9 @@ internal class MissionPlanner
                     LegDragIndex = dragIndex,
                     LegFuelAdded = 0,
                     LegDistance = Math.Round(distance, 1),
-                    LegSpeed = 450,
                     LegStartAircraftWeight = aircraftWeightAtStart
                 };
+                missionLeg.LegSpeed = (fromWaypoint.Ktas == 0) ? 450 : fromWaypoint.Ktas;
                 if (toWaypoint.Target) missionLeg.LegTarget = true;
                 missionLeg.LegFuel = CalculateLegFuel(missionLeg);
                 if (missionLeg.Id == 1) missionLeg.LegFuel += 1488; // Startup and Taxi

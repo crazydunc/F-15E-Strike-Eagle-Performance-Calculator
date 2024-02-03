@@ -106,22 +106,22 @@ namespace F_15E_Strike_Eagle_Performance_Calculator
         //}
         public (double FlapDownSpeed, double FlapUpSpeed) GetLandingSpeed(int weight)
         {
-            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            using (var connection = new SQLiteConnection(connectionString))
             {
                 connection.Open();
 
-                using (SQLiteCommand command = new SQLiteCommand(connection))
+                using (var command = new SQLiteCommand(connection))
                 {
                     command.CommandText = "SELECT Weight, FlapDown, FlapUp FROM LandingSpeeds WHERE Weight <= @Weight ORDER BY Weight DESC LIMIT 2";
                     command.Parameters.AddWithValue("@Weight", weight);
 
-                    using (SQLiteDataReader reader = command.ExecuteReader())
+                    using (var reader = command.ExecuteReader())
                     {
                         if (reader.Read())
                         {
-                            int lowerWeight = reader.GetInt32(0);
-                            int lowerFlapDownSpeed = reader.GetInt32(1);
-                            int lowerFlapUpSpeed = reader.GetInt32(2);
+                            var lowerWeight = reader.GetInt32(0);
+                            var lowerFlapDownSpeed = reader.GetInt32(1);
+                            var lowerFlapUpSpeed = reader.GetInt32(2);
 
                             if (lowerWeight == weight)
                             {
@@ -131,14 +131,14 @@ namespace F_15E_Strike_Eagle_Performance_Calculator
 
                             if (reader.Read())
                             {
-                                int upperWeight = reader.GetInt32(0);
-                                int upperFlapDownSpeed = reader.GetInt32(1);
-                                int upperFlapUpSpeed = reader.GetInt32(2);
+                                var upperWeight = reader.GetInt32(0);
+                                var upperFlapDownSpeed = reader.GetInt32(1);
+                                var upperFlapUpSpeed = reader.GetInt32(2);
 
                                 // Perform linear interpolation between two closest weights for FlapDown and FlapUp speeds
-                                double interpolationFactor = (double)(weight - lowerWeight) / (upperWeight - lowerWeight);
-                                double interpolatedFlapDownSpeed = lowerFlapDownSpeed + interpolationFactor * (upperFlapDownSpeed - lowerFlapDownSpeed);
-                                double interpolatedFlapUpSpeed = lowerFlapUpSpeed + interpolationFactor * (upperFlapUpSpeed - lowerFlapUpSpeed);
+                                var interpolationFactor = (double)(weight - lowerWeight) / (upperWeight - lowerWeight);
+                                var interpolatedFlapDownSpeed = lowerFlapDownSpeed + interpolationFactor * (upperFlapDownSpeed - lowerFlapDownSpeed);
+                                var interpolatedFlapUpSpeed = lowerFlapUpSpeed + interpolationFactor * (upperFlapUpSpeed - lowerFlapUpSpeed);
 
                                 return (interpolatedFlapDownSpeed, interpolatedFlapUpSpeed);
                             }
