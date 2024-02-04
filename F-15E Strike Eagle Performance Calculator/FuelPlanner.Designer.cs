@@ -327,6 +327,7 @@
             Controls.Add(groupBox1);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(ImportDtcButton);
+            DoubleBuffered = true;
             Name = "FuelPlanner";
             Size = new Size(1345, 694);
             VisibleChanged += FuelPlanner_VisibleChanged;

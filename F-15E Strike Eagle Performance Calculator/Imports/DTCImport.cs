@@ -6,9 +6,9 @@ public class DTCImport
     public string? Aircraft { get; set; }
     public object? Upload { get; set; }
     public object? WaypointsCapture { get; set; }
-    public RouteA RouteA { get; set; }
-    public RouteB RouteB { get; set; }
-    public RouteC RouteC { get; set; }
+    public Route RouteA { get; set; } = new Route();
+    public Route RouteB { get; set; } = new Route();
+    public Route RouteC { get; set; } = new Route();
     public object? Radios { get; set; }
     public object? Displays { get; set; }
     public object? SmartWeapons { get; set; }
@@ -16,20 +16,11 @@ public class DTCImport
     public int? Version { get; set; }
 }
 
-public class RouteA
+public class Route
 {
-    public List<Waypoint> Waypoints { get; set; }
+    public List<Waypoint> Waypoints { get; set; } = new(); 
 }
 
-public class RouteB
-{
-    public List<Waypoint> Waypoints { get; set; }
-}
-
-public class RouteC
-{
-    public List<Waypoint> Waypoints { get; set; }
-}
 
 public class Waypoint
 {
@@ -42,4 +33,5 @@ public class Waypoint
     public bool Target { get; set; }
     public int Mea { get; set; }
     public int Ktas { get; set; }
+    public int Activity { get; set; }
 }

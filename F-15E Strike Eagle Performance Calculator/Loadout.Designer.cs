@@ -119,7 +119,7 @@
             // 
             Exportbutton.BackColor = SystemColors.GrayText;
             Exportbutton.ForeColor = SystemColors.ButtonHighlight;
-            Exportbutton.Location = new Point(1211, 118);
+            Exportbutton.Location = new Point(1206, 118);
             Exportbutton.Name = "Exportbutton";
             Exportbutton.Size = new Size(94, 39);
             Exportbutton.TabIndex = 23;

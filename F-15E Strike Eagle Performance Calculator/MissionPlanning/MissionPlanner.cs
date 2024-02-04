@@ -12,6 +12,10 @@ internal class MissionPlanner
         hold = true;
         CurrentMissionDataCard = new MissionDataCard();
         CurrentMissionDataCard.MissionLegs = CalculateMissionLegs(missionWaypoints);
+        if (CurrentMissionDataCard.MissionLegs.Count == 0)
+        {
+            throw new Exception("Calculation Error occurred during import");
+        }
         foreach (var leg in CurrentMissionDataCard.MissionLegs)
         {
             CurrentMissionDataCard.MissionDistance += leg.LegDistance;
@@ -51,14 +55,26 @@ internal class MissionPlanner
                     LegDistance = Math.Round(distance, 1),
                     LegStartAircraftWeight = aircraftWeightAtStart
                 };
+                // Set LegDelay based on ToWaypoint's Activity
+                missionLeg.LegDelay = (toWaypoint.Activity == 0) ? 0 : toWaypoint.Activity;
+                // Set LegSpeed based on FromWaypoint's Ktas, with a default value of 450
                 missionLeg.LegSpeed = (fromWaypoint.Ktas == 0) ? 450 : fromWaypoint.Ktas;
-                if (toWaypoint.Target) missionLeg.LegTarget = true;
+                // Set LegTarget to true if ToWaypoint is a target
+                missionLeg.LegTarget = toWaypoint.Target;
+                // Calculate LegFuel based on custom logic (assuming CalculateLegFuel is a method)
                 missionLeg.LegFuel = CalculateLegFuel(missionLeg);
-                if (missionLeg.Id == 1) missionLeg.LegFuel += 1488; // Startup and Taxi
+                // Apply a special case for the first mission leg (Id == 1)
+                if (missionLeg.Id == 1)
+                {
+                    missionLeg.LegFuel += 1488; // Add startup and taxi fuel
+                }
+                // Calculate LegEndAircraftWeight and update aircraftWeightAtStart
                 missionLeg.LegEndAircraftWeight = aircraftWeightAtStart - (int)missionLeg.LegFuel;
                 aircraftWeightAtStart = missionLeg.LegEndAircraftWeight;
+                // Calculate LegFuelRemainEnd and update fuelWeight
                 missionLeg.LegFuelRemainEnd = fuelWeight - (int)missionLeg.LegFuel;
                 fuelWeight = missionLeg.LegFuelRemainEnd;
+                // Update dragIndex for the next iteration
                 dragIndex = missionLeg.LegDragIndex;
                 missionLegs.Add(missionLeg);
             }

@@ -314,6 +314,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlDark;
             Controls.Add(panel1);
+            DoubleBuffered = true;
             Name = "MissionLegUserControl";
             Size = new Size(1061, 54);
             panel1.ResumeLayout(false);

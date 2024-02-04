@@ -82,7 +82,7 @@
             label8.Name = "label8";
             label8.Size = new Size(194, 15);
             label8.TabIndex = 19;
-            label8.Text = "© Duncan MacKellar 2024 - v1.0.0.3";
+            label8.Text = "© Duncan MacKellar 2024 - v1.0.0.4";
             // 
             // buttonFuel
             // 
@@ -164,6 +164,7 @@
             ClientSize = new Size(1347, 753);
             Controls.Add(UiPanel);
             Controls.Add(NavPanel);
+            DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;

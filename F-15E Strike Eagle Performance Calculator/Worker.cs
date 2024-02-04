@@ -91,7 +91,17 @@ public static class Worker
         return roundedDown;
     }
 
-    
+    public static int ConvertTimeToMinutes(string time)
+    {
+        if (TimeSpan.TryParse(time, out TimeSpan timeSpan))
+        {
+            // Calculate the total minutes
+            int totalMinutes = (int)timeSpan.TotalMinutes;
+            return totalMinutes;
+        }
+        // Handle parsing error (e.g., if time format is invalid)
+        return 0; // You can choose to return a default value or handle the error differently
+    }
 
 
     public static double ToRadians(double degrees)

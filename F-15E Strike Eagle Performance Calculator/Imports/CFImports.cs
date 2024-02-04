@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace F_15E_Strike_Eagle_Performance_Calculator.Imports
+﻿namespace F_15E_Strike_Eagle_Performance_Calculator.Imports
 {
     public class CFImports
     {

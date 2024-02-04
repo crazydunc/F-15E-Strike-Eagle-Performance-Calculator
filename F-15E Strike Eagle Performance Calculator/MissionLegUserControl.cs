@@ -14,6 +14,7 @@ public partial class MissionLegUserControl : UserControl
     public MissionLegUserControl()
     {
         InitializeComponent();
+
     }
 
     public MissionLegs MissionLeg { get; set; }
@@ -36,7 +37,8 @@ public partial class MissionLegUserControl : UserControl
             DataSourceUpdateMode.OnPropertyChanged);
         FuelRemLabel.DataBindings.Add("Text", MissionLeg, "LegFuelRemainEnd", true,
             DataSourceUpdateMode.OnPropertyChanged);
-
+        DelaytextBox.DataBindings.Add("Text", MissionLeg, "LegDelay", true,
+            DataSourceUpdateMode.OnPropertyChanged);
         if (MissionLeg.LegTarget) buttonStores.Visible = true;
     }
 

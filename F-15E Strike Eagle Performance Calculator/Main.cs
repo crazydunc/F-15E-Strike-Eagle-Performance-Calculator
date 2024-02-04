@@ -17,7 +17,9 @@ public partial class Main : Form
         LoadedData = StoresManagement.LoadStoresInfo();
 
         InitializeComponent();
-
+        this.ResizeBegin += (s, e) => { this.SuspendLayout(); };
+        this.ResizeEnd += (s, e) => { this.ResumeLayout(true); };
+        
         //Loadout = new Loadout();
         //UiPanel.A
     }
