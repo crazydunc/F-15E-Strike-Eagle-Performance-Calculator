@@ -32,7 +32,7 @@
             NavPanel = new Panel();
             panel1 = new Panel();
             label1 = new Label();
-            label8 = new Label();
+            labelCopy = new Label();
             buttonFuel = new Button();
             buttonHome = new Button();
             UiPanel = new Panel();
@@ -55,7 +55,7 @@
             // panel1
             // 
             panel1.Controls.Add(label1);
-            panel1.Controls.Add(label8);
+            panel1.Controls.Add(labelCopy);
             panel1.Controls.Add(buttonFuel);
             panel1.Controls.Add(buttonHome);
             panel1.Location = new Point(3, 3);
@@ -74,15 +74,15 @@
             label1.TabIndex = 20;
             label1.Text = "Strike Eagle Performance Calculator";
             // 
-            // label8
+            // labelCopy
             // 
-            label8.AutoSize = true;
-            label8.ForeColor = SystemColors.Control;
-            label8.Location = new Point(1147, 6);
-            label8.Name = "label8";
-            label8.Size = new Size(194, 15);
-            label8.TabIndex = 19;
-            label8.Text = "© Duncan MacKellar 2024 - v1.0.0.5";
+            labelCopy.AutoSize = true;
+            labelCopy.ForeColor = SystemColors.Control;
+            labelCopy.Location = new Point(1147, 6);
+            labelCopy.Name = "labelCopy";
+            labelCopy.Size = new Size(194, 15);
+            labelCopy.TabIndex = 19;
+            labelCopy.Text = "© Duncan MacKellar 2024 - v1.0.0.5";
             // 
             // buttonFuel
             // 
@@ -187,7 +187,7 @@
         private Panel panel1;
         private Button buttonFuel;
         private Button buttonHome;
-        private Label label8;
+        private Label labelCopy;
         private FuelPlanner fuelPlanner1;
         private Label label1;
     }

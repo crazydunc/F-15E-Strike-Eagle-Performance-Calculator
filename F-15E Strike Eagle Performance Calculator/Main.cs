@@ -1,3 +1,5 @@
+using System.Reflection;
+
 namespace F_15E_Strike_Eagle_Performance_Calculator;
 
 public partial class Main : Form
@@ -19,7 +21,9 @@ public partial class Main : Form
         InitializeComponent();
         this.ResizeBegin += (s, e) => { this.SuspendLayout(); };
         this.ResizeEnd += (s, e) => { this.ResumeLayout(true); };
-        
+        Version version = Assembly.GetEntryAssembly().GetName().Version;
+        labelCopy.Text = $@"© Duncan MacKellar 2024 - v{version}";
+        this.Text = $@"Strike Eagle Performance Calculator -  v{version}";
         //Loadout = new Loadout();
         //UiPanel.A
     }
