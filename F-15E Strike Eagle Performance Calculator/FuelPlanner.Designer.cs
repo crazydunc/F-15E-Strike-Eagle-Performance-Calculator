@@ -74,7 +74,7 @@
             flowLayoutPanel1.AutoScroll = true;
             flowLayoutPanel1.Location = new Point(8, 48);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(1093, 636);
+            flowLayoutPanel1.Size = new Size(1000, 636);
             flowLayoutPanel1.TabIndex = 25;
             flowLayoutPanel1.ControlAdded += flowLayoutPanel1_ControlAdded;
             // 
@@ -103,7 +103,7 @@
             groupBox1.Controls.Add(labelTotalDistance);
             groupBox1.Controls.Add(label1);
             groupBox1.ForeColor = SystemColors.ButtonHighlight;
-            groupBox1.Location = new Point(1107, 40);
+            groupBox1.Location = new Point(1093, 48);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(235, 331);
             groupBox1.TabIndex = 26;

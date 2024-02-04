@@ -82,7 +82,7 @@
             label8.Name = "label8";
             label8.Size = new Size(194, 15);
             label8.TabIndex = 19;
-            label8.Text = "© Duncan MacKellar 2024 - v1.0.0.4";
+            label8.Text = "© Duncan MacKellar 2024 - v1.0.0.5";
             // 
             // buttonFuel
             // 

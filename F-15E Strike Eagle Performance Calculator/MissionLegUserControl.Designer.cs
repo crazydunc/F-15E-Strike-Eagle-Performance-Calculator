@@ -93,12 +93,12 @@
             panel1.Controls.Add(LegIdTextLabel);
             panel1.Location = new Point(3, 3);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1053, 48);
+            panel1.Size = new Size(995, 48);
             panel1.TabIndex = 1;
             // 
             // buttonStores
             // 
-            buttonStores.Location = new Point(829, 13);
+            buttonStores.Location = new Point(762, 13);
             buttonStores.Name = "buttonStores";
             buttonStores.Size = new Size(75, 23);
             buttonStores.TabIndex = 23;
@@ -110,7 +110,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(720, 26);
+            label7.Location = new Point(653, 26);
             label7.Name = "label7";
             label7.Size = new Size(49, 15);
             label7.TabIndex = 22;
@@ -119,7 +119,7 @@
             // AARtextBox
             // 
             AARtextBox.Enabled = false;
-            AARtextBox.Location = new Point(775, 23);
+            AARtextBox.Location = new Point(708, 23);
             AARtextBox.Name = "AARtextBox";
             AARtextBox.Size = new Size(48, 23);
             AARtextBox.TabIndex = 21;
@@ -129,7 +129,7 @@
             // FuelRemLabel
             // 
             FuelRemLabel.AutoSize = true;
-            FuelRemLabel.Location = new Point(966, 28);
+            FuelRemLabel.Location = new Point(899, 28);
             FuelRemLabel.Name = "FuelRemLabel";
             FuelRemLabel.Size = new Size(37, 15);
             FuelRemLabel.TabIndex = 20;
@@ -138,7 +138,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(909, 27);
+            label6.Location = new Point(842, 27);
             label6.Name = "label6";
             label6.Size = new Size(62, 15);
             label6.TabIndex = 19;
@@ -147,7 +147,7 @@
             // checkBoxAAR
             // 
             checkBoxAAR.AutoSize = true;
-            checkBoxAAR.Location = new Point(720, 5);
+            checkBoxAAR.Location = new Point(653, 5);
             checkBoxAAR.Name = "checkBoxAAR";
             checkBoxAAR.Size = new Size(49, 19);
             checkBoxAAR.TabIndex = 18;
@@ -157,7 +157,7 @@
             // 
             // DelaytextBox
             // 
-            DelaytextBox.Location = new Point(686, 13);
+            DelaytextBox.Location = new Point(619, 13);
             DelaytextBox.Name = "DelaytextBox";
             DelaytextBox.Size = new Size(28, 23);
             DelaytextBox.TabIndex = 17;
@@ -167,7 +167,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(614, 17);
+            label5.Location = new Point(547, 17);
             label5.Name = "label5";
             label5.Size = new Size(76, 15);
             label5.TabIndex = 16;
@@ -176,7 +176,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(1014, 27);
+            label4.Location = new Point(947, 27);
             label4.Name = "label4";
             label4.Size = new Size(37, 15);
             label4.TabIndex = 15;
@@ -185,7 +185,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(1014, 8);
+            label3.Location = new Point(947, 8);
             label3.Name = "label3";
             label3.Size = new Size(37, 15);
             label3.TabIndex = 14;
@@ -194,7 +194,7 @@
             // FuelUsedValueLabel
             // 
             FuelUsedValueLabel.AutoSize = true;
-            FuelUsedValueLabel.Location = new Point(966, 8);
+            FuelUsedValueLabel.Location = new Point(899, 8);
             FuelUsedValueLabel.Name = "FuelUsedValueLabel";
             FuelUsedValueLabel.Size = new Size(37, 15);
             FuelUsedValueLabel.TabIndex = 13;
@@ -203,7 +203,7 @@
             // FuelUsedLabel
             // 
             FuelUsedLabel.AutoSize = true;
-            FuelUsedLabel.Location = new Point(909, 7);
+            FuelUsedLabel.Location = new Point(842, 7);
             FuelUsedLabel.Name = "FuelUsedLabel";
             FuelUsedLabel.Size = new Size(63, 15);
             FuelUsedLabel.TabIndex = 12;
@@ -211,7 +211,7 @@
             // 
             // SpeedTexbox
             // 
-            SpeedTexbox.Location = new Point(571, 13);
+            SpeedTexbox.Location = new Point(504, 13);
             SpeedTexbox.Name = "SpeedTexbox";
             SpeedTexbox.Size = new Size(37, 23);
             SpeedTexbox.TabIndex = 11;
@@ -221,7 +221,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(532, 17);
+            label1.Location = new Point(465, 17);
             label1.Name = "label1";
             label1.Size = new Size(33, 15);
             label1.TabIndex = 10;
@@ -229,7 +229,7 @@
             // 
             // AltitudeTextbox
             // 
-            AltitudeTextbox.Location = new Point(481, 13);
+            AltitudeTextbox.Location = new Point(414, 13);
             AltitudeTextbox.Name = "AltitudeTextbox";
             AltitudeTextbox.Size = new Size(45, 23);
             AltitudeTextbox.TabIndex = 9;
@@ -239,7 +239,7 @@
             // AltitudeLabelName
             // 
             AltitudeLabelName.AutoSize = true;
-            AltitudeLabelName.Location = new Point(451, 17);
+            AltitudeLabelName.Location = new Point(384, 17);
             AltitudeLabelName.Name = "AltitudeLabelName";
             AltitudeLabelName.Size = new Size(25, 15);
             AltitudeLabelName.TabIndex = 8;
@@ -248,7 +248,7 @@
             // LegDistanceValueLabel
             // 
             LegDistanceValueLabel.AutoSize = true;
-            LegDistanceValueLabel.Location = new Point(412, 17);
+            LegDistanceValueLabel.Location = new Point(345, 17);
             LegDistanceValueLabel.Name = "LegDistanceValueLabel";
             LegDistanceValueLabel.Size = new Size(25, 15);
             LegDistanceValueLabel.TabIndex = 7;
@@ -257,7 +257,7 @@
             // DistanceLabelName
             // 
             DistanceLabelName.AutoSize = true;
-            DistanceLabelName.Location = new Point(354, 17);
+            DistanceLabelName.Location = new Point(287, 17);
             DistanceLabelName.Name = "DistanceLabelName";
             DistanceLabelName.Size = new Size(61, 15);
             DistanceLabelName.TabIndex = 6;
@@ -266,7 +266,7 @@
             // WaypointToNameLabel
             // 
             WaypointToNameLabel.AutoSize = true;
-            WaypointToNameLabel.Location = new Point(218, 17);
+            WaypointToNameLabel.Location = new Point(83, 26);
             WaypointToNameLabel.Name = "WaypointToNameLabel";
             WaypointToNameLabel.Size = new Size(37, 15);
             WaypointToNameLabel.TabIndex = 5;
@@ -275,7 +275,7 @@
             // WaypointToLabel
             // 
             WaypointToLabel.AutoSize = true;
-            WaypointToLabel.Location = new Point(196, 17);
+            WaypointToLabel.Location = new Point(61, 26);
             WaypointToLabel.Name = "WaypointToLabel";
             WaypointToLabel.Size = new Size(22, 15);
             WaypointToLabel.TabIndex = 4;
@@ -284,7 +284,7 @@
             // WaypointFromNameLabel
             // 
             WaypointFromNameLabel.AutoSize = true;
-            WaypointFromNameLabel.Location = new Point(91, 17);
+            WaypointFromNameLabel.Location = new Point(96, 7);
             WaypointFromNameLabel.Name = "WaypointFromNameLabel";
             WaypointFromNameLabel.Size = new Size(41, 15);
             WaypointFromNameLabel.TabIndex = 3;
@@ -293,7 +293,7 @@
             // WaypointFromLabel
             // 
             WaypointFromLabel.AutoSize = true;
-            WaypointFromLabel.Location = new Point(56, 17);
+            WaypointFromLabel.Location = new Point(61, 7);
             WaypointFromLabel.Name = "WaypointFromLabel";
             WaypointFromLabel.Size = new Size(38, 15);
             WaypointFromLabel.TabIndex = 2;
@@ -316,7 +316,7 @@
             Controls.Add(panel1);
             DoubleBuffered = true;
             Name = "MissionLegUserControl";
-            Size = new Size(1061, 54);
+            Size = new Size(1000, 54);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);
