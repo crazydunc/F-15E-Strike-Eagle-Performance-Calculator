@@ -128,7 +128,7 @@
             missionInfoGroupBox.ForeColor = SystemColors.ButtonHighlight;
             missionInfoGroupBox.Location = new Point(1060, 48);
             missionInfoGroupBox.Name = "missionInfoGroupBox";
-            missionInfoGroupBox.Size = new Size(235, 359);
+            missionInfoGroupBox.Size = new Size(235, 368);
             missionInfoGroupBox.TabIndex = 26;
             missionInfoGroupBox.TabStop = false;
             missionInfoGroupBox.Text = "Mission Info";

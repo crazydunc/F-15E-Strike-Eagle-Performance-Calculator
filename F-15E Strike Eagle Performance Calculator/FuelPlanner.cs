@@ -34,7 +34,7 @@ public partial class FuelPlanner : UserControl
             "Joker Fuel is Bingo Fuel, plus 1500lbs. User can enter their own value to override");
         JokerTt.SetToolTip(BingoLabel,
             "Bingo Fuel is recovery fuel, plus half route distance at 15lb/nm on a Max Endurance profile. User can enter their own value to override");
-        toolTipCmbt.SetToolTip(checkBoxCombat, "Adds fuel for 5min of 5min of combat maneuvering");
+        toolTipCmbt.SetToolTip(checkBoxCombat, "Adds fuel for 5min of combat maneuvering");
         fuelNetTt.SetToolTip(fuelLabelNet, "If Positive, you have extra fuel on board vs the Estimated Required, if negative, you have a fuel deficit vs the Estimated Required");
     }
 
@@ -393,7 +393,7 @@ public partial class FuelPlanner : UserControl
         LandingWeightValueLabel.Text = MissionPlanner.CurrentMissionDataCard.LandingWeight + @" lbs";
         JokertextBox.Text = roundedJoker.ToString();
         AAROnloadLabel.Text = MissionPlanner.CurrentMissionDataCard.AAROnload + @" lbs";
-        var netFuel = F15EStrikeEagle.TotalFuel - suggestedFuel;
+        var netFuel = F15EStrikeEagle.TotalFuel + MissionPlanner.CurrentMissionDataCard.AAROnload - suggestedFuel;
         fuelLabelNet.Text = netFuel + " lbs";
         fuelLabelNet.ForeColor = netFuel < 0 ? Color.Red : Color.LawnGreen;
 

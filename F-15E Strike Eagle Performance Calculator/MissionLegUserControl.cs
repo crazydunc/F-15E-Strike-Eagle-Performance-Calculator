@@ -194,6 +194,11 @@ public partial class MissionLegUserControl : UserControl
             var weight = stores.WeightRemoved;
             MissionLeg.LegDragIndexRemoved = drag;
             MissionLeg.LegPayloadReleased = (int)weight;
+            if (weight != 0)
+            {
+                buttonStores.BackColor = Color.Green;
+                buttonStores.ForeColor = Color.White;
+            }
             RecalculateFuel();
         }
     }

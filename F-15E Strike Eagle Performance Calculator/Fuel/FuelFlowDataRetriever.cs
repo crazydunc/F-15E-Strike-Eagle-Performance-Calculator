@@ -490,7 +490,7 @@ public class FuelFlowDataRetriever
                         var spd = reader["Speed"];
                         var pph = reader["FuelFlowPerHour"];
                         
-                        return $"Calculation Failure: Suggested Profile: {alt} ft - Speed: {spd} KTAS";
+                        return $"Calculation Failure - Suggested Profile: {alt} ft @ {spd} KTAS";
                     }
 
                     return $"Calculation Failure: Unable to find valid data - Please select a lower altitude/speed.";
