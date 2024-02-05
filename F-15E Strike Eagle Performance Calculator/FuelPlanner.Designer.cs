@@ -30,8 +30,11 @@
         {
             components = new System.ComponentModel.Container();
             ImportDtcButton = new Button();
-            flowLayoutPanel1 = new FlowLayoutPanel();
-            groupBox1 = new GroupBox();
+            routeFlowPanel = new FlowLayoutPanel();
+            missionInfoGroupBox = new GroupBox();
+            checkBoxCombat = new CheckBox();
+            fuelLabelNet = new Label();
+            labelFuelNet = new Label();
             labelSpeeds = new Label();
             label10 = new Label();
             JokertextBox = new TextBox();
@@ -59,7 +62,7 @@
             textBoxLog = new TextBox();
             DistTt = new ToolTip(components);
             TowTt = new ToolTip(components);
-            toolTip3 = new ToolTip(components);
+            fuelNetTt = new ToolTip(components);
             LawTt = new ToolTip(components);
             LandingSpdTt = new ToolTip(components);
             FuelBurnTt = new ToolTip(components);
@@ -69,7 +72,8 @@
             AarOnloadTt = new ToolTip(components);
             JokerTt = new ToolTip(components);
             BingoTt = new ToolTip(components);
-            groupBox1.SuspendLayout();
+            toolTipCmbt = new ToolTip(components);
+            missionInfoGroupBox.SuspendLayout();
             groupBox2.SuspendLayout();
             SuspendLayout();
             // 
@@ -85,46 +89,79 @@
             ImportDtcButton.UseVisualStyleBackColor = false;
             ImportDtcButton.Click += ImportDtcButton_Click;
             // 
-            // flowLayoutPanel1
+            // routeFlowPanel
             // 
-            flowLayoutPanel1.AutoScroll = true;
-            flowLayoutPanel1.Location = new Point(8, 48);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(990, 503);
-            flowLayoutPanel1.TabIndex = 25;
-            flowLayoutPanel1.ControlAdded += flowLayoutPanel1_ControlAdded;
+            routeFlowPanel.AutoScroll = true;
+            routeFlowPanel.Location = new Point(8, 48);
+            routeFlowPanel.Name = "routeFlowPanel";
+            routeFlowPanel.Size = new Size(990, 503);
+            routeFlowPanel.TabIndex = 25;
+            routeFlowPanel.ControlAdded += RouteFlowPanelControlAdded;
             // 
-            // groupBox1
+            // missionInfoGroupBox
             // 
-            groupBox1.Controls.Add(labelSpeeds);
-            groupBox1.Controls.Add(label10);
-            groupBox1.Controls.Add(JokertextBox);
-            groupBox1.Controls.Add(JokerLabel);
-            groupBox1.Controls.Add(AAROnloadLabel);
-            groupBox1.Controls.Add(label8);
-            groupBox1.Controls.Add(RecoveryFuelLabel);
-            groupBox1.Controls.Add(label7);
-            groupBox1.Controls.Add(LandingWeightValueLabel);
-            groupBox1.Controls.Add(landingWeightLabel);
-            groupBox1.Controls.Add(takeoffWeightLabel);
-            groupBox1.Controls.Add(label4);
-            groupBox1.Controls.Add(FuelLoadedLabelValue);
-            groupBox1.Controls.Add(FuelLoadedLabel);
-            groupBox1.Controls.Add(labelFuelBurn);
-            groupBox1.Controls.Add(label5);
-            groupBox1.Controls.Add(labelSuggestedFuel);
-            groupBox1.Controls.Add(label3);
-            groupBox1.Controls.Add(textBoxBingo);
-            groupBox1.Controls.Add(BingoLabel);
-            groupBox1.Controls.Add(labelTotalDistance);
-            groupBox1.Controls.Add(label1);
-            groupBox1.ForeColor = SystemColors.ButtonHighlight;
-            groupBox1.Location = new Point(1060, 48);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(235, 331);
-            groupBox1.TabIndex = 26;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Mission Info";
+            missionInfoGroupBox.Controls.Add(checkBoxCombat);
+            missionInfoGroupBox.Controls.Add(fuelLabelNet);
+            missionInfoGroupBox.Controls.Add(labelFuelNet);
+            missionInfoGroupBox.Controls.Add(labelSpeeds);
+            missionInfoGroupBox.Controls.Add(label10);
+            missionInfoGroupBox.Controls.Add(JokertextBox);
+            missionInfoGroupBox.Controls.Add(JokerLabel);
+            missionInfoGroupBox.Controls.Add(AAROnloadLabel);
+            missionInfoGroupBox.Controls.Add(label8);
+            missionInfoGroupBox.Controls.Add(RecoveryFuelLabel);
+            missionInfoGroupBox.Controls.Add(label7);
+            missionInfoGroupBox.Controls.Add(LandingWeightValueLabel);
+            missionInfoGroupBox.Controls.Add(landingWeightLabel);
+            missionInfoGroupBox.Controls.Add(takeoffWeightLabel);
+            missionInfoGroupBox.Controls.Add(label4);
+            missionInfoGroupBox.Controls.Add(FuelLoadedLabelValue);
+            missionInfoGroupBox.Controls.Add(FuelLoadedLabel);
+            missionInfoGroupBox.Controls.Add(labelFuelBurn);
+            missionInfoGroupBox.Controls.Add(label5);
+            missionInfoGroupBox.Controls.Add(labelSuggestedFuel);
+            missionInfoGroupBox.Controls.Add(label3);
+            missionInfoGroupBox.Controls.Add(textBoxBingo);
+            missionInfoGroupBox.Controls.Add(BingoLabel);
+            missionInfoGroupBox.Controls.Add(labelTotalDistance);
+            missionInfoGroupBox.Controls.Add(label1);
+            missionInfoGroupBox.ForeColor = SystemColors.ButtonHighlight;
+            missionInfoGroupBox.Location = new Point(1060, 48);
+            missionInfoGroupBox.Name = "missionInfoGroupBox";
+            missionInfoGroupBox.Size = new Size(235, 359);
+            missionInfoGroupBox.TabIndex = 26;
+            missionInfoGroupBox.TabStop = false;
+            missionInfoGroupBox.Text = "Mission Info";
+            // 
+            // checkBoxCombat
+            // 
+            checkBoxCombat.AutoSize = true;
+            checkBoxCombat.CheckAlign = ContentAlignment.MiddleRight;
+            checkBoxCombat.Location = new Point(16, 180);
+            checkBoxCombat.Name = "checkBoxCombat";
+            checkBoxCombat.Size = new Size(148, 19);
+            checkBoxCombat.TabIndex = 24;
+            checkBoxCombat.Text = "Combat Reserve            ";
+            checkBoxCombat.UseVisualStyleBackColor = true;
+            checkBoxCombat.CheckedChanged += checkBoxCombat_CheckedChanged;
+            // 
+            // fuelLabelNet
+            // 
+            fuelLabelNet.AutoSize = true;
+            fuelLabelNet.Location = new Point(146, 277);
+            fuelLabelNet.Name = "fuelLabelNet";
+            fuelLabelNet.Size = new Size(50, 15);
+            fuelLabelNet.TabIndex = 23;
+            fuelLabelNet.Text = "----- lbs";
+            // 
+            // labelFuelNet
+            // 
+            labelFuelNet.AutoSize = true;
+            labelFuelNet.Location = new Point(16, 277);
+            labelFuelNet.Name = "labelFuelNet";
+            labelFuelNet.Size = new Size(50, 15);
+            labelFuelNet.TabIndex = 22;
+            labelFuelNet.Text = "Fuel +/-";
             // 
             // labelSpeeds
             // 
@@ -146,7 +183,7 @@
             // 
             // JokertextBox
             // 
-            JokertextBox.Location = new Point(146, 252);
+            JokertextBox.Location = new Point(146, 302);
             JokertextBox.Name = "JokertextBox";
             JokertextBox.Size = new Size(47, 23);
             JokertextBox.TabIndex = 19;
@@ -155,7 +192,7 @@
             // JokerLabel
             // 
             JokerLabel.AutoSize = true;
-            JokerLabel.Location = new Point(16, 256);
+            JokerLabel.Location = new Point(16, 306);
             JokerLabel.Name = "JokerLabel";
             JokerLabel.Size = new Size(37, 15);
             JokerLabel.TabIndex = 18;
@@ -164,7 +201,7 @@
             // AAROnloadLabel
             // 
             AAROnloadLabel.AutoSize = true;
-            AAROnloadLabel.Location = new Point(146, 228);
+            AAROnloadLabel.Location = new Point(146, 252);
             AAROnloadLabel.Name = "AAROnloadLabel";
             AAROnloadLabel.Size = new Size(50, 15);
             AAROnloadLabel.TabIndex = 17;
@@ -173,7 +210,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(16, 228);
+            label8.Location = new Point(16, 252);
             label8.Name = "label8";
             label8.Size = new Size(121, 15);
             label8.TabIndex = 16;
@@ -236,7 +273,7 @@
             // FuelLoadedLabelValue
             // 
             FuelLoadedLabelValue.AutoSize = true;
-            FuelLoadedLabelValue.Location = new Point(146, 204);
+            FuelLoadedLabelValue.Location = new Point(146, 228);
             FuelLoadedLabelValue.Name = "FuelLoadedLabelValue";
             FuelLoadedLabelValue.Size = new Size(50, 15);
             FuelLoadedLabelValue.TabIndex = 9;
@@ -245,7 +282,7 @@
             // FuelLoadedLabel
             // 
             FuelLoadedLabel.AutoSize = true;
-            FuelLoadedLabel.Location = new Point(16, 204);
+            FuelLoadedLabel.Location = new Point(16, 228);
             FuelLoadedLabel.Name = "FuelLoadedLabel";
             FuelLoadedLabel.Size = new Size(74, 15);
             FuelLoadedLabel.TabIndex = 8;
@@ -272,7 +309,7 @@
             // labelSuggestedFuel
             // 
             labelSuggestedFuel.AutoSize = true;
-            labelSuggestedFuel.Location = new Point(146, 180);
+            labelSuggestedFuel.Location = new Point(146, 204);
             labelSuggestedFuel.Name = "labelSuggestedFuel";
             labelSuggestedFuel.Size = new Size(50, 15);
             labelSuggestedFuel.TabIndex = 5;
@@ -281,7 +318,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(16, 180);
+            label3.Location = new Point(16, 204);
             label3.Name = "label3";
             label3.Size = new Size(76, 15);
             label3.TabIndex = 4;
@@ -289,7 +326,7 @@
             // 
             // textBoxBingo
             // 
-            textBoxBingo.Location = new Point(146, 284);
+            textBoxBingo.Location = new Point(146, 334);
             textBoxBingo.Name = "textBoxBingo";
             textBoxBingo.Size = new Size(47, 23);
             textBoxBingo.TabIndex = 3;
@@ -298,7 +335,7 @@
             // BingoLabel
             // 
             BingoLabel.AutoSize = true;
-            BingoLabel.Location = new Point(16, 288);
+            BingoLabel.Location = new Point(16, 338);
             BingoLabel.Name = "BingoLabel";
             BingoLabel.Size = new Size(44, 15);
             BingoLabel.TabIndex = 2;
@@ -365,15 +402,15 @@
             BackColor = SystemColors.WindowFrame;
             Controls.Add(groupBox2);
             Controls.Add(buttonCombatFlite);
-            Controls.Add(groupBox1);
-            Controls.Add(flowLayoutPanel1);
+            Controls.Add(missionInfoGroupBox);
+            Controls.Add(routeFlowPanel);
             Controls.Add(ImportDtcButton);
             DoubleBuffered = true;
             Name = "FuelPlanner";
             Size = new Size(1345, 694);
             VisibleChanged += FuelPlanner_VisibleChanged;
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
+            missionInfoGroupBox.ResumeLayout(false);
+            missionInfoGroupBox.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             ResumeLayout(false);
@@ -381,8 +418,8 @@
 
         #endregion
         private Button ImportDtcButton;
-        private FlowLayoutPanel flowLayoutPanel1;
-        private GroupBox groupBox1;
+        private FlowLayoutPanel routeFlowPanel;
+        private GroupBox missionInfoGroupBox;
         private Label label1;
         private Label labelTotalDistance;
         private TextBox textBoxBingo;
@@ -410,7 +447,7 @@
         private TextBox textBoxLog;
         private ToolTip DistTt;
         private ToolTip TowTt;
-        private ToolTip toolTip3;
+        private ToolTip fuelNetTt;
         private ToolTip LawTt;
         private ToolTip LandingSpdTt;
         private ToolTip FuelBurnTt;
@@ -420,5 +457,9 @@
         private ToolTip AarOnloadTt;
         private ToolTip JokerTt;
         private ToolTip BingoTt;
+        private Label fuelLabelNet;
+        private Label labelFuelNet;
+        private CheckBox checkBoxCombat;
+        private ToolTip toolTipCmbt;
     }
 }

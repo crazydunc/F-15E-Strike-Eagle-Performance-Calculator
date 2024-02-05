@@ -346,9 +346,13 @@ public class FuelFlowDataRetriever
                     while (reader.Read() && i < 16)
                     {
                         cornerValues[i] = Convert.ToDouble(reader["FuelFlowPerHour"]);
-                        i++;
+                        if (Convert.ToDouble(reader["FuelFlowPerHour"]) != 0)
+                        {
+                            i++;
+                        }
                     }
                 }
+
 
                 if (i == 16)
                 {
@@ -372,6 +376,17 @@ public class FuelFlowDataRetriever
                         cornerValues[12], cornerValues[13], cornerValues[14], cornerValues[15]);
 
                     return interpolatedFuelFlow;
+                }
+                else
+                {
+                    if (i == 0)
+                    {
+                        Log.WriteLog("No valid data found for Flight Parameters. - Forcing calculation error as outside of Flight Test Envelope.");
+                        Log.WriteLog($"Data Dump - Alt: {altitude} {Environment.NewLine} Speed: {speed} {Environment.NewLine} DragIndex: {dragIndex} {Environment.NewLine} Weight: {aircraftWeight}");
+
+                        return 0;
+                    } 
+
                 }
 
                 //Log.WriteLog("QuadLinear failed - only " + i + " corner points returned");

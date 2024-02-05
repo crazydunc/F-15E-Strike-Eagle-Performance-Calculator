@@ -28,10 +28,9 @@ public partial class MissionLegUserControl : UserControl
         LegIdValueLabel.DataBindings.Add("Text", MissionLeg, "Id");
         WaypointFromNameLabel.DataBindings.Add("Text", MissionLeg.FromWaypoint, "Name");
         WaypointToNameLabel.DataBindings.Add("Text", MissionLeg.ToWaypoint, "Name");
-        SpeedTexbox.DataBindings.Add("Text", MissionLeg, "LegSpeed", true, DataSourceUpdateMode.OnPropertyChanged);
+        SpeedTexbox.DataBindings.Add("Text", MissionLeg, "LegSpeed");
         LegDistanceValueLabel.DataBindings.Add("Text", MissionLeg, "LegDistance");
-        AltitudeTextbox.DataBindings.Add("Text", MissionLeg, "LegAltitude", true,
-            DataSourceUpdateMode.OnPropertyChanged);
+        AltitudeTextbox.DataBindings.Add("Text", MissionLeg, "LegAltitude"); //, true,DataSourceUpdateMode.OnPropertyChanged
         FuelUsedValueLabel.DataBindings.Add("Text", MissionLeg, "LegFuel", true,
             DataSourceUpdateMode.OnPropertyChanged);
         label3.DataBindings.Add("Text", MissionLeg, "LegStartAircraftWeight", true,
@@ -40,8 +39,7 @@ public partial class MissionLegUserControl : UserControl
             DataSourceUpdateMode.OnPropertyChanged);
         FuelRemLabel.DataBindings.Add("Text", MissionLeg, "LegFuelRemainEnd", true,
             DataSourceUpdateMode.OnPropertyChanged);
-        DelaytextBox.DataBindings.Add("Text", MissionLeg, "LegDelay", true,
-            DataSourceUpdateMode.OnPropertyChanged);
+        DelaytextBox.DataBindings.Add("Text", MissionLeg, "LegDelay");
         if (MissionLeg.LegTarget) buttonStores.Visible = true;
         if (MissionLeg.Id == 1)
         {
@@ -79,8 +77,11 @@ public partial class MissionLegUserControl : UserControl
 
             if (a is > -1 and < 45001)
             {
-                MissionLeg.LegAltitude = a;
-                RecalculateFuel();
+                if (a != MissionLeg.LegAltitude)
+                {
+                    MissionLeg.LegAltitude = a;
+                    RecalculateFuel();
+                }
             }
             else
             {

@@ -25,7 +25,7 @@ public partial class FuelPlanner : UserControl
         FuelBurnTt.SetToolTip(labelFuelBurn, "Total Fuel burn for planned route, including delay times.");
         RecFuelTt.SetToolTip(RecoveryFuelLabel, "Minimum fuel at FAF/Initial Point for recovery to planned base");
         ReqFuelTt.SetToolTip(labelSuggestedFuel,
-            "Suggested planned fuel load, based on Fuel burn + Recovery Fuel + 5min of Combat maneuvering");
+            "Suggested planned fuel load, based on Fuel burn + Recovery Fuel + 5min of Combat maneuvering (if selected)");
         AarOnloadTt.SetToolTip(AAROnloadLabel,
             "Total planned Air to Air refueling onload, for the sortie");
         FuelLoadedTt.SetToolTip(FuelLoadedLabelValue, "Fuel on board (Internal + External) - From Planned Loadout");
@@ -34,6 +34,8 @@ public partial class FuelPlanner : UserControl
             "Joker Fuel is Bingo Fuel, plus 1500lbs. User can enter their own value to override");
         JokerTt.SetToolTip(BingoLabel,
             "Bingo Fuel is recovery fuel, plus half route distance at 15lb/nm on a Max Endurance profile. User can enter their own value to override");
+        toolTipCmbt.SetToolTip(checkBoxCombat, "Adds fuel for 5min of 5min of combat maneuvering");
+        fuelNetTt.SetToolTip(fuelLabelNet, "If Positive, you have extra fuel on board vs the Estimated Required, if negative, you have a fuel deficit vs the Estimated Required");
     }
 
     protected override void OnResize(EventArgs e)
@@ -77,7 +79,7 @@ public partial class FuelPlanner : UserControl
                 leg.LegRemarks = string.Empty;
             }
 
-            foreach (MissionLegUserControl legUserControl in flowLayoutPanel1.Controls)
+            foreach (MissionLegUserControl legUserControl in routeFlowPanel.Controls)
                 if (legUserControl.MissionLeg.Id == leg.Id && leg.LegRemarks != string.Empty)
                 {
                     legUserControl.BackColor = Color.Firebrick;
@@ -99,7 +101,7 @@ public partial class FuelPlanner : UserControl
             MissionPlanner.CurrentMissionDataCard.LandingWeight = endWeight;
         }
 
-        groupBox1.BackColor = issue ? Color.Firebrick : SystemColors.WindowFrame;
+        missionInfoGroupBox.BackColor = issue ? Color.Firebrick : SystemColors.WindowFrame;
 
         UpdateFuelInfo();
     }
@@ -133,7 +135,6 @@ public partial class FuelPlanner : UserControl
                         var routeListBox = new ListBox();
                         routeListBox.Dock = DockStyle.Fill;
 
-                        // Add route names (Name + MSNnumber) to the list box
                         foreach (var route in a.CfRoutes)
                             routeListBox.Items.Add($"{route.Name} (MSN#{route.MsnNumber})");
 
@@ -168,7 +169,6 @@ public partial class FuelPlanner : UserControl
                     }
                     else
                     {
-                        // Handle the case where no routes were found
                         MessageBox.Show(@"No routes found.", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
@@ -327,7 +327,7 @@ public partial class FuelPlanner : UserControl
     private void ResetFuelPlanner()
     {
         MissionPlanner.CurrentMissionDataCard = new MissionDataCard();
-        flowLayoutPanel1.Controls.Clear();
+        routeFlowPanel.Controls.Clear();
     }
 
     private void ProcessImport(List<Waypoint> route)
@@ -345,7 +345,7 @@ public partial class FuelPlanner : UserControl
                 };
                 legControl.BindData();
                 legControl.MissionLegsUpdated += MissionLegsUpdatedHandler;
-                flowLayoutPanel1.Controls.Add(legControl);
+                routeFlowPanel.Controls.Add(legControl);
             }
 
             while (MissionPlanner.hold)
@@ -375,11 +375,17 @@ public partial class FuelPlanner : UserControl
             labelSpeeds.Text = (int)flapDownSpeed + @"/" + (int)flapUpSpeed + @" KCAS";
         }
 
+        int cmbt = 0;
+        if (checkBoxCombat.Checked)
+        {
+            cmbt = 6000;
+        }
+
+        var suggestedFuel = MissionPlanner.CurrentMissionDataCard.TotalRouteFuel + 2500 + cmbt;
         var roundedBingo = Math.Ceiling(MissionPlanner.CurrentMissionDataCard.BingoFuel / 100) * 100;
         var roundedJoker = Math.Ceiling(MissionPlanner.CurrentMissionDataCard.JokerFuel / 100) * 100;
         labelTotalDistance.Text = (int)MissionPlanner.CurrentMissionDataCard.MissionDistance + @" nm";
-        labelSuggestedFuel.Text =
-            MissionPlanner.CurrentMissionDataCard.TotalRouteFuel + 2500 + (1200 * 5) + @" lbs";
+        labelSuggestedFuel.Text = suggestedFuel + @" lbs";
         textBoxBingo.Text = roundedBingo.ToString();
         labelFuelBurn.Text = MissionPlanner.CurrentMissionDataCard.TotalRouteFuel + @" lbs";
         FuelLoadedLabelValue.Text = F15EStrikeEagle.TotalFuel + @" lbs";
@@ -387,6 +393,10 @@ public partial class FuelPlanner : UserControl
         LandingWeightValueLabel.Text = MissionPlanner.CurrentMissionDataCard.LandingWeight + @" lbs";
         JokertextBox.Text = roundedJoker.ToString();
         AAROnloadLabel.Text = MissionPlanner.CurrentMissionDataCard.AAROnload + @" lbs";
+        var netFuel = F15EStrikeEagle.TotalFuel - suggestedFuel;
+        fuelLabelNet.Text = netFuel + " lbs";
+        fuelLabelNet.ForeColor = netFuel < 0 ? Color.Red : Color.LawnGreen;
+
     }
 
     private string ShowRouteSelectionDialog(bool routeAExists, bool routeBExists, bool routeCExists)
@@ -448,7 +458,7 @@ public partial class FuelPlanner : UserControl
 
     private void FuelPlanner_VisibleChanged(object sender, EventArgs e)
     {
-        if (Visible && flowLayoutPanel1.Controls.Count != 0) MissionLegsUpdatedHandler(null, null);
+        if (Visible && routeFlowPanel.Controls.Count != 0) MissionLegsUpdatedHandler(null, null);
     }
 
     private void textBoxBingo_Leave(object sender, EventArgs e)
@@ -463,7 +473,7 @@ public partial class FuelPlanner : UserControl
         }
     }
 
-    private void flowLayoutPanel1_ControlAdded(object sender, ControlEventArgs e)
+    private void RouteFlowPanelControlAdded(object sender, ControlEventArgs e)
     {
     }
 
@@ -476,6 +486,14 @@ public partial class FuelPlanner : UserControl
         catch
         {
             JokertextBox.Text = MissionPlanner.CurrentMissionDataCard.JokerFuel.ToString();
+        }
+    }
+
+    private void checkBoxCombat_CheckedChanged(object sender, EventArgs e)
+    {
+        if (routeFlowPanel.Controls.Count != 0)
+        {
+            UpdateFuelInfo();
         }
     }
 }
