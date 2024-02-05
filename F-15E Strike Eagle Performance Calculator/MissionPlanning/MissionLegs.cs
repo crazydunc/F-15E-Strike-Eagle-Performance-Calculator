@@ -47,6 +47,8 @@ public class MissionLegs : INotifyPropertyChanged
     //public int LegFuelRemainEnd { get; set; }
     public int LegEndAircraftWeight { get; set; } // Weight at the start of the leg. Basic + Stores + Fuel not burned. 
     public double LegFuel { get; set; }
+    public double LegFuelFlow { get; set; }
+
     public int LegFuelAdded { get; set; }
     public double LegDistance { get; set; }
     public double LegDragIndexRemoved { get; set; }

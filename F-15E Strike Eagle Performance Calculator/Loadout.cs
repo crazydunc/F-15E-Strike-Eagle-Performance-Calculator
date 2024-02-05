@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using F_15E_Strike_Eagle_Performance_Calculator.MissionPlanning;
 
 namespace F_15E_Strike_Eagle_Performance_Calculator;
 
@@ -464,6 +465,28 @@ public partial class Loadout : UserControl
     {
         var export = new ExportSelectedLoadout();
         export.ExportData();
+    }
+
+    private void Loadout_VisibleChanged(object sender, EventArgs e)
+    {
+        if (runwayElevationTextBox.Text.Length == 0)
+        {
+            if (MissionPlanner.CurrentMissionDataCard.MissionLegs != null)
+            {
+                if (MissionPlanner.CurrentMissionDataCard.MissionLegs.Count > 0)
+                {
+                    var a = MissionPlanner.CurrentMissionDataCard.MissionLegs[0].FromWaypoint.Elevation;
+                    runwayElevationTextBox.Text = a.ToString();
+                    if (OATTextBox.Text.Length == 0)
+                    {
+                        OATTextBox.Text = "8";
+                    }
+
+                    calcuateButton.PerformClick();
+                }
+            }
+
+        }
     }
 
     private delegate int StationPropertySelector(Stores store);

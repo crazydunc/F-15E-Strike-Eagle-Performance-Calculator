@@ -63,8 +63,10 @@ internal class MissionPlanner
                 // Set LegTarget to true if ToWaypoint is a target
                 missionLeg.LegTarget = toWaypoint.Target;
                 // Calculate LegFuel based on custom logic (assuming CalculateLegFuel is a method)
-                missionLeg.LegFuel = CalculateLegFuel(missionLeg);
-                if (missionLeg.LegFuel < 3200)
+                var fuelOut = CalculateLegFuel(missionLeg);
+                missionLeg.LegFuel = fuelOut.calculatedValue;
+                missionLeg.LegFuelFlow = fuelOut.poundPerHour;
+                if (missionLeg.LegFuelFlow < 3200)
                 {
                     missionLeg.LegFuel = 0;
                     FuelFlowDataRetriever getData = new();
@@ -101,13 +103,15 @@ internal class MissionPlanner
         }
     }
 
-    public static int CalculateLegFuel(MissionLegs leg)
+    public static (int poundPerHour, int calculatedValue) CalculateLegFuel(MissionLegs leg)
     {
         var time = leg.LegDistance / leg.LegSpeed + Convert.ToDouble(leg.LegDelay) / 60;
         FuelFlowDataRetriever getFuel = new();
         var poundPerHour =
             getFuel.RetrieveFuelFlow(leg.LegAltitude, (int)leg.LegDragIndex, (int)leg.LegSpeed,
                 leg.LegStartAircraftWeight);
-        return (int)(time * poundPerHour);
+        var calculatedValue = (int)(time * poundPerHour);
+
+        return ((int)poundPerHour, calculatedValue);
     }
 }

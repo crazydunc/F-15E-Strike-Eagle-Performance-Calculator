@@ -674,6 +674,7 @@
             Controls.Add(panel3);
             Name = "Loadout";
             Size = new Size(1345, 694);
+            VisibleChanged += Loadout_VisibleChanged;
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

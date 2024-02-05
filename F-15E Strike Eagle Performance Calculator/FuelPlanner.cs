@@ -43,9 +43,11 @@ public partial class FuelPlanner : UserControl
             leg.LegDragIndex = dragIndex - leg.LegDragIndexRemoved;
             leg.LegStartAircraftWeight = endWeight;
             var calculateLegFuel = MissionPlanner.CalculateLegFuel(leg);
-            if (leg.Id == 1) calculateLegFuel += 1488; // Startup and Taxi
-            leg.LegFuel = calculateLegFuel;
-            if (leg.LegFuel < 3200)
+            if (leg.Id == 1) calculateLegFuel.calculatedValue += 1488; // Startup and Taxi
+            leg.LegFuel = calculateLegFuel.calculatedValue;
+            leg.LegFuelFlow = calculateLegFuel.poundPerHour;
+
+            if (leg.LegFuelFlow < 3200)
             {
                 leg.LegFuel = 0;
                 FuelFlowDataRetriever getData = new();
@@ -72,8 +74,8 @@ public partial class FuelPlanner : UserControl
                 }
             }
             
-            leg.LegEndAircraftWeight = leg.LegStartAircraftWeight - calculateLegFuel;
-            endWeight = leg.LegStartAircraftWeight - calculateLegFuel + leg.LegFuelAdded - leg.LegPayloadReleased;
+            leg.LegEndAircraftWeight = leg.LegStartAircraftWeight - calculateLegFuel.calculatedValue;
+            endWeight = leg.LegStartAircraftWeight - calculateLegFuel.calculatedValue + leg.LegFuelAdded - leg.LegPayloadReleased;
             leg.LegFuelRemainEnd = fuelWeight - (int)leg.LegFuel + leg.LegFuelAdded;
             fuelWeight = leg.LegFuelRemainEnd;
             dragIndex = leg.LegDragIndex;

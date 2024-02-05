@@ -96,8 +96,9 @@ public partial class MissionLegUserControl : UserControl
         var newFuel = MissionPlanner.CalculateLegFuel(MissionLeg);
 
         // Update the MissionLeg object with the new fuel value
-        MissionLeg.LegFuel = newFuel;
-        MissionLeg.LegEndAircraftWeight = MissionLeg.LegStartAircraftWeight - newFuel + MissionLeg.LegFuelAdded;
+        MissionLeg.LegFuel = newFuel.calculatedValue;
+        MissionLeg.LegFuelFlow = newFuel.poundPerHour;
+        MissionLeg.LegEndAircraftWeight = MissionLeg.LegStartAircraftWeight - (int)MissionLeg.LegFuel + MissionLeg.LegFuelAdded;
         OnMissionLegsUpdated();
     }
 
