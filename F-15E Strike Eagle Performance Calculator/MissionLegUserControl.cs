@@ -42,7 +42,7 @@ public partial class MissionLegUserControl : UserControl
         if (MissionLeg.LegTarget) buttonStores.Visible = true;
     }
 
-    private void SpeedTexbox_TextChanged(object sender, EventArgs e)
+    private void SpeedTexbox_Leave(object sender, EventArgs e)
     {
         try
         {
@@ -63,13 +63,13 @@ public partial class MissionLegUserControl : UserControl
         }
     }
 
-    private void AltitudeTextbox_TextChanged(object sender, EventArgs e)
+    private void AltitudeTextbox_Leave(object sender, EventArgs e)
     {
         try
         {
             var a = Convert.ToInt32(AltitudeTextbox.Text);
 
-            if (a is > -1 and < 20001)
+            if (a is > -1 and < 45001)
             {
                 MissionLeg.LegAltitude = a;
                 RecalculateFuel();
@@ -185,6 +185,39 @@ public partial class MissionLegUserControl : UserControl
             MissionLeg.LegDragIndexRemoved = drag;
             MissionLeg.LegPayloadReleased = (int)weight;
             RecalculateFuel();
+        }
+    }
+
+    private void AltitudeTextbox_KeyUp(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Enter)
+        {
+            // Call the Leave event of the control
+            AltitudeTextbox_Leave(this, EventArgs.Empty);
+        }
+    }
+
+    private void SpeedTexbox_KeyUp(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Enter)
+        {
+            SpeedTexbox_Leave(this, EventArgs.Empty);
+        }
+    }
+
+    private void DelaytextBox_KeyUp(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Enter)
+        {
+            DelaytextBox_Leave(this, EventArgs.Empty);
+        }
+    }
+
+    private void AARtextBox_KeyUp(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Enter)
+        {
+            AARtextBox_Leave(this, EventArgs.Empty);
         }
     }
 }

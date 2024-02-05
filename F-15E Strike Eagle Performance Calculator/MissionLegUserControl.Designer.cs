@@ -124,6 +124,7 @@
             AARtextBox.Size = new Size(48, 23);
             AARtextBox.TabIndex = 21;
             AARtextBox.Text = "0";
+            AARtextBox.KeyDown += AARtextBox_KeyUp;
             AARtextBox.Leave += AARtextBox_Leave;
             // 
             // FuelRemLabel
@@ -162,6 +163,7 @@
             DelaytextBox.Size = new Size(28, 23);
             DelaytextBox.TabIndex = 17;
             DelaytextBox.Text = "0";
+            DelaytextBox.KeyUp += DelaytextBox_KeyUp;
             DelaytextBox.Leave += DelaytextBox_Leave;
             // 
             // label5
@@ -216,7 +218,8 @@
             SpeedTexbox.Size = new Size(37, 23);
             SpeedTexbox.TabIndex = 11;
             SpeedTexbox.Text = "600";
-            SpeedTexbox.Leave += SpeedTexbox_TextChanged;
+            SpeedTexbox.KeyUp += SpeedTexbox_KeyUp;
+            SpeedTexbox.Leave += SpeedTexbox_Leave;
             // 
             // label1
             // 
@@ -234,7 +237,8 @@
             AltitudeTextbox.Size = new Size(45, 23);
             AltitudeTextbox.TabIndex = 9;
             AltitudeTextbox.Text = "40000";
-            AltitudeTextbox.Leave += AltitudeTextbox_TextChanged;
+            AltitudeTextbox.KeyUp += AltitudeTextbox_KeyUp;
+            AltitudeTextbox.Leave += AltitudeTextbox_Leave;
             // 
             // AltitudeLabelName
             // 

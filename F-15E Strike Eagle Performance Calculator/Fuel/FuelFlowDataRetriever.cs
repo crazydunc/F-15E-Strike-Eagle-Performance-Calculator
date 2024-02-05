@@ -11,12 +11,12 @@ public class FuelFlowDataRetriever
 
     public double RetrieveFuelFlow(int altitude, int dragIndex, int speed, int aircraftWeight)
     {
-        Console.WriteLine("SEPC - Fuel Calculation - Input data");
-        Console.WriteLine($"Weight: {aircraftWeight}");
-        Console.WriteLine($"Speed: {speed}");
-        Console.WriteLine($"Drag Index: {dragIndex}");
-        Console.WriteLine($"Altitude: {altitude}");
-        Console.WriteLine("Input Ends \r\n");
+        //Log.WriteLog("SEPC - Fuel Calculation - Input data");
+        //Log.WriteLog($"Weight: {aircraftWeight}");
+        //Log.WriteLog($"Speed: {speed}");
+        //Log.WriteLog($"Drag Index: {dragIndex}");
+        //Log.WriteLog($"Altitude: {altitude}");
+        //Log.WriteLog("Input Ends \r\n");
 
         using (var connection = new SQLiteConnection(connectionString))
         {
@@ -44,15 +44,15 @@ public class FuelFlowDataRetriever
                     {
                         // Exact match found, return the fuel flow
                         var fuelFlow = Convert.ToDouble(reader["FuelFlowPerHour"]);
-                        Console.WriteLine("Exact Fuel Flow Match found");
+                        //Log.WriteLog("Exact Fuel Flow Match found");
 
                         return fuelFlow;
                     }
 
-                    Console.WriteLine("No Exact Fuel Flow Match found - QuadLinear Interpolation time");
+                    //Log.WriteLog("No Exact Fuel Flow Match found - QuadLinear Interpolation time");
 
                     var b = PerformQuadlinearInterpolation(altitude, dragIndex, speed, aircraftWeight);
-                    Console.WriteLine("FF Interpolated: " + b);
+                    //Log.WriteLog("FF Interpolated: " + b);
                     return b;
                 }
             }
@@ -62,7 +62,7 @@ public class FuelFlowDataRetriever
     private double PerformIndependentInterpolations(
         int altitude, int dragIndex, int speed, int aircraftWeight)
     {
-        Console.WriteLine("Attempting 1D Interpolates");
+        //Log.WriteLog("Attempting 1D Interpolates");
 
         var numbers = new List<int> { 35000, 40000, 45000, 50000, 55000, 60000, 65000, 70000, 75000, 80000 };
         var closestWeight = FindClosestValue(numbers, aircraftWeight);
@@ -79,16 +79,16 @@ public class FuelFlowDataRetriever
                 (interpolatedSpeed == -1 && interpolatedAltitude == -1) ||
                 (interpolatedDragIndex == -1 && interpolatedAltitude == -1))
             {
-                Console.WriteLine("All 1D Interpolates Failed");
+                //Log.WriteLog("All 1D Interpolates Failed");
 
 
-                Console.WriteLine("Finding closest tabulated data");
+                //Log.WriteLog("Finding closest tabulated data");
 
                 averageFuelFlow = FallbackCalculation(altitude, dragIndex, speed, closestWeight);
             }
             else if (interpolatedSpeed != -1 && interpolatedDragIndex != -1 && interpolatedAltitude == -1)
             {
-                Console.WriteLine("All 1D Alt Interpolates Failed");
+                //Log.WriteLog("All 1D Alt Interpolates Failed");
 
                 averageFuelFlow = (FallbackCalculation(altitude, dragIndex, speed, closestWeight) +
                                    interpolatedDragIndex +
@@ -96,7 +96,7 @@ public class FuelFlowDataRetriever
             }
             else if (interpolatedSpeed != -1 && interpolatedDragIndex == -1 && interpolatedAltitude != -1)
             {
-                Console.WriteLine("All 1D Drag Interpolates Failed");
+                //Log.WriteLog("All 1D Drag Interpolates Failed");
 
                 averageFuelFlow = (FallbackCalculation(altitude, dragIndex, speed, closestWeight) +
                                    interpolatedAltitude +
@@ -104,7 +104,7 @@ public class FuelFlowDataRetriever
             }
             else if (interpolatedSpeed == -1 && interpolatedDragIndex != -1 && interpolatedAltitude != -1)
             {
-                Console.WriteLine("All 1D Speed Interpolates Failed");
+                //Log.WriteLog("All 1D Speed Interpolates Failed");
 
                 averageFuelFlow = (FallbackCalculation(altitude, dragIndex, speed, closestWeight) +
                                    interpolatedAltitude +
@@ -113,7 +113,7 @@ public class FuelFlowDataRetriever
         }
         else
         {
-            Console.WriteLine("All 1D Interpolates Worked shooting a 4 way average");
+            //Log.WriteLog("All 1D Interpolates Worked shooting a 4 way average");
 
             // Average the interpolated values
             averageFuelFlow = (interpolatedAltitude + interpolatedDragIndex +
@@ -128,10 +128,10 @@ public class FuelFlowDataRetriever
 
     private double FallbackCalculation(int altitude, int dragIndex, int speed, int aircraftWeight)
     {
-        Console.WriteLine("Final fallback step");
+        //Log.WriteLog("Final fallback step");
         var numbersSpd = new List<int> { 360, 400, 440, 480, 520, 560, 600 };
         var numbersDi = new List<int> { 0, 20, 40, 60, 80, 100, 120, 140, 160 };
-        var numbersAlt = new List<int> { 0, 5000, 10000, 15000, 20000 };
+        var numbersAlt = new List<int> { 0, 5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000 };
         var closestSpeed = FindClosestValue(numbersSpd, speed);
         var closestDrag = FindClosestValue(numbersDi, dragIndex);
         var closestAltitude = FindClosestValue(numbersAlt, altitude);
@@ -374,7 +374,7 @@ public class FuelFlowDataRetriever
                     return interpolatedFuelFlow;
                 }
 
-                Console.WriteLine("QuadLinear failed - only " + i + " corner points returned");
+                //Log.WriteLog("QuadLinear failed - only " + i + " corner points returned");
             }
         }
 
@@ -429,5 +429,58 @@ public class FuelFlowDataRetriever
         }
 
         return closestValue;
+    }
+
+    public string FindClosestValidData( int weight, int dragIndex, int altitude, int speed)
+    {
+        var numbersSpd = new List<int> { 360, 400, 440, 480, 520, 560, 600 };
+        var numbersDi = new List<int> { 0, 20, 40, 60, 80, 100, 120, 140, 160 };
+        var numbersAlt = new List<int> { 0, 5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000 };
+        var numbersWeight = new List<int> { 35000, 40000, 45000, 50000, 55000, 60000, 65000, 70000, 75000, 80000 };
+
+        //var closestSpeed = FindClosestValue(numbersSpd, speed);
+        var closestDrag = FindClosestValue(numbersDi, dragIndex);
+        //var closestAltitude = FindClosestValue(numbersAlt, altitude);
+        var closestWeight = FindClosestValue(numbersWeight, weight);
+
+        using (var connection = new SQLiteConnection(connectionString))
+        {
+            connection.Open();
+            var query = @"
+                SELECT *
+                FROM FuelFlowData
+                WHERE AircraftWeight = @Weight
+                    AND DragIndex = @DragIndex
+                    AND FuelFlowPerHour <> 0
+                ORDER BY
+                    ABS(Altitude - @Altitude) ASC,
+                    ABS(Speed - @Speed) ASC
+                LIMIT 1;";
+
+            using (var command = new SQLiteCommand(query, connection))
+            {
+                // Step 2: Set parameter values
+                command.Parameters.AddWithValue("@Weight", closestWeight);
+                command.Parameters.AddWithValue("@DragIndex", closestDrag);
+                command.Parameters.AddWithValue("@Altitude", altitude);
+                command.Parameters.AddWithValue("@Speed", speed);
+
+                // Step 3: Execute the query and retrieve the result
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        // Exact match found, return the fuel flow
+                        var alt = reader["Altitude"];
+                        var spd = reader["Speed"];
+                        var pph = reader["FuelFlowPerHour"];
+                        
+                        return $"Calculation Failure: Suggested Profile: {alt} ft - Speed: {spd} KTAS";
+                    }
+
+                    return $"Calculation Failure: Unable to find valid data - Please select a lower altitude/speed.";
+                }
+            }
+        }
     }
 }

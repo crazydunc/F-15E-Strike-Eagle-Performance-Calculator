@@ -1,10 +1,11 @@
 ﻿using F_15E_Strike_Eagle_Performance_Calculator.Imports;
+using Microsoft.VisualBasic.Logging;
 
 namespace F_15E_Strike_Eagle_Performance_Calculator.MissionPlanning;
 
 internal class MissionPlanner
 {
-    public static MissionDataCard CurrentMissionDataCard;
+    public static MissionDataCard CurrentMissionDataCard = new MissionDataCard();
     public static bool hold;
 
     public void MissionInitialisation(List<Waypoint> missionWaypoints)
@@ -43,7 +44,7 @@ internal class MissionPlanner
 
                 var distance = WaypointConversion.WaypointCalculateDistance(fromWaypoint.Latitude,
                     fromWaypoint.Longitude, toWaypoint.Latitude, toWaypoint.Longitude);
-                if (toWaypoint.Elevation > 20000) toWaypoint.Elevation = 20000;
+                if (toWaypoint.Elevation > 45000) toWaypoint.Elevation = 45000;
                 var missionLeg = new MissionLegs
                 {
                     Id = i + 1,
@@ -63,6 +64,18 @@ internal class MissionPlanner
                 missionLeg.LegTarget = toWaypoint.Target;
                 // Calculate LegFuel based on custom logic (assuming CalculateLegFuel is a method)
                 missionLeg.LegFuel = CalculateLegFuel(missionLeg);
+                if (missionLeg.LegFuel < 3200)
+                {
+                    missionLeg.LegFuel = 0;
+                    FuelFlowDataRetriever getData = new();
+
+                    missionLeg.LegRemarks = getData.FindClosestValidData(missionLeg.LegStartAircraftWeight,
+                        (int)missionLeg.LegDragIndex, missionLeg.LegAltitude, (int)missionLeg.LegSpeed);
+                }
+                else
+                {
+                    missionLeg.LegRemarks = string.Empty;
+                }
                 // Apply a special case for the first mission leg (Id == 1)
                 if (missionLeg.Id == 1)
                 {

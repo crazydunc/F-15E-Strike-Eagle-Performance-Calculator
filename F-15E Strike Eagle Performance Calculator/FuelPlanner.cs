@@ -30,6 +30,8 @@ public partial class FuelPlanner : UserControl
     // Define the event handler method in your main form
     private void MissionLegsUpdatedHandler(object sender, EventArgs e)
     {
+        bool issue = false; 
+        textBoxLog.Clear();
         var endWeight = F15EStrikeEagle.GrossWeight;
         var fuelWeight = F15EStrikeEagle.TotalFuel;
         var dragIndex = F15EStrikeEagle.TotalDragIndex;
@@ -43,6 +45,33 @@ public partial class FuelPlanner : UserControl
             var calculateLegFuel = MissionPlanner.CalculateLegFuel(leg);
             if (leg.Id == 1) calculateLegFuel += 1488; // Startup and Taxi
             leg.LegFuel = calculateLegFuel;
+            if (leg.LegFuel < 3200)
+            {
+                leg.LegFuel = 0;
+                FuelFlowDataRetriever getData = new();
+
+                leg.LegRemarks = getData.FindClosestValidData(leg.LegStartAircraftWeight,
+                    (int)leg.LegDragIndex, leg.LegAltitude, (int)leg.LegSpeed);
+                textBoxLog.AppendText($"Leg {leg.Id}: {leg.LegRemarks}" + Environment.NewLine);
+                
+            }
+            else
+            {
+                leg.LegRemarks = string.Empty; 
+            }
+            foreach (MissionLegUserControl legUserControl in flowLayoutPanel1.Controls)
+            {
+                if (legUserControl.MissionLeg.Id == leg.Id && leg.LegRemarks != string.Empty)
+                {
+                    legUserControl.BackColor = Color.Firebrick;
+                    issue = true;
+                }
+                else if(legUserControl.MissionLeg.Id == leg.Id && leg.LegRemarks == string.Empty)
+                {
+                    legUserControl.BackColor = SystemColors.ControlDark;
+                }
+            }
+            
             leg.LegEndAircraftWeight = leg.LegStartAircraftWeight - calculateLegFuel;
             endWeight = leg.LegStartAircraftWeight - calculateLegFuel + leg.LegFuelAdded - leg.LegPayloadReleased;
             leg.LegFuelRemainEnd = fuelWeight - (int)leg.LegFuel + leg.LegFuelAdded;
@@ -52,6 +81,7 @@ public partial class FuelPlanner : UserControl
             MissionPlanner.CurrentMissionDataCard.TotalRouteFuel += (int)leg.LegFuel;
             MissionPlanner.CurrentMissionDataCard.LandingWeight = endWeight;
         }
+        groupBox1.BackColor = issue ? Color.Firebrick : SystemColors.WindowFrame;
 
         UpdateFuelInfo();
     }

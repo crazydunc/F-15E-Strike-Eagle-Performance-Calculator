@@ -54,7 +54,10 @@
             labelTotalDistance = new Label();
             label1 = new Label();
             buttonCombatFlite = new Button();
+            groupBox2 = new GroupBox();
+            textBoxLog = new TextBox();
             groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // ImportDtcButton
@@ -74,7 +77,7 @@
             flowLayoutPanel1.AutoScroll = true;
             flowLayoutPanel1.Location = new Point(8, 48);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(990, 636);
+            flowLayoutPanel1.Size = new Size(990, 503);
             flowLayoutPanel1.TabIndex = 25;
             flowLayoutPanel1.ControlAdded += flowLayoutPanel1_ControlAdded;
             // 
@@ -318,11 +321,36 @@
             buttonCombatFlite.UseVisualStyleBackColor = false;
             buttonCombatFlite.Click += buttonCombatFlite_Click;
             // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(textBoxLog);
+            groupBox2.ForeColor = SystemColors.ButtonHighlight;
+            groupBox2.Location = new Point(11, 557);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(987, 134);
+            groupBox2.TabIndex = 28;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Log";
+            // 
+            // textBoxLog
+            // 
+            textBoxLog.BackColor = SystemColors.WindowFrame;
+            textBoxLog.BorderStyle = BorderStyle.FixedSingle;
+            textBoxLog.ForeColor = SystemColors.ButtonHighlight;
+            textBoxLog.Location = new Point(6, 22);
+            textBoxLog.Multiline = true;
+            textBoxLog.Name = "textBoxLog";
+            textBoxLog.ReadOnly = true;
+            textBoxLog.ScrollBars = ScrollBars.Vertical;
+            textBoxLog.Size = new Size(975, 106);
+            textBoxLog.TabIndex = 0;
+            // 
             // FuelPlanner
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.WindowFrame;
+            Controls.Add(groupBox2);
             Controls.Add(buttonCombatFlite);
             Controls.Add(groupBox1);
             Controls.Add(flowLayoutPanel1);
@@ -333,6 +361,8 @@
             VisibleChanged += FuelPlanner_VisibleChanged;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -363,5 +393,7 @@
         private Label label10;
         private Label labelSpeeds;
         private Button buttonCombatFlite;
+        private GroupBox groupBox2;
+        private TextBox textBoxLog;
     }
 }
