@@ -1,5 +1,4 @@
 ﻿using System.IO.Compression;
-using System.Windows.Forms;
 using System.Xml.Linq;
 using F_15E_Strike_Eagle_Performance_Calculator.Imports;
 using F_15E_Strike_Eagle_Performance_Calculator.MissionPlanning;
@@ -19,18 +18,35 @@ public partial class FuelPlanner : UserControl
     public FuelPlanner()
     {
         InitializeComponent();
+        DistTt.SetToolTip(labelTotalDistance, "Total length of the imported route");
+        TowTt.SetToolTip(takeoffWeightLabel, "Takeoff Weight - From Planned Loadout");
+        LawTt.SetToolTip(LandingWeightValueLabel, "Landing Weight - Total Fuel burned + Stores expended");
+        LandingSpdTt.SetToolTip(labelSpeeds, "Calculated Landing Speeds for Landing Weight. Flaps Down / Flaps Up");
+        FuelBurnTt.SetToolTip(labelFuelBurn, "Total Fuel burn for planned route, including delay times.");
+        RecFuelTt.SetToolTip(RecoveryFuelLabel, "Minimum fuel at FAF/Initial Point for recovery to planned base");
+        ReqFuelTt.SetToolTip(labelSuggestedFuel,
+            "Suggested planned fuel load, based on Fuel burn + Recovery Fuel + 5min of Combat maneuvering");
+        AarOnloadTt.SetToolTip(AAROnloadLabel,
+            "Total planned Air to Air refueling onload, for the sortie");
+        FuelLoadedTt.SetToolTip(FuelLoadedLabelValue, "Fuel on board (Internal + External) - From Planned Loadout");
 
+        JokerTt.SetToolTip(JokerLabel,
+            "Joker Fuel is Bingo Fuel, plus 1500lbs. User can enter their own value to override");
+        JokerTt.SetToolTip(BingoLabel,
+            "Bingo Fuel is recovery fuel, plus half route distance at 15lb/nm on a Max Endurance profile. User can enter their own value to override");
     }
+
     protected override void OnResize(EventArgs e)
     {
-        this.Visible = false;
+        Visible = false;
         base.OnResize(e);
-        this.Visible = true;
+        Visible = true;
     }
+
     // Define the event handler method in your main form
     private void MissionLegsUpdatedHandler(object sender, EventArgs e)
     {
-        bool issue = false; 
+        bool issue = false;
         textBoxLog.Clear();
         var endWeight = F15EStrikeEagle.GrossWeight;
         var fuelWeight = F15EStrikeEagle.TotalFuel;
@@ -55,27 +71,26 @@ public partial class FuelPlanner : UserControl
                 leg.LegRemarks = getData.FindClosestValidData(leg.LegStartAircraftWeight,
                     (int)leg.LegDragIndex, leg.LegAltitude, (int)leg.LegSpeed);
                 textBoxLog.AppendText($"Leg {leg.Id}: {leg.LegRemarks}" + Environment.NewLine);
-                
             }
             else
             {
-                leg.LegRemarks = string.Empty; 
+                leg.LegRemarks = string.Empty;
             }
+
             foreach (MissionLegUserControl legUserControl in flowLayoutPanel1.Controls)
-            {
                 if (legUserControl.MissionLeg.Id == leg.Id && leg.LegRemarks != string.Empty)
                 {
                     legUserControl.BackColor = Color.Firebrick;
                     issue = true;
                 }
-                else if(legUserControl.MissionLeg.Id == leg.Id && leg.LegRemarks == string.Empty)
+                else if (legUserControl.MissionLeg.Id == leg.Id && leg.LegRemarks == string.Empty)
                 {
                     legUserControl.BackColor = SystemColors.ControlDark;
                 }
-            }
-            
+
             leg.LegEndAircraftWeight = leg.LegStartAircraftWeight - calculateLegFuel.calculatedValue;
-            endWeight = leg.LegStartAircraftWeight - calculateLegFuel.calculatedValue + leg.LegFuelAdded - leg.LegPayloadReleased;
+            endWeight = leg.LegStartAircraftWeight - calculateLegFuel.calculatedValue + leg.LegFuelAdded -
+                        leg.LegPayloadReleased;
             leg.LegFuelRemainEnd = fuelWeight - (int)leg.LegFuel + leg.LegFuelAdded;
             fuelWeight = leg.LegFuelRemainEnd;
             dragIndex = leg.LegDragIndex;
@@ -83,16 +98,18 @@ public partial class FuelPlanner : UserControl
             MissionPlanner.CurrentMissionDataCard.TotalRouteFuel += (int)leg.LegFuel;
             MissionPlanner.CurrentMissionDataCard.LandingWeight = endWeight;
         }
+
         groupBox1.BackColor = issue ? Color.Firebrick : SystemColors.WindowFrame;
 
         UpdateFuelInfo();
     }
+
     private void buttonCombatFlite_Click(object sender, EventArgs e)
     {
         ResetFuelPlanner();
         using (var openFileDialog = new OpenFileDialog())
         {
-            openFileDialog.Filter = "CombatFlite Files (*.cf)|*.cf|All Files (*.*)|*.*";
+            openFileDialog.Filter = @"CombatFlite Files (*.cf)|*.cf|All Files (*.*)|*.*";
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -109,7 +126,7 @@ public partial class FuelPlanner : UserControl
                     {
                         // Create a form to display the route selection
                         var routeSelectionForm = new Form();
-                        routeSelectionForm.Text = "Select a route";
+                        routeSelectionForm.Text = @"Select a route";
                         routeSelectionForm.MaximizeBox = false;
                         routeSelectionForm.MinimizeBox = false;
                         routeSelectionForm.StartPosition = FormStartPosition.CenterParent;
@@ -118,12 +135,10 @@ public partial class FuelPlanner : UserControl
 
                         // Add route names (Name + MSNnumber) to the list box
                         foreach (var route in a.CfRoutes)
-                        {
                             routeListBox.Items.Add($"{route.Name} (MSN#{route.MsnNumber})");
-                        }
 
                         var importButton = new Button();
-                        importButton.Text = "Import";
+                        importButton.Text = @"Import";
                         importButton.Click += (sender, e) =>
                         {
                             if (routeListBox.SelectedIndex >= 0 && routeListBox.SelectedIndex < a.CfRoutes.Count)
@@ -137,11 +152,8 @@ public partial class FuelPlanner : UserControl
                         };
 
                         var cancelButton = new Button();
-                        cancelButton.Text = "Cancel";
-                        cancelButton.Click += (sender, e) =>
-                        {
-                            routeSelectionForm.Close();
-                        };
+                        cancelButton.Text = @"Cancel";
+                        cancelButton.Click += (sender, e) => { routeSelectionForm.Close(); };
 
                         var buttonPanel = new FlowLayoutPanel();
                         buttonPanel.FlowDirection = FlowDirection.RightToLeft;
@@ -157,24 +169,24 @@ public partial class FuelPlanner : UserControl
                     else
                     {
                         // Handle the case where no routes were found
-                        MessageBox.Show("No routes found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        
+                        MessageBox.Show(@"No routes found.", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception ex)
                 {
                     MissionPlanner.hold = false;
-                    MessageBox.Show("Error: " + ex.Message);
+                    MessageBox.Show(@"Error: " + ex.Message);
                 }
             }
         }
     }
+
     private void ImportDtcButton_Click(object sender, EventArgs e)
     {
         ResetFuelPlanner();
         using (var openFileDialog = new OpenFileDialog())
         {
-            openFileDialog.Filter = "JSON Files (*.json)|*.json|All Files (*.*)|*.*";
+            openFileDialog.Filter = @"JSON Files (*.json)|*.json|All Files (*.*)|*.*";
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -201,43 +213,33 @@ public partial class FuelPlanner : UserControl
                     {
                         ProcessImport(jsonObject.RouteC.Waypoints);
                     }
-                    else if ((hasWaypointsInA && hasWaypointsInB) || (hasWaypointsInA && hasWaypointsInC) || (hasWaypointsInB && hasWaypointsInC))
+                    else if ((hasWaypointsInA && hasWaypointsInB) || (hasWaypointsInA && hasWaypointsInC) ||
+                             (hasWaypointsInB && hasWaypointsInC))
                     {
                         // Two or more of the three routes have waypoints, present a dialog to choose which one
                         var selectedRoute = ShowRouteSelectionDialog(hasWaypointsInA, hasWaypointsInB, hasWaypointsInC);
-                        
+
                         if (selectedRoute != null)
                         {
                             if (selectedRoute == "A")
-                            {
                                 ProcessImport(jsonObject.RouteA.Waypoints);
-
-                            }
                             else if (selectedRoute == "B")
-                            {
                                 ProcessImport(jsonObject.RouteB.Waypoints);
-
-                            }
                             else if (selectedRoute == "C")
-                            {
                                 ProcessImport(jsonObject.RouteC.Waypoints);
-
-                            }
                             else
-                            {
-                                MessageBox.Show("No Route Selected", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                            }
-
+                                MessageBox.Show(@"No Route Selected", @"Information", MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information);
                         }
                     }
                     else
                     {
                         // None of the routes have waypoints
-                        MessageBox.Show("No waypoints found in any route.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(@"No waypoints found in any route.", @"Information", MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
                     }
-                    MissionPlanner.hold = false;
 
+                    MissionPlanner.hold = false;
                 }
                 catch (Exception ex)
                 {
@@ -247,6 +249,7 @@ public partial class FuelPlanner : UserControl
             }
         }
     }
+
     public static CFImports ParseMissionXml(string zipFilePath)
     {
         try
@@ -259,7 +262,8 @@ public partial class FuelPlanner : UserControl
                 {
                     // Log error message
                     Log.WriteLog("mission.xml not found in the ZIP file.");
-                    MessageBox.Show("mission.xml not found in the ZIP file.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(@"mission.xml not found in the ZIP file.", @"Error", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
                     return null;
                 }
 
@@ -295,8 +299,10 @@ public partial class FuelPlanner : UserControl
                                     Longitude = wp.Element("Lon").Value,
                                     Elevation = Convert.ToInt32(wp.Element("Altitude").Value),
                                     TimeOverSteerpoint = wp.Element("TOT").Value,
-                                    Target = (wp.Element("Type").Value == "Target"), // Set Target to True if Type is "Target"
-                                    Ktas = (int)double.Parse(wp.Element("KTAS").Value),//Convert.ToInt32(wp.Element("KTAS").Value)
+                                    Target = wp.Element("Type").Value ==
+                                             "Target", // Set Target to True if Type is "Target"
+                                    Ktas = (int)double.Parse(wp.Element("KTAS")
+                                        .Value), //Convert.ToInt32(wp.Element("KTAS").Value)
                                     Activity = Worker.ConvertTimeToMinutes(wp.Element("Activity").Value)
                                 }));
                         }
@@ -312,10 +318,12 @@ public partial class FuelPlanner : UserControl
         {
             // Log the exception message
             Log.WriteLog("An error occurred while parsing the CF File: " + ex.Message);
-            MessageBox.Show("An error occurred while parsing CF File:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(@"An error occurred while parsing CF File:
+" + ex.Message, @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return null;
         }
     }
+
     private void ResetFuelPlanner()
     {
         MissionPlanner.CurrentMissionDataCard = new MissionDataCard();
@@ -350,9 +358,8 @@ public partial class FuelPlanner : UserControl
         }
         catch (Exception exception)
         {
-            Log.WriteLog("Route Calculation Failed. Route Import Aborted. " +exception.Message);
-            MessageBox.Show("Route Calculation Failed. Route Import Aborted. See Log for more information");
-
+            Log.WriteLog("Route Calculation Failed. Route Import Aborted. " + exception.Message);
+            MessageBox.Show(@"Route Calculation Failed. Route Import Aborted. See Log for more information");
         }
     }
 
@@ -365,54 +372,42 @@ public partial class FuelPlanner : UserControl
             var speeds = landingSpeedInterpolation.GetLandingSpeed(MissionPlanner.CurrentMissionDataCard.LandingWeight);
             var flapDownSpeed = speeds.FlapDownSpeed;
             var flapUpSpeed = speeds.FlapUpSpeed;
-            labelSpeeds.Text = (int)flapDownSpeed + @"/" + (int)flapUpSpeed + " KCAS";
-
+            labelSpeeds.Text = (int)flapDownSpeed + @"/" + (int)flapUpSpeed + @" KCAS";
         }
-
-
 
         var roundedBingo = Math.Ceiling(MissionPlanner.CurrentMissionDataCard.BingoFuel / 100) * 100;
         var roundedJoker = Math.Ceiling(MissionPlanner.CurrentMissionDataCard.JokerFuel / 100) * 100;
-        labelTotalDistance.Text = (int)MissionPlanner.CurrentMissionDataCard.MissionDistance + " nm";
+        labelTotalDistance.Text = (int)MissionPlanner.CurrentMissionDataCard.MissionDistance + @" nm";
         labelSuggestedFuel.Text =
-            MissionPlanner.CurrentMissionDataCard.TotalRouteFuel + 2500 + 1200 * 5 + " lbs";
+            MissionPlanner.CurrentMissionDataCard.TotalRouteFuel + 2500 + (1200 * 5) + @" lbs";
         textBoxBingo.Text = roundedBingo.ToString();
-        labelFuelBurn.Text = MissionPlanner.CurrentMissionDataCard.TotalRouteFuel + " lbs";
-        FuelLoadedLabelValue.Text = F15EStrikeEagle.TotalFuel + " lbs";
-        takeoffWeightLabel.Text = F15EStrikeEagle.GrossWeight + " lbs";
-        LandingWeightValueLabel.Text = MissionPlanner.CurrentMissionDataCard.LandingWeight + " lbs";
+        labelFuelBurn.Text = MissionPlanner.CurrentMissionDataCard.TotalRouteFuel + @" lbs";
+        FuelLoadedLabelValue.Text = F15EStrikeEagle.TotalFuel + @" lbs";
+        takeoffWeightLabel.Text = F15EStrikeEagle.GrossWeight + @" lbs";
+        LandingWeightValueLabel.Text = MissionPlanner.CurrentMissionDataCard.LandingWeight + @" lbs";
         JokertextBox.Text = roundedJoker.ToString();
-        AAROnloadLabel.Text = MissionPlanner.CurrentMissionDataCard.AAROnload + " lbs";
-
+        AAROnloadLabel.Text = MissionPlanner.CurrentMissionDataCard.AAROnload + @" lbs";
     }
+
     private string ShowRouteSelectionDialog(bool routeAExists, bool routeBExists, bool routeCExists)
     {
-        string value = null; 
+        string value = null;
         // Create a form to display the route selection
         var routeSelectionForm = new Form();
         routeSelectionForm.MaximizeBox = false;
         routeSelectionForm.MinimizeBox = false;
-        routeSelectionForm.Text = "Select a route to import";
+        routeSelectionForm.Text = @"Select a route to import";
         routeSelectionForm.StartPosition = FormStartPosition.CenterParent;
         var routeListBox = new ListBox();
         routeListBox.Dock = DockStyle.Fill;
 
         // Add options for available routes
-        if (routeAExists)
-        {
-            routeListBox.Items.Add("Route A");
-        }
-        if (routeBExists)
-        {
-            routeListBox.Items.Add("Route B");
-        }
-        if (routeCExists)
-        {
-            routeListBox.Items.Add("Route C");
-        }
+        if (routeAExists) routeListBox.Items.Add("Route A");
+        if (routeBExists) routeListBox.Items.Add("Route B");
+        if (routeCExists) routeListBox.Items.Add("Route C");
 
         var importButton = new Button();
-        importButton.Text = "Import";
+        importButton.Text = @"Import";
         importButton.Click += (sender, e) =>
         {
             if (routeListBox.SelectedIndex >= 0)
@@ -423,20 +418,16 @@ public partial class FuelPlanner : UserControl
                     "Route A" => "A",
                     "Route B" => "B",
                     "Route C" => "C",
-                    _ => string.Empty,
+                    _ => string.Empty
                 };
                 routeSelectionForm.DialogResult = DialogResult.OK;
                 routeSelectionForm.Close();
-
             }
         };
 
         var cancelButton = new Button();
-        cancelButton.Text = "Cancel";
-        cancelButton.Click += (sender, e) =>
-        {
-            routeSelectionForm.Close();
-        };
+        cancelButton.Text = @"Cancel";
+        cancelButton.Click += (sender, e) => { routeSelectionForm.Close(); };
 
         var buttonPanel = new FlowLayoutPanel();
         buttonPanel.FlowDirection = FlowDirection.RightToLeft;
@@ -450,13 +441,11 @@ public partial class FuelPlanner : UserControl
         // Show the dialog and wait for the user's selection
         var result = routeSelectionForm.ShowDialog();
 
-        if (result == DialogResult.Cancel)
-        {
-            return null;
-        }
+        if (result == DialogResult.Cancel) return null;
 
         return value; // Handle the case when no route is selected
     }
+
     private void FuelPlanner_VisibleChanged(object sender, EventArgs e)
     {
         if (Visible && flowLayoutPanel1.Controls.Count != 0) MissionLegsUpdatedHandler(null, null);
@@ -489,6 +478,4 @@ public partial class FuelPlanner : UserControl
             JokertextBox.Text = MissionPlanner.CurrentMissionDataCard.JokerFuel.ToString();
         }
     }
-
-
 }

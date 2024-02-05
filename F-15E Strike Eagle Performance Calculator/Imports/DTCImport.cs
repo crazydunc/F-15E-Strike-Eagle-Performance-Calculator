@@ -6,9 +6,9 @@ public class DTCImport
     public string? Aircraft { get; set; }
     public object? Upload { get; set; }
     public object? WaypointsCapture { get; set; }
-    public Route RouteA { get; set; } = new Route();
-    public Route RouteB { get; set; } = new Route();
-    public Route RouteC { get; set; } = new Route();
+    public Route? RouteA { get; set; } = new Route();
+    public Route? RouteB { get; set; } = new Route();
+    public Route? RouteC { get; set; } = new Route();
     public object? Radios { get; set; }
     public object? Displays { get; set; }
     public object? SmartWeapons { get; set; }

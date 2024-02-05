@@ -4,17 +4,20 @@ namespace F_15E_Strike_Eagle_Performance_Calculator;
 
 public partial class MissionLegUserControl : UserControl
 {
-    private bool Lcft;
-    private bool RCft;
+    private bool _lcft;
+    private bool _rCft;
 
-    private bool Station2;
-    private bool Station5;
-    private bool Station8;
+    private bool _station2;
+    private bool _station5;
+    private bool _station8;
 
     public MissionLegUserControl()
     {
         InitializeComponent();
-
+        FuelBurnTt.SetToolTip(FuelUsedValueLabel, "This is your total fuel used on this leg in Lbs");
+        AltTt.SetToolTip(AltitudeLabelName, "Valid data: 0-45000ft");
+        SpeedTt.SetToolTip(SpdLabel, "Valid data: 360-600 KTAS");
+        DelayTt.SetToolTip(labelDelay, "Valid data: 0-60 Min");
     }
 
     public MissionLegs MissionLeg { get; set; }
@@ -40,6 +43,11 @@ public partial class MissionLegUserControl : UserControl
         DelaytextBox.DataBindings.Add("Text", MissionLeg, "LegDelay", true,
             DataSourceUpdateMode.OnPropertyChanged);
         if (MissionLeg.LegTarget) buttonStores.Visible = true;
+        if (MissionLeg.Id == 1)
+        {
+            FuelBurnTt.SetToolTip(FuelUsedValueLabel, "This is your total fuel used on this leg in Lbs with 1488Lbs added for Startup, Taxi and Takeoff");
+
+        }
     }
 
     private void SpeedTexbox_Leave(object sender, EventArgs e)
@@ -85,7 +93,7 @@ public partial class MissionLegUserControl : UserControl
         }
     }
 
-    public void updateFuelUi()
+    public void UpdateFuelUi()
     {
         //MissionLeg.LegEndAircraftWeight = 1000; 
     }
@@ -171,16 +179,16 @@ public partial class MissionLegUserControl : UserControl
 
     private void buttonStores_Click(object sender, EventArgs e)
     {
-        var stores = new StoresEmployment(Station2, Lcft, Station5, RCft, Station8);
+        var stores = new StoresEmployment(_station2, _lcft, _station5, _rCft, _station8);
         var result = stores.ShowDialog();
 
         if (result == DialogResult.OK)
         {
-            Station8 = stores.Station8;
-            Station5 = stores.Station5;
-            Station2 = stores.Station2;
-            RCft = stores.RightCft;
-            Lcft = stores.LeftCft;
+            _station8 = stores.Station8;
+            _station5 = stores.Station5;
+            _station2 = stores.Station2;
+            _rCft = stores.RightCft;
+            _lcft = stores.LeftCft;
             var drag = stores.DragIndexRemoved;
             var weight = stores.WeightRemoved;
             MissionLeg.LegDragIndexRemoved = drag;

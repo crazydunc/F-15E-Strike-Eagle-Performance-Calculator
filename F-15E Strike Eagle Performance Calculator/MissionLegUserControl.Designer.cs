@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             LegIdTextLabel = new Label();
             panel1 = new Panel();
             buttonStores = new Button();
@@ -37,13 +38,13 @@
             label6 = new Label();
             checkBoxAAR = new CheckBox();
             DelaytextBox = new TextBox();
-            label5 = new Label();
+            labelDelay = new Label();
             label4 = new Label();
             label3 = new Label();
             FuelUsedValueLabel = new Label();
             FuelUsedLabel = new Label();
             SpeedTexbox = new TextBox();
-            label1 = new Label();
+            SpdLabel = new Label();
             AltitudeTextbox = new TextBox();
             AltitudeLabelName = new Label();
             LegDistanceValueLabel = new Label();
@@ -53,6 +54,10 @@
             WaypointFromNameLabel = new Label();
             WaypointFromLabel = new Label();
             LegIdValueLabel = new Label();
+            FuelBurnTt = new ToolTip(components);
+            AltTt = new ToolTip(components);
+            SpeedTt = new ToolTip(components);
+            DelayTt = new ToolTip(components);
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -74,13 +79,13 @@
             panel1.Controls.Add(label6);
             panel1.Controls.Add(checkBoxAAR);
             panel1.Controls.Add(DelaytextBox);
-            panel1.Controls.Add(label5);
+            panel1.Controls.Add(labelDelay);
             panel1.Controls.Add(label4);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(FuelUsedValueLabel);
             panel1.Controls.Add(FuelUsedLabel);
             panel1.Controls.Add(SpeedTexbox);
-            panel1.Controls.Add(label1);
+            panel1.Controls.Add(SpdLabel);
             panel1.Controls.Add(AltitudeTextbox);
             panel1.Controls.Add(AltitudeLabelName);
             panel1.Controls.Add(LegDistanceValueLabel);
@@ -166,14 +171,14 @@
             DelaytextBox.KeyUp += DelaytextBox_KeyUp;
             DelaytextBox.Leave += DelaytextBox_Leave;
             // 
-            // label5
+            // labelDelay
             // 
-            label5.AutoSize = true;
-            label5.Location = new Point(507, 17);
-            label5.Name = "label5";
-            label5.Size = new Size(76, 15);
-            label5.TabIndex = 16;
-            label5.Text = "Delay (mins):";
+            labelDelay.AutoSize = true;
+            labelDelay.Location = new Point(507, 17);
+            labelDelay.Name = "labelDelay";
+            labelDelay.Size = new Size(76, 15);
+            labelDelay.TabIndex = 16;
+            labelDelay.Text = "Delay (mins):";
             // 
             // label4
             // 
@@ -183,6 +188,7 @@
             label4.Size = new Size(37, 15);
             label4.TabIndex = 15;
             label4.Text = "23456";
+            label4.Visible = false;
             // 
             // label3
             // 
@@ -192,6 +198,7 @@
             label3.Size = new Size(37, 15);
             label3.TabIndex = 14;
             label3.Text = "23456";
+            label3.Visible = false;
             // 
             // FuelUsedValueLabel
             // 
@@ -221,14 +228,14 @@
             SpeedTexbox.KeyUp += SpeedTexbox_KeyUp;
             SpeedTexbox.Leave += SpeedTexbox_Leave;
             // 
-            // label1
+            // SpdLabel
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(425, 17);
-            label1.Name = "label1";
-            label1.Size = new Size(33, 15);
-            label1.TabIndex = 10;
-            label1.Text = "KTAS";
+            SpdLabel.AutoSize = true;
+            SpdLabel.Location = new Point(425, 17);
+            SpdLabel.Name = "SpdLabel";
+            SpdLabel.Size = new Size(33, 15);
+            SpdLabel.TabIndex = 10;
+            SpdLabel.Text = "KTAS";
             // 
             // AltitudeTextbox
             // 
@@ -270,7 +277,7 @@
             // WaypointToNameLabel
             // 
             WaypointToNameLabel.AutoSize = true;
-            WaypointToNameLabel.Location = new Point(83, 26);
+            WaypointToNameLabel.Location = new Point(96, 26);
             WaypointToNameLabel.Name = "WaypointToNameLabel";
             WaypointToNameLabel.Size = new Size(37, 15);
             WaypointToNameLabel.TabIndex = 5;
@@ -341,7 +348,7 @@
         private TextBox AARtextBox;
         private Label FuelRemLabel;
         private TextBox SpeedTexbox;
-        private Label label1;
+        private Label SpdLabel;
         private TextBox AltitudeTextbox;
         private Label FuelUsedValueLabel;
         private Label FuelUsedLabel;
@@ -349,9 +356,13 @@
         private Label label4;
         private CheckBox checkBoxAAR;
         private TextBox DelaytextBox;
-        private Label label5;
+        private Label labelDelay;
         private Label label7;
         private Label label6;
         private Button buttonStores;
+        private ToolTip FuelBurnTt;
+        private ToolTip AltTt;
+        private ToolTip SpeedTt;
+        private ToolTip DelayTt;
     }
 }

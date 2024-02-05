@@ -28,16 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             ImportDtcButton = new Button();
             flowLayoutPanel1 = new FlowLayoutPanel();
             groupBox1 = new GroupBox();
             labelSpeeds = new Label();
             label10 = new Label();
             JokertextBox = new TextBox();
-            label9 = new Label();
+            JokerLabel = new Label();
             AAROnloadLabel = new Label();
             label8 = new Label();
-            label6 = new Label();
+            RecoveryFuelLabel = new Label();
             label7 = new Label();
             LandingWeightValueLabel = new Label();
             landingWeightLabel = new Label();
@@ -50,12 +51,24 @@
             labelSuggestedFuel = new Label();
             label3 = new Label();
             textBoxBingo = new TextBox();
-            label2 = new Label();
+            BingoLabel = new Label();
             labelTotalDistance = new Label();
             label1 = new Label();
             buttonCombatFlite = new Button();
             groupBox2 = new GroupBox();
             textBoxLog = new TextBox();
+            DistTt = new ToolTip(components);
+            TowTt = new ToolTip(components);
+            toolTip3 = new ToolTip(components);
+            LawTt = new ToolTip(components);
+            LandingSpdTt = new ToolTip(components);
+            FuelBurnTt = new ToolTip(components);
+            RecFuelTt = new ToolTip(components);
+            ReqFuelTt = new ToolTip(components);
+            FuelLoadedTt = new ToolTip(components);
+            AarOnloadTt = new ToolTip(components);
+            JokerTt = new ToolTip(components);
+            BingoTt = new ToolTip(components);
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             SuspendLayout();
@@ -86,10 +99,10 @@
             groupBox1.Controls.Add(labelSpeeds);
             groupBox1.Controls.Add(label10);
             groupBox1.Controls.Add(JokertextBox);
-            groupBox1.Controls.Add(label9);
+            groupBox1.Controls.Add(JokerLabel);
             groupBox1.Controls.Add(AAROnloadLabel);
             groupBox1.Controls.Add(label8);
-            groupBox1.Controls.Add(label6);
+            groupBox1.Controls.Add(RecoveryFuelLabel);
             groupBox1.Controls.Add(label7);
             groupBox1.Controls.Add(LandingWeightValueLabel);
             groupBox1.Controls.Add(landingWeightLabel);
@@ -102,7 +115,7 @@
             groupBox1.Controls.Add(labelSuggestedFuel);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(textBoxBingo);
-            groupBox1.Controls.Add(label2);
+            groupBox1.Controls.Add(BingoLabel);
             groupBox1.Controls.Add(labelTotalDistance);
             groupBox1.Controls.Add(label1);
             groupBox1.ForeColor = SystemColors.ButtonHighlight;
@@ -139,14 +152,14 @@
             JokertextBox.TabIndex = 19;
             JokertextBox.Leave += JokertextBox_Leave;
             // 
-            // label9
+            // JokerLabel
             // 
-            label9.AutoSize = true;
-            label9.Location = new Point(16, 256);
-            label9.Name = "label9";
-            label9.Size = new Size(37, 15);
-            label9.TabIndex = 18;
-            label9.Text = "Joker:";
+            JokerLabel.AutoSize = true;
+            JokerLabel.Location = new Point(16, 256);
+            JokerLabel.Name = "JokerLabel";
+            JokerLabel.Size = new Size(37, 15);
+            JokerLabel.TabIndex = 18;
+            JokerLabel.Text = "Joker:";
             // 
             // AAROnloadLabel
             // 
@@ -166,14 +179,14 @@
             label8.TabIndex = 16;
             label8.Text = "Planned AAR Onload:";
             // 
-            // label6
+            // RecoveryFuelLabel
             // 
-            label6.AutoSize = true;
-            label6.Location = new Point(146, 156);
-            label6.Name = "label6";
-            label6.Size = new Size(49, 15);
-            label6.TabIndex = 15;
-            label6.Text = "2500 lbs";
+            RecoveryFuelLabel.AutoSize = true;
+            RecoveryFuelLabel.Location = new Point(146, 156);
+            RecoveryFuelLabel.Name = "RecoveryFuelLabel";
+            RecoveryFuelLabel.Size = new Size(49, 15);
+            RecoveryFuelLabel.TabIndex = 15;
+            RecoveryFuelLabel.Text = "2500 lbs";
             // 
             // label7
             // 
@@ -282,14 +295,14 @@
             textBoxBingo.TabIndex = 3;
             textBoxBingo.Leave += textBoxBingo_Leave;
             // 
-            // label2
+            // BingoLabel
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(16, 288);
-            label2.Name = "label2";
-            label2.Size = new Size(44, 15);
-            label2.TabIndex = 2;
-            label2.Text = "Bingo: ";
+            BingoLabel.AutoSize = true;
+            BingoLabel.Location = new Point(16, 288);
+            BingoLabel.Name = "BingoLabel";
+            BingoLabel.Size = new Size(44, 15);
+            BingoLabel.TabIndex = 2;
+            BingoLabel.Text = "Bingo: ";
             // 
             // labelTotalDistance
             // 
@@ -373,21 +386,21 @@
         private Label label1;
         private Label labelTotalDistance;
         private TextBox textBoxBingo;
-        private Label label2;
+        private Label BingoLabel;
         private Label labelSuggestedFuel;
         private Label label3;
         private Label labelFuelBurn;
         private Label label5;
         private Label FuelLoadedLabelValue;
         private Label FuelLoadedLabel;
-        private Label label6;
+        private Label RecoveryFuelLabel;
         private Label label7;
         private Label LandingWeightValueLabel;
         private Label landingWeightLabel;
         private Label takeoffWeightLabel;
         private Label label4;
         private TextBox JokertextBox;
-        private Label label9;
+        private Label JokerLabel;
         private Label AAROnloadLabel;
         private Label label8;
         private Label label10;
@@ -395,5 +408,17 @@
         private Button buttonCombatFlite;
         private GroupBox groupBox2;
         private TextBox textBoxLog;
+        private ToolTip DistTt;
+        private ToolTip TowTt;
+        private ToolTip toolTip3;
+        private ToolTip LawTt;
+        private ToolTip LandingSpdTt;
+        private ToolTip FuelBurnTt;
+        private ToolTip RecFuelTt;
+        private ToolTip ReqFuelTt;
+        private ToolTip FuelLoadedTt;
+        private ToolTip AarOnloadTt;
+        private ToolTip JokerTt;
+        private ToolTip BingoTt;
     }
 }
