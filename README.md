@@ -7,12 +7,8 @@ Please let me know if you have any issues here or via Discord.
 
 REQUIRES .NET 6
 
-![image](https://github.com/crazydunc/F-15E-Strike-Eagle-Performance-Calculator/assets/12380846/adaacfa5-b5c1-4f7d-b503-a026a9d82959)
+![image](https://github.com/crazydunc/F-15E-Strike-Eagle-Performance-Calculator/assets/12380846/fc7762c4-c1d6-40e3-bf21-20fcf083f841)
 
-![image](https://github.com/crazydunc/F-15E-Strike-Eagle-Performance-Calculator/assets/12380846/8a246e69-1eb0-44ce-9722-652c24d9332c)
+![image](https://github.com/crazydunc/F-15E-Strike-Eagle-Performance-Calculator/assets/12380846/d6981787-42e1-4232-8c5d-9b8da575f0db)
 
-Valid data for TO Performance 
-
-- TOW: 45000-81000lb
-- Elevation: 0-2000ft
-- OAT: 0-40C
+![image](https://github.com/crazydunc/F-15E-Strike-Eagle-Performance-Calculator/assets/12380846/85880841-5b9a-4f60-81b0-62d826b7f85e)
