@@ -39,10 +39,13 @@ public static class Log
         try
         {
             File.WriteAllLines(path, exportList.ToArray());
+            MessageBox.Show($@"Loadout Exported to: {path}", @"Export Successful");
         }
         catch (Exception a)
         {
             WriteLog(a.ToString());
+            MessageBox.Show($@"Loadout Export Failed", @"Export Failed");
+
         }
     }
 }

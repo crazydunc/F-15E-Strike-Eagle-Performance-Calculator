@@ -24,7 +24,6 @@ public partial class Main : Form
         Version version = Assembly.GetEntryAssembly().GetName().Version;
         labelCopy.Text = $@"© Duncan MacKellar 2024 - v{version}";
         Text = $@"Strike Eagle Performance Calculator -  v{version}";
-
     }
 
     private void Main_Load(object sender, EventArgs e)

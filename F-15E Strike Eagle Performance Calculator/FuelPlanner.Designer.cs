@@ -73,6 +73,10 @@
             JokerTt = new ToolTip(components);
             BingoTt = new ToolTip(components);
             toolTipCmbt = new ToolTip(components);
+            buttonTw = new Button();
+            dtcTt = new ToolTip(components);
+            CfTt = new ToolTip(components);
+            TwTt = new ToolTip(components);
             missionInfoGroupBox.SuspendLayout();
             groupBox2.SuspendLayout();
             SuspendLayout();
@@ -395,11 +399,24 @@
             textBoxLog.Size = new Size(975, 106);
             textBoxLog.TabIndex = 0;
             // 
+            // buttonTw
+            // 
+            buttonTw.BackColor = SystemColors.GrayText;
+            buttonTw.ForeColor = SystemColors.ButtonHighlight;
+            buttonTw.Location = new Point(208, 3);
+            buttonTw.Name = "buttonTw";
+            buttonTw.Size = new Size(94, 39);
+            buttonTw.TabIndex = 29;
+            buttonTw.Text = "Import TW";
+            buttonTw.UseVisualStyleBackColor = false;
+            buttonTw.Click += buttonTw_Click;
+            // 
             // FuelPlanner
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.WindowFrame;
+            Controls.Add(buttonTw);
             Controls.Add(groupBox2);
             Controls.Add(buttonCombatFlite);
             Controls.Add(missionInfoGroupBox);
@@ -461,5 +478,9 @@
         private Label labelFuelNet;
         private CheckBox checkBoxCombat;
         private ToolTip toolTipCmbt;
+        private Button buttonTw;
+        private ToolTip dtcTt;
+        private ToolTip CfTt;
+        private ToolTip TwTt;
     }
 }

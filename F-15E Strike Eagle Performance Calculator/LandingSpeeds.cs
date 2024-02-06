@@ -51,9 +51,7 @@ public class LandingSpeeds
                         }
 
                         if (lowerWeight != 0 && lowerFlapDownSpeed != 0 && lowerFlapUpSpeed != 0)
-                        {
                             return (lowerFlapDownSpeed, lowerFlapUpSpeed);
-                        }
                     }
 
                     // Handle the case where weight is outside the range of available data

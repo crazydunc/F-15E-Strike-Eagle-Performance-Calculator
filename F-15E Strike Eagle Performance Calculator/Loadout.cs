@@ -479,6 +479,7 @@ public partial class Loadout : UserControl
                     buttonCalc.PerformClick();
                 }
     }
+
     private void buttonCalc_Click(object sender, EventArgs e)
     {
         takeOffCalcuation();

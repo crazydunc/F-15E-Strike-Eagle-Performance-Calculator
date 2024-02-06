@@ -71,31 +71,33 @@ public class Station
 
     private double GetLauncherDragIndex(string? storeName)
     {
-        if (storeName.Contains("AIM-9"))
-            return 1.2d; // LAU-114/A 
-        if (storeName.Contains("AIM-120"))
+        if (StoreName.Contains("610")) return 3.3d;
+
+        if (storeName.Contains("AIM-120") || storeName.Contains("AIM-9"))
             return 1.1d; // LAU-128/A 
-        if (storeName.Contains("GBU-38") || storeName.Contains("GBU-54") ||
-            storeName.Contains("GBU-31")) return 3.3d; // SUU-73/A  or SUU-59C/A 
+        if (StoreCategory is CategoryType.DispensersRockets or CategoryType.GeneralPurposeWeapons
+                or CategoryType.GuidedWeapons && !StationName.Contains("CFT")) return 3.3d; // SUU-73/A  or SUU-59C/A 
 
         return 0;
     }
 
     private int GetLauncherWeight(string? storeName)
     {
-        if (storeName.Contains("AIM-9"))
+        if (StoreName.Contains("610"))
         {
-            PylonLauncher = "LAU-114/A";
-            return 79; // LAU-114/A 
+            var w = StationName.Contains("STA5") ? 316 : 371; // SUU-73/A OR SUU-59C/A 
+            PylonLauncher = StationName.Contains("STA5") ? "SUU-73/A with BRU-47/A" : "SUU-59C/A with BRU-47/A";
+            return w;
         }
 
-        if (storeName.Contains("AIM-120"))
+        if (storeName.Contains("AIM-120") || (storeName.Contains("AIM-9") && !StationName.Contains("CFT")))
         {
             PylonLauncher = "LAU-128/A";
             return 111; // LAU-128/A 
         }
 
-        if (storeName.Contains("GBU-38") || storeName.Contains("GBU-54") || storeName.Contains("GBU-31"))
+        if (StoreCategory is CategoryType.DispensersRockets or CategoryType.GeneralPurposeWeapons
+                or CategoryType.GuidedWeapons && !StationName.Contains("CFT")) // SUU-73/A  or SUU-59C/A 
         {
             var w = StationName.Contains("STA5") ? 316 : 371; // SUU-73/A OR SUU-59C/A 
             PylonLauncher = StationName.Contains("STA5") ? "SUU-73/A with BRU-47/A" : "SUU-59C/A with BRU-47/A";

@@ -6,11 +6,6 @@ using Newtonsoft.Json;
 
 namespace F_15E_Strike_Eagle_Performance_Calculator;
 
-//Normal Recovery Fuel 2500lb. 
-//Minimum Fuel - 1900lb
-//Emerg Fuel - 800lb. 
-//30min Reserve = 4300lb
-//Start up/Taxi = 800lb. 
 public partial class FuelPlanner : UserControl
 {
     public delegate void MissionLegsUpdatedEventHandler(object sender, EventArgs e);
@@ -18,6 +13,10 @@ public partial class FuelPlanner : UserControl
     public FuelPlanner()
     {
         InitializeComponent();
+
+        dtcTt.SetToolTip(ImportDtcButton, "Import a DTC v7 Json File");
+        CfTt.SetToolTip(buttonCombatFlite, "Import a CombatFlite .CF File");
+        TwTt.SetToolTip(buttonTw, "Import a DCS TheWay .tw File");
         DistTt.SetToolTip(labelTotalDistance, "Total length of the imported route");
         TowTt.SetToolTip(takeoffWeightLabel, "Takeoff Weight - From Planned Loadout");
         LawTt.SetToolTip(LandingWeightValueLabel, "Landing Weight - Total Fuel burned + Stores expended");
@@ -177,6 +176,48 @@ public partial class FuelPlanner : UserControl
                 {
                     MissionPlanner.hold = false;
                     MessageBox.Show(@"Error: " + ex.Message);
+                }
+            }
+        }
+    }
+
+    private void buttonTw_Click(object sender, EventArgs e)
+    {
+        ResetFuelPlanner();
+        using (var openFileDialog = new OpenFileDialog())
+        {
+            openFileDialog.Filter = @"TheWay Files (*.tw)|*.tw|All Files (*.*)|*.*";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                var filePath = openFileDialog.FileName;
+                try
+                {
+                    var json = File.ReadAllText(filePath);
+                    var jsonObject = JsonConvert.DeserializeObject<List<TheWayImport>>(json);
+                    var a = "test";
+                    List<Waypoint> _import = new List<Waypoint>();
+                    foreach (var wpt in jsonObject)
+                    {
+                        var convertWaypoint = new Waypoint();
+                        convertWaypoint.Sequence = wpt.id;
+                        convertWaypoint.Name = wpt.name;
+                        convertWaypoint.Latitude = wpt.lat.ToString();
+                        convertWaypoint.Longitude = wpt.@long.ToString();
+                        convertWaypoint.Elevation = (int)wpt.elev;
+                        if (convertWaypoint.Name.Contains("Target") || convertWaypoint.Name.Contains("TGT") ||
+                            convertWaypoint.Name.Contains("DMPI"))
+                            convertWaypoint.Target = true;
+
+                        _import.Add(convertWaypoint);
+                    }
+
+                    if (_import.Count == 0) throw new Exception("No valid The Way waypoints found");
+                    ProcessImport(_import);
+                }
+                catch (Exception ex)
+                {
+                    Log.WriteLog(ex.Message);
+                    MessageBox.Show("Route Import failed. Please see Log");
                 }
             }
         }
