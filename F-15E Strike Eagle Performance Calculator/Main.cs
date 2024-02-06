@@ -19,13 +19,12 @@ public partial class Main : Form
         LoadedData = StoresManagement.LoadStoresInfo();
 
         InitializeComponent();
-        this.ResizeBegin += (s, e) => { this.SuspendLayout(); };
-        this.ResizeEnd += (s, e) => { this.ResumeLayout(true); };
+        ResizeBegin += (s, e) => { SuspendLayout(); };
+        ResizeEnd += (s, e) => { ResumeLayout(true); };
         Version version = Assembly.GetEntryAssembly().GetName().Version;
         labelCopy.Text = $@"© Duncan MacKellar 2024 - v{version}";
-        this.Text = $@"Strike Eagle Performance Calculator -  v{version}";
-        //Loadout = new Loadout();
-        //UiPanel.A
+        Text = $@"Strike Eagle Performance Calculator -  v{version}";
+
     }
 
     private void Main_Load(object sender, EventArgs e)

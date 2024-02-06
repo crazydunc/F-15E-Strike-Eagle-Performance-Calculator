@@ -16,6 +16,5 @@ internal class MissionDataCard
 
     public void ExportMissionData()
     {
-
     }
 }

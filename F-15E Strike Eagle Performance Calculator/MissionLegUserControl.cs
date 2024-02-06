@@ -30,7 +30,8 @@ public partial class MissionLegUserControl : UserControl
         WaypointToNameLabel.DataBindings.Add("Text", MissionLeg.ToWaypoint, "Name");
         SpeedTexbox.DataBindings.Add("Text", MissionLeg, "LegSpeed");
         LegDistanceValueLabel.DataBindings.Add("Text", MissionLeg, "LegDistance");
-        AltitudeTextbox.DataBindings.Add("Text", MissionLeg, "LegAltitude"); //, true,DataSourceUpdateMode.OnPropertyChanged
+        AltitudeTextbox.DataBindings.Add("Text", MissionLeg,
+            "LegAltitude"); //, true,DataSourceUpdateMode.OnPropertyChanged
         FuelUsedValueLabel.DataBindings.Add("Text", MissionLeg, "LegFuel", true,
             DataSourceUpdateMode.OnPropertyChanged);
         label3.DataBindings.Add("Text", MissionLeg, "LegStartAircraftWeight", true,
@@ -42,10 +43,8 @@ public partial class MissionLegUserControl : UserControl
         DelaytextBox.DataBindings.Add("Text", MissionLeg, "LegDelay");
         if (MissionLeg.LegTarget) buttonStores.Visible = true;
         if (MissionLeg.Id == 1)
-        {
-            FuelBurnTt.SetToolTip(FuelUsedValueLabel, "This is your total fuel used on this leg in Lbs with 1488Lbs added for Startup, Taxi and Takeoff");
-
-        }
+            FuelBurnTt.SetToolTip(FuelUsedValueLabel,
+                "This is your total fuel used on this leg in Lbs with 1488Lbs added for Startup, Taxi and Takeoff");
     }
 
     private void SpeedTexbox_Leave(object sender, EventArgs e)
@@ -107,7 +106,8 @@ public partial class MissionLegUserControl : UserControl
         // Update the MissionLeg object with the new fuel value
         MissionLeg.LegFuel = newFuel.calculatedValue;
         MissionLeg.LegFuelFlow = newFuel.poundPerHour;
-        MissionLeg.LegEndAircraftWeight = MissionLeg.LegStartAircraftWeight - (int)MissionLeg.LegFuel + MissionLeg.LegFuelAdded;
+        MissionLeg.LegEndAircraftWeight =
+            MissionLeg.LegStartAircraftWeight - (int)MissionLeg.LegFuel + MissionLeg.LegFuelAdded;
         OnMissionLegsUpdated();
     }
 
@@ -199,6 +199,7 @@ public partial class MissionLegUserControl : UserControl
                 buttonStores.BackColor = Color.Green;
                 buttonStores.ForeColor = Color.White;
             }
+
             RecalculateFuel();
         }
     }
@@ -206,33 +207,22 @@ public partial class MissionLegUserControl : UserControl
     private void AltitudeTextbox_KeyUp(object sender, KeyEventArgs e)
     {
         if (e.KeyCode == Keys.Enter)
-        {
             // Call the Leave event of the control
             AltitudeTextbox_Leave(this, EventArgs.Empty);
-        }
     }
 
     private void SpeedTexbox_KeyUp(object sender, KeyEventArgs e)
     {
-        if (e.KeyCode == Keys.Enter)
-        {
-            SpeedTexbox_Leave(this, EventArgs.Empty);
-        }
+        if (e.KeyCode == Keys.Enter) SpeedTexbox_Leave(this, EventArgs.Empty);
     }
 
     private void DelaytextBox_KeyUp(object sender, KeyEventArgs e)
     {
-        if (e.KeyCode == Keys.Enter)
-        {
-            DelaytextBox_Leave(this, EventArgs.Empty);
-        }
+        if (e.KeyCode == Keys.Enter) DelaytextBox_Leave(this, EventArgs.Empty);
     }
 
     private void AARtextBox_KeyUp(object sender, KeyEventArgs e)
     {
-        if (e.KeyCode == Keys.Enter)
-        {
-            AARtextBox_Leave(this, EventArgs.Empty);
-        }
+        if (e.KeyCode == Keys.Enter) AARtextBox_Leave(this, EventArgs.Empty);
     }
 }

@@ -36,8 +36,8 @@
             buttonFuel = new Button();
             buttonHome = new Button();
             UiPanel = new Panel();
-            loadout1 = new Loadout();
             fuelPlanner1 = new FuelPlanner();
+            loadout1 = new Loadout();
             NavPanel.SuspendLayout();
             panel1.SuspendLayout();
             UiPanel.SuspendLayout();
@@ -139,14 +139,6 @@
             UiPanel.Size = new Size(1347, 699);
             UiPanel.TabIndex = 1;
             // 
-            // loadout1
-            // 
-            loadout1.BackColor = SystemColors.WindowFrame;
-            loadout1.Location = new Point(0, 0);
-            loadout1.Name = "loadout1";
-            loadout1.Size = new Size(1345, 694);
-            loadout1.TabIndex = 0;
-            // 
             // fuelPlanner1
             // 
             fuelPlanner1.BackColor = SystemColors.WindowFrame;
@@ -155,6 +147,14 @@
             fuelPlanner1.Size = new Size(1345, 694);
             fuelPlanner1.TabIndex = 1;
             fuelPlanner1.Visible = false;
+            // 
+            // loadout1
+            // 
+            loadout1.BackColor = SystemColors.WindowFrame;
+            loadout1.Location = new Point(0, 0);
+            loadout1.Name = "loadout1";
+            loadout1.Size = new Size(1345, 694);
+            loadout1.TabIndex = 0;
             // 
             // Main
             // 
@@ -183,12 +183,12 @@
 
         private Panel NavPanel;
         private Panel UiPanel;
-        private Loadout loadout1;
         private Panel panel1;
         private Button buttonFuel;
         private Button buttonHome;
         private Label labelCopy;
         private FuelPlanner fuelPlanner1;
         private Label label1;
+        private Loadout loadout1;
     }
 }

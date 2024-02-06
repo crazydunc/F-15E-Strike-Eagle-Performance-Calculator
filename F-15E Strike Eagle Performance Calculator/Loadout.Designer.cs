@@ -44,10 +44,10 @@
             label11 = new Label();
             pictureBox1 = new PictureBox();
             groupBox1 = new GroupBox();
+            buttonCalc = new Button();
             RotationCheckBox = new CheckBox();
             label6 = new Label();
             OATTextBox = new TextBox();
-            calcuateButton = new Button();
             radioButton2 = new RadioButton();
             takeoffWeightTextBox = new TextBox();
             radioButton1 = new RadioButton();
@@ -118,6 +118,7 @@
             // Exportbutton
             // 
             Exportbutton.BackColor = SystemColors.GrayText;
+            Exportbutton.FlatStyle = FlatStyle.Flat;
             Exportbutton.ForeColor = SystemColors.ButtonHighlight;
             Exportbutton.Location = new Point(1206, 118);
             Exportbutton.Name = "Exportbutton";
@@ -244,10 +245,10 @@
             // groupBox1
             // 
             groupBox1.BackColor = SystemColors.WindowFrame;
+            groupBox1.Controls.Add(buttonCalc);
             groupBox1.Controls.Add(RotationCheckBox);
             groupBox1.Controls.Add(label6);
             groupBox1.Controls.Add(OATTextBox);
-            groupBox1.Controls.Add(calcuateButton);
             groupBox1.Controls.Add(radioButton2);
             groupBox1.Controls.Add(takeoffWeightTextBox);
             groupBox1.Controls.Add(radioButton1);
@@ -259,15 +260,28 @@
             groupBox1.Margin = new Padding(2);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(2);
-            groupBox1.Size = new Size(217, 166);
+            groupBox1.Size = new Size(217, 155);
             groupBox1.TabIndex = 14;
             groupBox1.TabStop = false;
             groupBox1.Text = "Takeoff Data";
             // 
+            // buttonCalc
+            // 
+            buttonCalc.BackColor = SystemColors.GrayText;
+            buttonCalc.FlatStyle = FlatStyle.Flat;
+            buttonCalc.ForeColor = SystemColors.Control;
+            buttonCalc.Location = new Point(123, 116);
+            buttonCalc.Name = "buttonCalc";
+            buttonCalc.Size = new Size(75, 30);
+            buttonCalc.TabIndex = 16;
+            buttonCalc.Text = "Calculate";
+            buttonCalc.UseVisualStyleBackColor = false;
+            buttonCalc.Click += buttonCalc_Click;
+            // 
             // RotationCheckBox
             // 
             RotationCheckBox.AutoSize = true;
-            RotationCheckBox.Location = new Point(3, 112);
+            RotationCheckBox.Location = new Point(3, 118);
             RotationCheckBox.Margin = new Padding(2);
             RotationCheckBox.Name = "RotationCheckBox";
             RotationCheckBox.Size = new Size(91, 19);
@@ -293,21 +307,10 @@
             OATTextBox.Size = new Size(44, 23);
             OATTextBox.TabIndex = 13;
             // 
-            // calcuateButton
-            // 
-            calcuateButton.BackColor = SystemColors.GrayText;
-            calcuateButton.Location = new Point(79, 138);
-            calcuateButton.Name = "calcuateButton";
-            calcuateButton.Size = new Size(75, 23);
-            calcuateButton.TabIndex = 0;
-            calcuateButton.Text = "Calculate";
-            calcuateButton.UseVisualStyleBackColor = false;
-            calcuateButton.Click += calcuateButton_Click;
-            // 
             // radioButton2
             // 
             radioButton2.AutoSize = true;
-            radioButton2.Location = new Point(124, 91);
+            radioButton2.Location = new Point(124, 94);
             radioButton2.Margin = new Padding(2);
             radioButton2.Name = "radioButton2";
             radioButton2.Size = new Size(78, 19);
@@ -326,7 +329,7 @@
             // 
             radioButton1.AutoSize = true;
             radioButton1.Checked = true;
-            radioButton1.Location = new Point(3, 91);
+            radioButton1.Location = new Point(3, 94);
             radioButton1.Margin = new Padding(2);
             radioButton1.Name = "radioButton1";
             radioButton1.Size = new Size(84, 19);
@@ -712,7 +715,6 @@
         private CheckBox RotationCheckBox;
         private Label label6;
         private TextBox OATTextBox;
-        private Button calcuateButton;
         private RadioButton radioButton2;
         private TextBox takeoffWeightTextBox;
         private RadioButton radioButton1;
@@ -745,5 +747,6 @@
         private ComboBox comboBoxsta2;
         private ComboBox comboBoxSta2a;
         private Panel panel3;
+        private Button buttonCalc;
     }
 }

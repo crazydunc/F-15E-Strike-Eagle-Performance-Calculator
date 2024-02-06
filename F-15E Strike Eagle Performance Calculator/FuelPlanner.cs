@@ -35,7 +35,8 @@ public partial class FuelPlanner : UserControl
         JokerTt.SetToolTip(BingoLabel,
             "Bingo Fuel is recovery fuel, plus half route distance at 15lb/nm on a Max Endurance profile. User can enter their own value to override");
         toolTipCmbt.SetToolTip(checkBoxCombat, "Adds fuel for 5min of combat maneuvering");
-        fuelNetTt.SetToolTip(fuelLabelNet, "If Positive, you have extra fuel on board vs the Estimated Required, if negative, you have a fuel deficit vs the Estimated Required");
+        fuelNetTt.SetToolTip(fuelLabelNet,
+            "If Positive, you have extra fuel on board vs the Estimated Required, if negative, you have a fuel deficit vs the Estimated Required");
     }
 
     protected override void OnResize(EventArgs e)
@@ -376,10 +377,7 @@ public partial class FuelPlanner : UserControl
         }
 
         int cmbt = 0;
-        if (checkBoxCombat.Checked)
-        {
-            cmbt = 6000;
-        }
+        if (checkBoxCombat.Checked) cmbt = 6000;
 
         var suggestedFuel = MissionPlanner.CurrentMissionDataCard.TotalRouteFuel + 2500 + cmbt;
         var roundedBingo = Math.Ceiling(MissionPlanner.CurrentMissionDataCard.BingoFuel / 100) * 100;
@@ -396,7 +394,6 @@ public partial class FuelPlanner : UserControl
         var netFuel = F15EStrikeEagle.TotalFuel + MissionPlanner.CurrentMissionDataCard.AAROnload - suggestedFuel;
         fuelLabelNet.Text = netFuel + " lbs";
         fuelLabelNet.ForeColor = netFuel < 0 ? Color.Red : Color.LawnGreen;
-
     }
 
     private string ShowRouteSelectionDialog(bool routeAExists, bool routeBExists, bool routeCExists)
@@ -491,9 +488,6 @@ public partial class FuelPlanner : UserControl
 
     private void checkBoxCombat_CheckedChanged(object sender, EventArgs e)
     {
-        if (routeFlowPanel.Controls.Count != 0)
-        {
-            UpdateFuelInfo();
-        }
+        if (routeFlowPanel.Controls.Count != 0) UpdateFuelInfo();
     }
 }

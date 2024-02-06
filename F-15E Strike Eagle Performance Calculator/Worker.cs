@@ -99,6 +99,7 @@ public static class Worker
             int totalMinutes = (int)timeSpan.TotalMinutes;
             return totalMinutes;
         }
+
         // Handle parsing error (e.g., if time format is invalid)
         return 0; // You can choose to return a default value or handle the error differently
     }
@@ -108,5 +109,4 @@ public static class Worker
     {
         return degrees * Math.PI / 180.0;
     }
-    
 }

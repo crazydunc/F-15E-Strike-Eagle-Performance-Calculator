@@ -78,38 +78,24 @@ public class FuelFlowDataRetriever
             if ((interpolatedSpeed == -1 && interpolatedDragIndex == -1) ||
                 (interpolatedSpeed == -1 && interpolatedAltitude == -1) ||
                 (interpolatedDragIndex == -1 && interpolatedAltitude == -1))
-            {
                 //Log.WriteLog("All 1D Interpolates Failed");
-
-
                 //Log.WriteLog("Finding closest tabulated data");
-
                 averageFuelFlow = FallbackCalculation(altitude, dragIndex, speed, closestWeight);
-            }
             else if (interpolatedSpeed != -1 && interpolatedDragIndex != -1 && interpolatedAltitude == -1)
-            {
                 //Log.WriteLog("All 1D Alt Interpolates Failed");
-
                 averageFuelFlow = (FallbackCalculation(altitude, dragIndex, speed, closestWeight) +
                                    interpolatedDragIndex +
                                    interpolatedSpeed) / 3.0;
-            }
             else if (interpolatedSpeed != -1 && interpolatedDragIndex == -1 && interpolatedAltitude != -1)
-            {
                 //Log.WriteLog("All 1D Drag Interpolates Failed");
-
                 averageFuelFlow = (FallbackCalculation(altitude, dragIndex, speed, closestWeight) +
                                    interpolatedAltitude +
                                    interpolatedSpeed) / 3.0;
-            }
             else if (interpolatedSpeed == -1 && interpolatedDragIndex != -1 && interpolatedAltitude != -1)
-            {
                 //Log.WriteLog("All 1D Speed Interpolates Failed");
-
                 averageFuelFlow = (FallbackCalculation(altitude, dragIndex, speed, closestWeight) +
                                    interpolatedAltitude +
                                    interpolatedDragIndex) / 3.0;
-            }
         }
         else
         {
@@ -346,10 +332,7 @@ public class FuelFlowDataRetriever
                     while (reader.Read() && i < 16)
                     {
                         cornerValues[i] = Convert.ToDouble(reader["FuelFlowPerHour"]);
-                        if (Convert.ToDouble(reader["FuelFlowPerHour"]) != 0)
-                        {
-                            i++;
-                        }
+                        if (Convert.ToDouble(reader["FuelFlowPerHour"]) != 0) i++;
                     }
                 }
 
@@ -377,16 +360,15 @@ public class FuelFlowDataRetriever
 
                     return interpolatedFuelFlow;
                 }
-                else
+
+                if (i == 0)
                 {
-                    if (i == 0)
-                    {
-                        Log.WriteLog("No valid data found for Flight Parameters. - Forcing calculation error as outside of Flight Test Envelope.");
-                        Log.WriteLog($"Data Dump - Alt: {altitude} {Environment.NewLine} Speed: {speed} {Environment.NewLine} DragIndex: {dragIndex} {Environment.NewLine} Weight: {aircraftWeight}");
+                    Log.WriteLog(
+                        "No valid data found for Flight Parameters. - Forcing calculation error as outside of Flight Test Envelope.");
+                    Log.WriteLog(
+                        $"Data Dump - Alt: {altitude} {Environment.NewLine} Speed: {speed} {Environment.NewLine} DragIndex: {dragIndex} {Environment.NewLine} Weight: {aircraftWeight}");
 
-                        return 0;
-                    } 
-
+                    return 0;
                 }
 
                 //Log.WriteLog("QuadLinear failed - only " + i + " corner points returned");
@@ -446,7 +428,7 @@ public class FuelFlowDataRetriever
         return closestValue;
     }
 
-    public string FindClosestValidData( int weight, int dragIndex, int altitude, int speed)
+    public string FindClosestValidData(int weight, int dragIndex, int altitude, int speed)
     {
         var numbersSpd = new List<int> { 360, 400, 440, 480, 520, 560, 600 };
         var numbersDi = new List<int> { 0, 20, 40, 60, 80, 100, 120, 140, 160 };
@@ -489,11 +471,11 @@ public class FuelFlowDataRetriever
                         var alt = reader["Altitude"];
                         var spd = reader["Speed"];
                         var pph = reader["FuelFlowPerHour"];
-                        
+
                         return $"Calculation Failure - Suggested Profile: {alt} ft @ {spd} KTAS";
                     }
 
-                    return $"Calculation Failure: Unable to find valid data - Please select a lower altitude/speed.";
+                    return "Calculation Failure: Unable to find valid data - Please select a lower altitude/speed.";
                 }
             }
         }

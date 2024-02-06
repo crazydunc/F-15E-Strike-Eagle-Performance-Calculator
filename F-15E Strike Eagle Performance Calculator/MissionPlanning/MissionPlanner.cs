@@ -1,11 +1,10 @@
 ﻿using F_15E_Strike_Eagle_Performance_Calculator.Imports;
-using Microsoft.VisualBasic.Logging;
 
 namespace F_15E_Strike_Eagle_Performance_Calculator.MissionPlanning;
 
 internal class MissionPlanner
 {
-    public static MissionDataCard CurrentMissionDataCard = new MissionDataCard();
+    public static MissionDataCard CurrentMissionDataCard = new();
     public static bool hold;
 
     public void MissionInitialisation(List<Waypoint> missionWaypoints)
@@ -14,9 +13,7 @@ internal class MissionPlanner
         CurrentMissionDataCard = new MissionDataCard();
         CurrentMissionDataCard.MissionLegs = CalculateMissionLegs(missionWaypoints);
         if (CurrentMissionDataCard.MissionLegs.Count == 0)
-        {
             throw new Exception("Calculation Error occurred during import");
-        }
         foreach (var leg in CurrentMissionDataCard.MissionLegs)
         {
             CurrentMissionDataCard.MissionDistance += leg.LegDistance;
@@ -57,9 +54,9 @@ internal class MissionPlanner
                     LegStartAircraftWeight = aircraftWeightAtStart
                 };
                 // Set LegDelay based on ToWaypoint's Activity
-                missionLeg.LegDelay = (toWaypoint.Activity == 0) ? 0 : toWaypoint.Activity;
+                missionLeg.LegDelay = toWaypoint.Activity == 0 ? 0 : toWaypoint.Activity;
                 // Set LegSpeed based on FromWaypoint's Ktas, with a default value of 450
-                missionLeg.LegSpeed = (fromWaypoint.Ktas == 0) ? 450 : fromWaypoint.Ktas;
+                missionLeg.LegSpeed = fromWaypoint.Ktas == 0 ? 450 : fromWaypoint.Ktas;
                 // Set LegTarget to true if ToWaypoint is a target
                 missionLeg.LegTarget = toWaypoint.Target;
                 // Calculate LegFuel based on custom logic (assuming CalculateLegFuel is a method)
@@ -78,11 +75,9 @@ internal class MissionPlanner
                 {
                     missionLeg.LegRemarks = string.Empty;
                 }
+
                 // Apply a special case for the first mission leg (Id == 1)
-                if (missionLeg.Id == 1)
-                {
-                    missionLeg.LegFuel += 1488; // Add startup and taxi fuel
-                }
+                if (missionLeg.Id == 1) missionLeg.LegFuel += 1488; // Add startup and taxi fuel
                 // Calculate LegEndAircraftWeight and update aircraftWeightAtStart
                 missionLeg.LegEndAircraftWeight = aircraftWeightAtStart - (int)missionLeg.LegFuel;
                 aircraftWeightAtStart = missionLeg.LegEndAircraftWeight;

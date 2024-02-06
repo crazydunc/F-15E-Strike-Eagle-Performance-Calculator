@@ -7,8 +7,8 @@ public class MissionLegs : INotifyPropertyChanged
 {
     private int _legFuelRemainEnd;
     private int _legPayloadReleased;
+    private string _legRemarks;
     private int _legStartAircraftWeight;
-    private string _legRemarks; 
     public int Id { get; set; }
     public Waypoint FromWaypoint { get; set; }
     public Waypoint ToWaypoint { get; set; }
@@ -67,6 +67,7 @@ public class MissionLegs : INotifyPropertyChanged
             }
         }
     }
+
     public string LegRemarks
     {
         get => _legRemarks;
@@ -79,6 +80,7 @@ public class MissionLegs : INotifyPropertyChanged
             }
         }
     }
+
     public bool LegTarget { get; set; }
     public MissionLegUserControl LegUserControl { get; set; }
 

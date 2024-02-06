@@ -25,7 +25,7 @@ public partial class Loadout : UserControl
         takeoffWeightTextBox.MaxLength = 5;
         OATTextBox.MaxLength = 2;
         runwayElevationTextBox.MaxLength = 4;
-        calcuateButton.Enabled = false;
+        buttonCalc.Enabled = false;
         takeoffWeightTextBox.TextChanged += TextBox_TextChanged;
         OATTextBox.TextChanged += TextBox_TextChanged;
         runwayElevationTextBox.TextChanged += TextBox_TextChanged;
@@ -303,7 +303,7 @@ public partial class Loadout : UserControl
 
     #region Events
 
-    private void calcuateButton_Click(object sender, EventArgs e)
+    private void takeOffCalcuation()
     {
         //Validate Inputs
 
@@ -367,13 +367,12 @@ public partial class Loadout : UserControl
 
     private void TextBox_TextChanged(object sender, EventArgs e)
     {
-        // Check if all three textboxes have data
         if (!string.IsNullOrEmpty(takeoffWeightTextBox.Text) &&
             !string.IsNullOrEmpty(OATTextBox.Text) &&
             !string.IsNullOrEmpty(runwayElevationTextBox.Text))
-            calcuateButton.Enabled = true; // Enable the button
+            buttonCalc.Enabled = true; // Enable the button
         else
-            calcuateButton.Enabled = false; // Disable the button
+            buttonCalc.Enabled = false; // Disable the button
     }
 
     private void comboBoxsta2_SelectedIndexChanged(object sender, EventArgs e)
@@ -470,23 +469,19 @@ public partial class Loadout : UserControl
     private void Loadout_VisibleChanged(object sender, EventArgs e)
     {
         if (runwayElevationTextBox.Text.Length == 0)
-        {
             if (MissionPlanner.CurrentMissionDataCard.MissionLegs != null)
-            {
                 if (MissionPlanner.CurrentMissionDataCard.MissionLegs.Count > 0)
                 {
                     var a = MissionPlanner.CurrentMissionDataCard.MissionLegs[0].FromWaypoint.Elevation;
                     runwayElevationTextBox.Text = a.ToString();
-                    if (OATTextBox.Text.Length == 0)
-                    {
-                        OATTextBox.Text = "8";
-                    }
+                    if (OATTextBox.Text.Length == 0) OATTextBox.Text = "8";
 
-                    calcuateButton.PerformClick();
+                    buttonCalc.PerformClick();
                 }
-            }
-
-        }
+    }
+    private void buttonCalc_Click(object sender, EventArgs e)
+    {
+        takeOffCalcuation();
     }
 
     private delegate int StationPropertySelector(Stores store);

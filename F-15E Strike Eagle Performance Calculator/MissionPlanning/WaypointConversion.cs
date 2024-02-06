@@ -25,6 +25,7 @@ internal class WaypointConversion
             lat2Decimal = Convert.ToDouble(lat2);
             lon2Decimal = Convert.ToDouble(lon2);
         }
+
         const double earthRadiusNauticalMiles = 3440.065; // Earth's mean radius in nautical miles
 
         var dLat = Worker.ToRadians(lat2Decimal - lat1Decimal);
@@ -38,6 +39,7 @@ internal class WaypointConversion
 
         return earthRadiusNauticalMiles * c;
     }
+
     private static double ConvertToDecimalDegrees(string input)
     {
         var parts = input.Split(new[] { ' ', '°', '\'', '’' }, StringSplitOptions.RemoveEmptyEntries);
@@ -55,9 +57,9 @@ internal class WaypointConversion
 
         throw new ArgumentException("Invalid input format");
     }
+
     private static bool IsDecimalDegrees(string value)
     {
-
         var pattern = @"^-?\d+(\.\d+)?$";
 
         return Regex.IsMatch(value, pattern);
