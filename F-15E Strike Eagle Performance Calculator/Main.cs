@@ -28,6 +28,11 @@ public partial class Main : Form
 
     private void Main_Load(object sender, EventArgs e)
     {
+        var newUpdate = new UpdateCheck();
+
+        var task = Task.Run(() => newUpdate.CheckLatestGit());
+        task.Wait();
+        var (tagName, body, downloadUrl) = task.Result;
     }
 
     private void buttonHome_Click(object sender, EventArgs e)
