@@ -1,18 +1,17 @@
 
 This small utility is designed to be used with Razbams F-15E for DCS World. 
 
-It allows you to generate the Loaded weight, Drag Index, Lateral Asymmetry of a loadout, and Takeoff/Landing Performance calculations as well as a Fuel plan based on Stores employment and profiles imported via DTC or CombatFlite. 
+It allows you to generate the Loaded weight, Drag Index, Lateral Asymmetry of a loadout, and Takeoff/Landing Performance calculations as well as a Fuel plan based on Stores employment and profiles imported via [DTC v7](https://github.com/the-paid-actor/dcs-dtc), [CombatFlite](https://www.combatflite.com/) or [DCS The Way](https://github.com/aronCiucu/DCSTheWay). 
 
 Please let me know if you have any issues here or via Discord. 
 
 REQUIRES .NET 6
 
-![image](https://github.com/crazydunc/F-15E-Strike-Eagle-Performance-Calculator/assets/12380846/adaacfa5-b5c1-4f7d-b503-a026a9d82959)
+To use the DTC Import function, you must be using [DTC v7](https://github.com/the-paid-actor/dcs-dtc)
+ or later. 
+ 
+![image](https://github.com/crazydunc/F-15E-Strike-Eagle-Performance-Calculator/assets/12380846/fc7762c4-c1d6-40e3-bf21-20fcf083f841)
 
-![image](https://github.com/crazydunc/F-15E-Strike-Eagle-Performance-Calculator/assets/12380846/8a246e69-1eb0-44ce-9722-652c24d9332c)
+![image](https://github.com/crazydunc/F-15E-Strike-Eagle-Performance-Calculator/assets/12380846/d6981787-42e1-4232-8c5d-9b8da575f0db)
 
-Valid data for TO Performance 
-
-- TOW: 45000-81000lb
-- Elevation: 0-2000ft
-- OAT: 0-40C
+![image](https://github.com/crazydunc/F-15E-Strike-Eagle-Performance-Calculator/assets/12380846/85880841-5b9a-4f60-81b0-62d826b7f85e)
