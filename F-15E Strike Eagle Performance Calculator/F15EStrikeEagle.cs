@@ -14,6 +14,8 @@ public static class F15EStrikeEagle
     public static double TotalDragIndex = BasicDragIndex;
     public static double PayloadDragIndex;
     public static int MaximumFuel = 12915 + 9352;
+    public static int MaximumInternalFuel = 12915 + 9352;
+
     public static int InternalFuel { get; set; } = 12915 + 9352; // Internal + CFT
     public static int PayloadWeight { get; set; }
     public static int TotalFuel { get; set; } = InternalFuel;

@@ -18,6 +18,7 @@ public partial class Loadout : UserControl
             F15EStrikeEagle.Calculate();
             UpdateLoadoutUi();
         }
+        LatTt.SetToolTip(LatAsymLabel, "Lateral Imbalance in Pounds. Negative values are (R)ight wing heavy, Positive values are (L)eft wing heavy");
     }
 
     private void SetupLoadout()
@@ -234,12 +235,29 @@ public partial class Loadout : UserControl
 
         if (!_loaded)
         {
+            string direction = "";
+            if (F15EStrikeEagle.LateralImbalance > 0)
+            {
+                direction = "(L)";
+
+            }
+            else if (F15EStrikeEagle.LateralImbalance == 0)
+            {
+                direction = "";
+            }
+            else
+            {
+                direction = "(R)";
+            }
+            double intFuelDiv = (100 * F15EStrikeEagle.InternalFuel);
+            double intFuelPercentage = intFuelDiv / F15EStrikeEagle.MaximumInternalFuel;
             fuelLabel.Text = F15EStrikeEagle.TotalFuel + Pounds;
             payloadLabel.Text = F15EStrikeEagle.PayloadWeight + Pounds;
-            LatAsymLabel.Text = F15EStrikeEagle.LateralImbalance + Pounds;
+            LatAsymLabel.Text = F15EStrikeEagle.LateralImbalance + Pounds + " " + direction;
             PayloadDraglabel.Text = F15EStrikeEagle.PayloadDragIndex.ToString(CultureInfo.InvariantCulture);
             DragLabel.Text = F15EStrikeEagle.TotalDragIndex.ToString(CultureInfo.InvariantCulture);
             weightLabel.Text = F15EStrikeEagle.GrossWeight + Pounds;
+            FuelIntLabel.Text = F15EStrikeEagle.InternalFuel + Pounds + $" ({(int)intFuelPercentage}%)"; 
             labelGW.Visible = F15EStrikeEagle.GrossWeight > 81000;
         }
 

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             DragLabel = new Label();
             payloadLabel = new Label();
             fuelLabel = new Label();
@@ -63,6 +64,8 @@
             trackBarsta2 = new TrackBar();
             trackBarsta8 = new TrackBar();
             groupBox3 = new GroupBox();
+            FuelIntLabel = new Label();
+            label8 = new Label();
             PayloadDraglabel = new Label();
             label18 = new Label();
             labelGW = new Label();
@@ -80,6 +83,7 @@
             comboBoxsta2 = new ComboBox();
             comboBoxSta2a = new ComboBox();
             panel3 = new Panel();
+            LatTt = new ToolTip(components);
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             groupBox1.SuspendLayout();
@@ -94,7 +98,7 @@
             // DragLabel
             // 
             DragLabel.AutoSize = true;
-            DragLabel.Location = new Point(116, 90);
+            DragLabel.Location = new Point(116, 111);
             DragLabel.Name = "DragLabel";
             DragLabel.Size = new Size(0, 15);
             DragLabel.TabIndex = 8;
@@ -102,7 +106,7 @@
             // payloadLabel
             // 
             payloadLabel.AutoSize = true;
-            payloadLabel.Location = new Point(116, 36);
+            payloadLabel.Location = new Point(116, 57);
             payloadLabel.Name = "payloadLabel";
             payloadLabel.Size = new Size(0, 15);
             payloadLabel.TabIndex = 6;
@@ -110,7 +114,7 @@
             // fuelLabel
             // 
             fuelLabel.AutoSize = true;
-            fuelLabel.Location = new Point(116, 19);
+            fuelLabel.Location = new Point(116, 40);
             fuelLabel.Name = "fuelLabel";
             fuelLabel.Size = new Size(0, 15);
             fuelLabel.TabIndex = 5;
@@ -141,7 +145,7 @@
             // label13
             // 
             label13.AutoSize = true;
-            label13.Location = new Point(50, 90);
+            label13.Location = new Point(50, 111);
             label13.Name = "label13";
             label13.Size = new Size(67, 15);
             label13.TabIndex = 4;
@@ -150,7 +154,7 @@
             // LatAsymLabel
             // 
             LatAsymLabel.AutoSize = true;
-            LatAsymLabel.Location = new Point(116, 53);
+            LatAsymLabel.Location = new Point(116, 74);
             LatAsymLabel.Name = "LatAsymLabel";
             LatAsymLabel.Size = new Size(0, 15);
             LatAsymLabel.TabIndex = 7;
@@ -214,7 +218,7 @@
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new Point(8, 53);
+            label12.Location = new Point(8, 74);
             label12.Name = "label12";
             label12.Size = new Size(109, 15);
             label12.TabIndex = 3;
@@ -223,11 +227,11 @@
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(85, 19);
+            label11.Location = new Point(57, 40);
             label11.Name = "label11";
-            label11.Size = new Size(32, 15);
+            label11.Size = new Size(60, 15);
             label11.TabIndex = 2;
-            label11.Text = "Fuel:";
+            label11.Text = "Total Fuel:";
             // 
             // pictureBox1
             // 
@@ -412,7 +416,7 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(65, 36);
+            label10.Location = new Point(65, 57);
             label10.Name = "label10";
             label10.Size = new Size(52, 15);
             label10.TabIndex = 1;
@@ -458,6 +462,8 @@
             // 
             // groupBox3
             // 
+            groupBox3.Controls.Add(FuelIntLabel);
+            groupBox3.Controls.Add(label8);
             groupBox3.Controls.Add(PayloadDraglabel);
             groupBox3.Controls.Add(label18);
             groupBox3.Controls.Add(labelGW);
@@ -472,17 +478,34 @@
             groupBox3.Controls.Add(label10);
             groupBox3.Controls.Add(label9);
             groupBox3.ForeColor = SystemColors.ButtonHighlight;
-            groupBox3.Location = new Point(1059, 457);
+            groupBox3.Location = new Point(1059, 425);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(246, 147);
+            groupBox3.Size = new Size(246, 179);
             groupBox3.TabIndex = 14;
             groupBox3.TabStop = false;
             groupBox3.Text = "Loadout Information";
             // 
+            // FuelIntLabel
+            // 
+            FuelIntLabel.AutoSize = true;
+            FuelIntLabel.Location = new Point(116, 23);
+            FuelIntLabel.Name = "FuelIntLabel";
+            FuelIntLabel.Size = new Size(0, 15);
+            FuelIntLabel.TabIndex = 14;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(42, 23);
+            label8.Name = "label8";
+            label8.Size = new Size(75, 15);
+            label8.TabIndex = 13;
+            label8.Text = "Internal Fuel:";
+            // 
             // PayloadDraglabel
             // 
             PayloadDraglabel.AutoSize = true;
-            PayloadDraglabel.Location = new Point(116, 71);
+            PayloadDraglabel.Location = new Point(116, 92);
             PayloadDraglabel.Name = "PayloadDraglabel";
             PayloadDraglabel.Size = new Size(0, 15);
             PayloadDraglabel.TabIndex = 12;
@@ -490,7 +513,7 @@
             // label18
             // 
             label18.AutoSize = true;
-            label18.Location = new Point(5, 71);
+            label18.Location = new Point(5, 92);
             label18.Name = "label18";
             label18.Size = new Size(112, 15);
             label18.TabIndex = 11;
@@ -501,7 +524,7 @@
             labelGW.AutoSize = true;
             labelGW.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             labelGW.ForeColor = Color.Red;
-            labelGW.Location = new Point(3, 125);
+            labelGW.Location = new Point(3, 146);
             labelGW.Name = "labelGW";
             labelGW.Size = new Size(225, 15);
             labelGW.TabIndex = 10;
@@ -511,7 +534,7 @@
             // weightLabel
             // 
             weightLabel.AutoSize = true;
-            weightLabel.Location = new Point(116, 107);
+            weightLabel.Location = new Point(116, 128);
             weightLabel.Name = "weightLabel";
             weightLabel.Size = new Size(0, 15);
             weightLabel.TabIndex = 9;
@@ -519,7 +542,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(37, 107);
+            label9.Location = new Point(37, 128);
             label9.Name = "label9";
             label9.Size = new Size(80, 15);
             label9.TabIndex = 0;
@@ -748,5 +771,8 @@
         private ComboBox comboBoxSta2a;
         private Panel panel3;
         private Button buttonCalc;
+        private ToolTip LatTt;
+        private Label FuelIntLabel;
+        private Label label8;
     }
 }
