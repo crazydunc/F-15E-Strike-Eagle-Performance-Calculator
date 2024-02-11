@@ -15,6 +15,8 @@ namespace F_15E_Strike_Eagle_Performance_Calculator
 
         public async Task<(string, string, string)> CheckLatestGit()
         {
+            Log.WriteLog($"Starting Update Check");
+
             string url = "https://api.github.com/repos/crazydunc/F-15E-Strike-Eagle-Performance-Calculator/releases/latest";
             string tagName = "";
             string html_url = "";
@@ -41,16 +43,21 @@ namespace F_15E_Strike_Eagle_Performance_Calculator
                     tagName = releaseInfo.tag_name; 
                     html_url = releaseInfo.html_url;
                     downloadUrl = releaseInfo.assets[0].browser_download_url;
-
+                    Log.WriteLog($"Server Gave: Version: {tagName}");
                     Version versionNow = Assembly.GetEntryAssembly().GetName().Version;
+                    Log.WriteLog($"Self Version: {versionNow}");
+
                     if (Version.TryParse(tagName, out Version versionServer))
                     {
+                        Log.WriteLog($"Valid Parse of Self Version {versionNow} . Checking against server {versionServer}");
                         if (versionServer > versionNow)
                         {
                             DialogResult result = MessageBox.Show("A newer version is available on the server. Do you want to Open the release on Github?", "Update Available", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
 
                             if (result == DialogResult.OK)
                             {
+                                Log.WriteLog($"User Opened Git Link");
+
                                 ProcessStartInfo psi = new ProcessStartInfo
                                 {
                                     FileName = html_url,
@@ -58,7 +65,22 @@ namespace F_15E_Strike_Eagle_Performance_Calculator
                                 };
                                 Process.Start(psi);
                             }
+                            else
+                            {
+                                Log.WriteLog($"User Declined to Open Git Link");
+
+                            }
                         }
+                        else
+                        {
+                            Log.WriteLog($"No Update Required.");
+
+                        }
+                    }
+                    else
+                    {
+                        Log.WriteLog($"Failed to Parse {tagName}");
+
                     }
                 }
                 catch (HttpRequestException e)

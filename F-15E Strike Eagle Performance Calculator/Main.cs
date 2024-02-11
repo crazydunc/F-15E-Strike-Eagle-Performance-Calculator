@@ -33,6 +33,9 @@ public partial class Main : Form
         var task = Task.Run(() => newUpdate.CheckLatestGit());
         task.Wait();
         var (tagName, body, downloadUrl) = task.Result;
+
+        Log.WriteLog($"Load Completed Okay");
+
     }
 
     private void buttonHome_Click(object sender, EventArgs e)
