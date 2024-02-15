@@ -217,7 +217,7 @@ public partial class FuelPlanner : UserControl
                 catch (Exception ex)
                 {
                     Log.WriteLog(ex.Message);
-                    MessageBox.Show("Route Import failed. Please see Log");
+                    MessageBox.Show(@"Route Import failed. Please see Log");
                 }
             }
         }
@@ -319,12 +319,20 @@ public partial class FuelPlanner : UserControl
 
                     foreach (var routeElement in xmlDoc.Descendants("Route"))
                     {
+                        var aircraft = routeElement.Element("Aircraft");
+
                         var cfRoute = new CFRoute
                         {
                             Name = routeElement.Element("Name").Value,
                             MsnNumber = routeElement.Element("MSNnumber").Value,
-                            Waypoints = new List<Waypoint>()
+                            Waypoints = new List<Waypoint>(),
+                            AircraftType = aircraft.Element("Type").Value
+
                         };
+                        if (cfRoute.AircraftType != "F-15ESE")
+                        {
+                            continue;
+                        }
 
                         var waypointsElement = routeElement.Element("Waypoints");
 
