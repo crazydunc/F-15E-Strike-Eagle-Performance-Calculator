@@ -340,21 +340,36 @@ public partial class FuelPlanner : UserControl
                         {
                             var sequence = 0; // Initialize sequence to 1
 
-                            cfRoute.Waypoints.AddRange(waypointsElement.Elements("Waypoint")
-                                .Select(wp => new Waypoint
-                                {
-                                    Sequence = sequence++,
-                                    Name = wp.Element("Name").Value,
-                                    Latitude = wp.Element("Lat").Value,
-                                    Longitude = wp.Element("Lon").Value,
-                                    Elevation = Convert.ToInt32(wp.Element("Altitude").Value),
-                                    TimeOverSteerpoint = wp.Element("TOT").Value,
-                                    Target = wp.Element("Type").Value ==
-                                             "Target", // Set Target to True if Type is "Target"
-                                    Ktas = (int)double.Parse(wp.Element("KTAS")
-                                        .Value), //Convert.ToInt32(wp.Element("KTAS").Value)
-                                    Activity = Worker.ConvertTimeToMinutes(wp.Element("Activity").Value)
-                                }));
+                            //cfRoute.Waypoints.AddRange(waypointsElement.Elements("Waypoint")
+                            //    .Select(wp => new Waypoint
+                            //    {
+                            //        Sequence = sequence++,
+                            //        Name = wp.Element("Name").Value,
+                            //        Latitude = wp.Element("Lat").Value,
+                            //        Longitude = wp.Element("Lon").Value,
+                            //        Elevation = Convert.ToInt32(wp.Element("Altitude").Value),
+                            //        TimeOverSteerpoint = wp.Element("TOT").Value,
+                            //        Target = wp.Element("Type").Value ==
+                            //                 "Target", // Set Target to True if Type is "Target"
+                            //        Ktas = (int)double.Parse(wp.Element("KTAS")
+                            //            .Value), //Convert.ToInt32(wp.Element("KTAS").Value)
+                            //        Activity = Worker.ConvertTimeToMinutes(wp.Element("Activity").Value)
+                            //    }));
+                            foreach (var wp in waypointsElement.Elements("Waypoint"))
+                            {
+                                var waypoint = new Waypoint();
+                                waypoint.Sequence = sequence++;
+                                waypoint.Name = wp.Element("Name").Value;
+                                waypoint.Latitude = wp.Element("Lat").Value;
+                                waypoint.Longitude = wp.Element("Lon").Value;
+                                waypoint.Elevation = (int)double.Parse(wp.Element("Altitude").Value);
+                                waypoint.TimeOverSteerpoint = wp.Element("TOT").Value;
+                                waypoint.Target = wp.Element("Type").Value == "Target";
+                                waypoint.Ktas = (int)double.Parse(wp.Element("KTAS").Value);
+                                waypoint.Activity = Worker.ConvertTimeToMinutes(wp.Element("Activity").Value);
+
+                                cfRoute.Waypoints.Add(waypoint);
+                            }
                         }
 
                         cfImports.CfRoutes.Add(cfRoute);
