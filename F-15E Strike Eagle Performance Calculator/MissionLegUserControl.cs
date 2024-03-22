@@ -51,7 +51,7 @@ public partial class MissionLegUserControl : UserControl
     {
         try
         {
-            var a = Convert.ToInt32(SpeedTexbox.Text);
+            var a = Convert.ToInt32(SpeedTexbox.Text, FuelPlanner.StandardCulture);
             if (a is > 359 and < 601)
             {
                 MissionLeg.LegSpeed = a;
@@ -72,7 +72,7 @@ public partial class MissionLegUserControl : UserControl
     {
         try
         {
-            var a = Convert.ToInt32(AltitudeTextbox.Text);
+            var a = Convert.ToInt32(AltitudeTextbox.Text, FuelPlanner.StandardCulture);
 
             if (a is > -1 and < 45001)
             {
@@ -135,7 +135,7 @@ public partial class MissionLegUserControl : UserControl
     {
         try
         {
-            var a = Convert.ToInt32(AARtextBox.Text);
+            var a = Convert.ToInt32(AARtextBox.Text, FuelPlanner.StandardCulture);
             var max = F15EStrikeEagle.MaximumFuel + 1;
             if (a > 0 && a < max)
             {
@@ -159,7 +159,7 @@ public partial class MissionLegUserControl : UserControl
     {
         try
         {
-            var a = Convert.ToInt32(DelaytextBox.Text);
+            var a = Convert.ToInt32(DelaytextBox.Text, FuelPlanner.StandardCulture);
             if (a > 0 && a < 61)
             {
                 MissionLeg.LegDelay = a;

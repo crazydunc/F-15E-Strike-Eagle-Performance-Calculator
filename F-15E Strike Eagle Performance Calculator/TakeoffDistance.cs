@@ -34,10 +34,10 @@ public static class TakeoffDistance
                     while (reader.Read())
                     {
                         var dataPoint = new DataPoint();
-                        dataPoint.Weight = Convert.ToDouble(reader["GrossWeight"].ToString());
-                        dataPoint.Temperature = Convert.ToDouble(reader["OAT"].ToString());
-                        dataPoint.Altitude = Convert.ToDouble(reader["Elevation"].ToString());
-                        dataPoint.Distance = Convert.ToDouble(reader["Distance"].ToString());
+                        dataPoint.Weight = Convert.ToDouble(reader["GrossWeight"].ToString(), FuelPlanner.StandardCulture);
+                        dataPoint.Temperature = Convert.ToDouble(reader["OAT"].ToString(), FuelPlanner.StandardCulture);
+                        dataPoint.Altitude = Convert.ToDouble(reader["Elevation"].ToString(), FuelPlanner.StandardCulture);
+                        dataPoint.Distance = Convert.ToDouble(reader["Distance"].ToString(), FuelPlanner.StandardCulture);
                         data.Add(dataPoint);
                     }
                 }

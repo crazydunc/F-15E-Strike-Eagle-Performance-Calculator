@@ -12,7 +12,7 @@ internal class MissionPlanner
         hold = true;
         CurrentMissionDataCard = new MissionDataCard();
         CurrentMissionDataCard.MissionLegs = CalculateMissionLegs(missionWaypoints);
-        if (CurrentMissionDataCard.MissionLegs.Count == 0)
+        if (CurrentMissionDataCard == null || CurrentMissionDataCard.MissionLegs.Count == 0)
             throw new Exception("Calculation Error occurred during import");
         foreach (var leg in CurrentMissionDataCard.MissionLegs)
         {
@@ -100,7 +100,7 @@ internal class MissionPlanner
 
     public static (int poundPerHour, int calculatedValue) CalculateLegFuel(MissionLegs leg)
     {
-        var time = leg.LegDistance / leg.LegSpeed + Convert.ToDouble(leg.LegDelay) / 60;
+        var time = leg.LegDistance / leg.LegSpeed + Convert.ToDouble(leg.LegDelay, FuelPlanner.StandardCulture) / 60;
         FuelFlowDataRetriever getFuel = new();
         var poundPerHour =
             getFuel.RetrieveFuelFlow(leg.LegAltitude, (int)leg.LegDragIndex, (int)leg.LegSpeed,

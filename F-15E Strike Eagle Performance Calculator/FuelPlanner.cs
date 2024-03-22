@@ -1,4 +1,7 @@
-﻿using System.IO.Compression;
+﻿using System.Globalization;
+using System.IO.Compression;
+using System.Text;
+using System.Xml;
 using System.Xml.Linq;
 using F_15E_Strike_Eagle_Performance_Calculator.Imports;
 using F_15E_Strike_Eagle_Performance_Calculator.MissionPlanning;
@@ -9,6 +12,7 @@ namespace F_15E_Strike_Eagle_Performance_Calculator;
 public partial class FuelPlanner : UserControl
 {
     public delegate void MissionLegsUpdatedEventHandler(object sender, EventArgs e);
+    public static CultureInfo StandardCulture = CultureInfo.GetCultureInfo("en-US");
 
     public FuelPlanner()
     {
@@ -120,6 +124,11 @@ public partial class FuelPlanner : UserControl
                 try
                 {
                     var a = ParseMissionXml(filePath);
+                    if (a == null)
+                    {
+                        MessageBox.Show(@"No routes found.", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return; 
+                    }
                     if (a.CfRoutes.Count == 1)
                     {
                         ProcessImport(a.CfRoutes[0].Waypoints);
@@ -292,6 +301,101 @@ public partial class FuelPlanner : UserControl
         }
     }
 
+    //    public static CFImports ParseMissionXml(string zipFilePath)
+    //    {
+    //        try
+    //        {
+    //            using (var _combatFliteFile = ZipFile.OpenRead(zipFilePath))
+    //            {
+    //                var missionXmlEntry = _combatFliteFile.Entries.FirstOrDefault(entry => entry.FullName == "mission.xml");
+
+    //                if (missionXmlEntry == null)
+    //                {
+    //                    // Log error message
+    //                    Log.WriteLog("mission.xml not found in the ZIP file.");
+    //                    MessageBox.Show(@"mission.xml not found in the ZIP file.", @"Error", MessageBoxButtons.OK,
+    //                        MessageBoxIcon.Error);
+    //                    return null;
+    //                }
+    //                using (var stream = missionXmlEntry.Open())
+    //                {
+    //                    var xmlDoc = XDocument.Load(stream);
+    //                    var cfImports = new CFImports
+    //                    {
+    //                        CfRoutes = new List<CFRoute>()
+    //                    };
+
+    //                    foreach (var routeElement in xmlDoc.Descendants("Route"))
+    //                    {
+    //                        var aircraft = routeElement.Element("Aircraft");
+
+    //                        var cfRoute = new CFRoute
+    //                        {
+    //                            Name = routeElement.Element("Name").Value,
+    //                            MsnNumber = routeElement.Element("MSNnumber").Value,
+    //                            Waypoints = new List<Waypoint>(),
+    //                            AircraftType = aircraft.Element("Type").Value
+
+    //                        };
+    //                        if (cfRoute.AircraftType != "F-15ESE")
+    //                        {
+    //                            continue;
+    //                        }
+
+    //                        var waypointsElement = routeElement.Element("Waypoints");
+
+    //                        if (waypointsElement != null)
+    //                        {
+    //                            var sequence = 0; // Initialize sequence to 1
+
+    //                            //cfRoute.Waypoints.AddRange(waypointsElement.Elements("Waypoint")
+    //                            //    .Select(wp => new Waypoint
+    //                            //    {
+    //                            //        Sequence = sequence++,
+    //                            //        Name = wp.Element("Name").Value,
+    //                            //        Latitude = wp.Element("Lat").Value,
+    //                            //        Longitude = wp.Element("Lon").Value,
+    //                            //        Elevation = Convert.ToInt32(wp.Element("Altitude").Value),
+    //                            //        TimeOverSteerpoint = wp.Element("TOT").Value,
+    //                            //        Target = wp.Element("Type").Value ==
+    //                            //                 "Target", // Set Target to True if Type is "Target"
+    //                            //        Ktas = (int)double.Parse(wp.Element("KTAS")
+    //                            //            .Value), //Convert.ToInt32(wp.Element("KTAS").Value)
+    //                            //        Activity = Worker.ConvertTimeToMinutes(wp.Element("Activity").Value)
+    //                            //    }));
+    //                            foreach (var wp in waypointsElement.Elements("Waypoint"))
+    //                            {
+    //                                var waypoint = new Waypoint();
+    //                                waypoint.Sequence = sequence++;
+    //                                waypoint.Name = wp.Element("Name").Value;
+    //                                waypoint.Latitude = wp.Element("Lat").Value;
+    //                                waypoint.Longitude = wp.Element("Lon").Value;
+    //                                waypoint.Elevation = (int)double.Parse(wp.Element("Altitude").Value);
+    //                                waypoint.TimeOverSteerpoint = wp.Element("TOT").Value;
+    //                                waypoint.Target = wp.Element("Type").Value == "Target";
+    //                                waypoint.Ktas = (int)double.Parse(wp.Element("KTAS").Value);
+    //                                waypoint.Activity = Worker.ConvertTimeToMinutes(wp.Element("Activity").Value);
+
+    //                                cfRoute.Waypoints.Add(waypoint);
+    //                            }
+    //                        }
+
+    //                        cfImports.CfRoutes.Add(cfRoute);
+    //                    }
+
+    //                    return cfImports;
+    //                }
+    //            }
+    //        }
+    //        catch (Exception ex)
+    //        {
+    //            // Log the exception message
+    //            Log.WriteLog("An error occurred while parsing the CF File: " + ex.Message);
+    //            MessageBox.Show(@"An error occurred while parsing CF File:
+    //" + ex.Message, @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+    //            return null;
+    //        }
+    //    }
     public static CFImports ParseMissionXml(string zipFilePath)
     {
         try
@@ -311,71 +415,62 @@ public partial class FuelPlanner : UserControl
 
                 using (var stream = missionXmlEntry.Open())
                 {
-                    var xmlDoc = XDocument.Load(stream);
-                    var cfImports = new CFImports
-                    {
-                        CfRoutes = new List<CFRoute>()
-                    };
 
-                    foreach (var routeElement in xmlDoc.Descendants("Route"))
-                    {
-                        var aircraft = routeElement.Element("Aircraft");
 
-                        var cfRoute = new CFRoute
+                    using (var reader = XmlReader.Create(stream))
+                    {
+                        var xmlDoc = XDocument.Load(reader);
+                        var cfImports = new CFImports
                         {
-                            Name = routeElement.Element("Name").Value,
-                            MsnNumber = routeElement.Element("MSNnumber").Value,
-                            Waypoints = new List<Waypoint>(),
-                            AircraftType = aircraft.Element("Type").Value
-
+                            CfRoutes = new List<CFRoute>()
                         };
-                        if (cfRoute.AircraftType != "F-15ESE")
+
+                        foreach (var routeElement in xmlDoc.Descendants("Route"))
                         {
-                            continue;
-                        }
+                            var aircraft = routeElement.Element("Aircraft");
 
-                        var waypointsElement = routeElement.Element("Waypoints");
-
-                        if (waypointsElement != null)
-                        {
-                            var sequence = 0; // Initialize sequence to 1
-
-                            //cfRoute.Waypoints.AddRange(waypointsElement.Elements("Waypoint")
-                            //    .Select(wp => new Waypoint
-                            //    {
-                            //        Sequence = sequence++,
-                            //        Name = wp.Element("Name").Value,
-                            //        Latitude = wp.Element("Lat").Value,
-                            //        Longitude = wp.Element("Lon").Value,
-                            //        Elevation = Convert.ToInt32(wp.Element("Altitude").Value),
-                            //        TimeOverSteerpoint = wp.Element("TOT").Value,
-                            //        Target = wp.Element("Type").Value ==
-                            //                 "Target", // Set Target to True if Type is "Target"
-                            //        Ktas = (int)double.Parse(wp.Element("KTAS")
-                            //            .Value), //Convert.ToInt32(wp.Element("KTAS").Value)
-                            //        Activity = Worker.ConvertTimeToMinutes(wp.Element("Activity").Value)
-                            //    }));
-                            foreach (var wp in waypointsElement.Elements("Waypoint"))
+                            var cfRoute = new CFRoute
                             {
-                                var waypoint = new Waypoint();
-                                waypoint.Sequence = sequence++;
-                                waypoint.Name = wp.Element("Name").Value;
-                                waypoint.Latitude = wp.Element("Lat").Value;
-                                waypoint.Longitude = wp.Element("Lon").Value;
-                                waypoint.Elevation = (int)double.Parse(wp.Element("Altitude").Value);
-                                waypoint.TimeOverSteerpoint = wp.Element("TOT").Value;
-                                waypoint.Target = wp.Element("Type").Value == "Target";
-                                waypoint.Ktas = (int)double.Parse(wp.Element("KTAS").Value);
-                                waypoint.Activity = Worker.ConvertTimeToMinutes(wp.Element("Activity").Value);
+                                Name = GetValueOrDefault(routeElement, "Name"),
+                                MsnNumber = GetValueOrDefault(routeElement, "MSNnumber"),
+                                Waypoints = new List<Waypoint>(),
+                                AircraftType = GetValueOrDefault(aircraft, "Type")
+                            };
 
-                                cfRoute.Waypoints.Add(waypoint);
+                            if (cfRoute.AircraftType != "F-15ESE")
+                            {
+                                continue;
                             }
+
+                            var waypointsElement = routeElement.Element("Waypoints");
+
+                            if (waypointsElement != null)
+                            {
+                                var sequence = 0; // Initialize sequence to 1
+
+                                foreach (var wp in waypointsElement.Elements("Waypoint"))
+                                {
+                                    var waypoint = new Waypoint();
+                                    waypoint.Sequence = sequence++;
+                                    waypoint.Name = GetValueOrDefault(wp, "Name");
+                                    waypoint.Latitude = GetValueOrDefault(wp, "Lat");
+                                    waypoint.Longitude = GetValueOrDefault(wp, "Lon");
+                                    waypoint.Elevation = Convert.ToInt32(GetValueOrDefault(wp, "Altitude"), FuelPlanner.StandardCulture);
+                                    waypoint.TimeOverSteerpoint = GetValueOrDefault(wp, "TOT");
+                                    waypoint.Target = GetValueOrDefault(wp, "Type") == "Target";
+                                    var spdHold = GetValueOrDefault(wp, "KTAS");
+                                    waypoint.Ktas = (int)double.Parse(spdHold, StandardCulture);
+                                    waypoint.Activity = Worker.ConvertTimeToMinutes(GetValueOrDefault(wp, "Activity"));
+
+                                    cfRoute.Waypoints.Add(waypoint);
+                                }
+                            }
+
+                            cfImports.CfRoutes.Add(cfRoute);
                         }
 
-                        cfImports.CfRoutes.Add(cfRoute);
+                        return cfImports;
                     }
-
-                    return cfImports;
                 }
             }
         }
@@ -388,7 +483,10 @@ public partial class FuelPlanner : UserControl
             return null;
         }
     }
-
+    private static string GetValueOrDefault(XElement element, string attributeName)
+    {
+        return element?.Element(attributeName)?.Value ?? string.Empty;
+    }
     private void ResetFuelPlanner()
     {
         MissionPlanner.CurrentMissionDataCard = new MissionDataCard();
@@ -526,7 +624,7 @@ public partial class FuelPlanner : UserControl
     {
         try
         {
-            MissionPlanner.CurrentMissionDataCard.BingoFuel = Convert.ToDouble(textBoxBingo.Text);
+            MissionPlanner.CurrentMissionDataCard.BingoFuel = Convert.ToDouble(textBoxBingo.Text, FuelPlanner.StandardCulture);
         }
         catch
         {
@@ -542,7 +640,7 @@ public partial class FuelPlanner : UserControl
     {
         try
         {
-            MissionPlanner.CurrentMissionDataCard.JokerFuel = Convert.ToDouble(JokertextBox.Text);
+            MissionPlanner.CurrentMissionDataCard.JokerFuel = Convert.ToDouble(JokertextBox.Text, FuelPlanner.StandardCulture);
         }
         catch
         {

@@ -43,7 +43,7 @@ public class FuelFlowDataRetriever
                     if (reader.Read())
                     {
                         // Exact match found, return the fuel flow
-                        var fuelFlow = Convert.ToDouble(reader["FuelFlowPerHour"]);
+                        var fuelFlow = Convert.ToDouble(reader["FuelFlowPerHour"], FuelPlanner.StandardCulture);
                         //Log.WriteLog("Exact Fuel Flow Match found");
 
                         return fuelFlow;
@@ -145,7 +145,7 @@ public class FuelFlowDataRetriever
                     if (reader.Read())
                     {
                         // Exact match found, return the fuel flow
-                        var fuelFlow = Convert.ToDouble(reader["FuelFlowPerHour"]);
+                        var fuelFlow = Convert.ToDouble(reader["FuelFlowPerHour"], FuelPlanner.StandardCulture);
                         return fuelFlow;
                     }
 
@@ -262,7 +262,7 @@ public class FuelFlowDataRetriever
                 {
                     while (reader.Read())
                     {
-                        cornerValues[i] = Convert.ToDouble(reader["FuelFlowPerHour"]);
+                        cornerValues[i] = Convert.ToDouble(reader["FuelFlowPerHour"], FuelPlanner.StandardCulture);
                         i++;
                     }
                 }
@@ -331,8 +331,8 @@ public class FuelFlowDataRetriever
                 {
                     while (reader.Read() && i < 16)
                     {
-                        cornerValues[i] = Convert.ToDouble(reader["FuelFlowPerHour"]);
-                        if (Convert.ToDouble(reader["FuelFlowPerHour"]) != 0) i++;
+                        cornerValues[i] = Convert.ToDouble(reader["FuelFlowPerHour"], FuelPlanner.StandardCulture);
+                        if (Convert.ToDouble(reader["FuelFlowPerHour"], FuelPlanner.StandardCulture) != 0) i++;
                     }
                 }
 

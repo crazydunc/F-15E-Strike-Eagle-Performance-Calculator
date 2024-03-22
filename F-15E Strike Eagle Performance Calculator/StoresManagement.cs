@@ -21,37 +21,37 @@ public static class StoresManagement
                 while (reader.Read())
                 {
                     var store = new Stores();
-                    store.Id = Convert.ToInt32(reader["ID"]);
+                    store.Id = Convert.ToInt32(reader["ID"], FuelPlanner.StandardCulture);
                     store.Item = reader["Item"].ToString();
-                    store.Weight = Convert.ToInt32(reader["Weight"]);
+                    store.Weight = Convert.ToInt32(reader["Weight"], FuelPlanner.StandardCulture);
                     store.DragIndexCl = reader["DragIndex-CL"] == DBNull.Value
                         ? null
-                        : Convert.ToDouble(reader["DragIndex-CL"]);
+                        : Convert.ToDouble(reader["DragIndex-CL"], FuelPlanner.StandardCulture);
                     store.DragIndexWing = reader["DragIndex-Wing"] == DBNull.Value
                         ? null
-                        : Convert.ToDouble(reader["DragIndex-Wing"]);
+                        : Convert.ToDouble(reader["DragIndex-Wing"], FuelPlanner.StandardCulture);
                     store.DragIndexCftNoBombOrTankWing = reader["DragIndex-CFT(NoBomborTankWing)"] == DBNull.Value
                         ? null
-                        : Convert.ToDouble(reader["DragIndex-CFT(NoBomborTankWing)"]);
+                        : Convert.ToDouble(reader["DragIndex-CFT(NoBomborTankWing)"], FuelPlanner.StandardCulture);
                     store.DragIndexCft = reader["DragIndex-CFT"] == DBNull.Value
                         ? null
-                        : Convert.ToDouble(reader["DragIndex-CFT"]);
+                        : Convert.ToDouble(reader["DragIndex-CFT"], FuelPlanner.StandardCulture);
                     store.DragIndexClNoCftA2GStores = reader["DragIndex-CL(NoCFTA2GStores)"] == DBNull.Value
                         ? null
                         : Convert.ToDouble(reader["DragIndex-CL(NoCFTA2GStores)"]);
                     var categoryType = reader["Category"].ToString() ?? string.Empty;
                     store.Description = reader["Description"].ToString();
-                    store.Sta2A = Convert.IsDBNull(reader["STA2A"]) ? 0 : Convert.ToInt32(reader["STA2A"]);
-                    store.Sta2 = Convert.IsDBNull(reader["STA2"]) ? 0 : Convert.ToInt32(reader["STA2"]);
-                    store.Sta2B = Convert.IsDBNull(reader["STA2B"]) ? 0 : Convert.ToInt32(reader["STA2B"]);
-                    store.Lcft = Convert.IsDBNull(reader["LCFT"]) ? 0 : Convert.ToInt32(reader["LCFT"]);
-                    store.Ltp = Convert.IsDBNull(reader["LTP"]) ? 0 : Convert.ToInt32(reader["LTP"]);
-                    store.Sta5 = Convert.IsDBNull(reader["STA5"]) ? 0 : Convert.ToInt32(reader["STA5"]);
-                    store.Lnp = Convert.IsDBNull(reader["LNP"]) ? 0 : Convert.ToInt32(reader["LNP"]);
-                    store.Rcft = Convert.IsDBNull(reader["RCFT"]) ? 0 : Convert.ToInt32(reader["RCFT"]);
-                    store.Sta8A = Convert.IsDBNull(reader["STA8A"]) ? 0 : Convert.ToInt32(reader["STA8A"]);
-                    store.Sta8 = Convert.IsDBNull(reader["STA8"]) ? 0 : Convert.ToInt32(reader["STA8"]);
-                    store.Sta8B = Convert.IsDBNull(reader["STA8B"]) ? 0 : Convert.ToInt32(reader["STA8B"]);
+                    store.Sta2A = Convert.IsDBNull(reader["STA2A"]) ? 0 : Convert.ToInt32(reader["STA2A"], FuelPlanner.StandardCulture);
+                    store.Sta2 = Convert.IsDBNull(reader["STA2"]) ? 0 : Convert.ToInt32(reader["STA2"], FuelPlanner.StandardCulture);
+                    store.Sta2B = Convert.IsDBNull(reader["STA2B"]) ? 0 : Convert.ToInt32(reader["STA2B"], FuelPlanner.StandardCulture);
+                    store.Lcft = Convert.IsDBNull(reader["LCFT"]) ? 0 : Convert.ToInt32(reader["LCFT"], FuelPlanner.StandardCulture);
+                    store.Ltp = Convert.IsDBNull(reader["LTP"]) ? 0 : Convert.ToInt32(reader["LTP"], FuelPlanner.StandardCulture);
+                    store.Sta5 = Convert.IsDBNull(reader["STA5"]) ? 0 : Convert.ToInt32(reader["STA5"], FuelPlanner.StandardCulture);
+                    store.Lnp = Convert.IsDBNull(reader["LNP"]) ? 0 : Convert.ToInt32(reader["LNP"], FuelPlanner.StandardCulture);
+                    store.Rcft = Convert.IsDBNull(reader["RCFT"]) ? 0 : Convert.ToInt32(reader["RCFT"], FuelPlanner.StandardCulture);
+                    store.Sta8A = Convert.IsDBNull(reader["STA8A"]) ? 0 : Convert.ToInt32(reader["STA8A"], FuelPlanner.StandardCulture);
+                    store.Sta8 = Convert.IsDBNull(reader["STA8"]) ? 0 : Convert.ToInt32(reader["STA8"], FuelPlanner.StandardCulture);
+                    store.Sta8B = Convert.IsDBNull(reader["STA8B"]) ? 0 : Convert.ToInt32(reader["STA8B"], FuelPlanner.StandardCulture);
                     store.Category = categoryType switch
                     {
                         "Air-to-Air Missiles" => CategoryType.AirToAirMissiles,

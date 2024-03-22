@@ -275,7 +275,7 @@ public partial class Loadout : UserControl
         string displayText = selectedItem.DisplayText;
         var displayParts = displayText.Split(" x ");
 
-        var sta = int.Parse(displayParts[0]);
+        var sta = int.Parse(displayParts[0], FuelPlanner.StandardCulture);
         var item = displayParts[1];
         var selectedData = Main.LoadedData.FirstOrDefault(s => propertySelector(s) == sta && s.Item == item);
 
@@ -344,7 +344,7 @@ public partial class Loadout : UserControl
         }
 
         var thrustSetting = radioButton1.Checked ? 0 : 1; //0 = Max || 1 = Mil
-        var takeoffWeight = Convert.ToDouble(takeoffWeightTextBox.Text);
+        var takeoffWeight = Convert.ToDouble(takeoffWeightTextBox.Text, FuelPlanner.StandardCulture);
         switch (takeoffWeight)
         {
             case > 81000:
@@ -357,8 +357,8 @@ public partial class Loadout : UserControl
                 try
                 {
                     label2.Text = TakeoffSpeeds.Calculate(takeoffWeight, 24, thrustSetting) + " KCAS";
-                    var oat = Convert.ToDouble(OATTextBox.Text); // Actual OAT
-                    var runwayElevation = Convert.ToDouble(runwayElevationTextBox.Text); // Actual Runway Elevation
+                    var oat = Convert.ToDouble(OATTextBox.Text, FuelPlanner.StandardCulture); // Actual OAT
+                    var runwayElevation = Convert.ToDouble(runwayElevationTextBox.Text, FuelPlanner.StandardCulture); // Actual Runway Elevation
                     if (runwayElevation > 2000)
                         MessageBox.Show(
                             @"Performance Data is Limited above 2000ft AMSL, Results may be inaccurate");

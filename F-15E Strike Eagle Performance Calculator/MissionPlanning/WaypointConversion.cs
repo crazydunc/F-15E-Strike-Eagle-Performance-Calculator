@@ -20,10 +20,10 @@ internal class WaypointConversion
         }
         else
         {
-            lat1Decimal = Convert.ToDouble(lat1);
-            lon1Decimal = Convert.ToDouble(lon1);
-            lat2Decimal = Convert.ToDouble(lat2);
-            lon2Decimal = Convert.ToDouble(lon2);
+            lat1Decimal = Convert.ToDouble(lat1, FuelPlanner.StandardCulture);
+            lon1Decimal = Convert.ToDouble(lon1, FuelPlanner.StandardCulture);
+            lat2Decimal = Convert.ToDouble(lat2, FuelPlanner.StandardCulture);
+            lon2Decimal = Convert.ToDouble(lon2, FuelPlanner.StandardCulture);
         }
 
         const double earthRadiusNauticalMiles = 3440.065; // Earth's mean radius in nautical miles
@@ -47,8 +47,8 @@ internal class WaypointConversion
         if (parts.Length == 3)
         {
             var direction = parts[0];
-            var degrees = int.Parse(parts[1]);
-            var minutes = double.Parse(parts[2]);
+            var degrees = int.Parse(parts[1], FuelPlanner.StandardCulture);
+            var minutes = double.Parse(parts[2], FuelPlanner.StandardCulture);
 
             var decimalDegrees = degrees + minutes / 60.0;
 
