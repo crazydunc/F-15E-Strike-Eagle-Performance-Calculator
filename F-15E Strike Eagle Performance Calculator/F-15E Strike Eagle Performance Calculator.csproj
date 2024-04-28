@@ -11,8 +11,8 @@
 		<Title>F-15E Strike Eagle Performance Calculator</Title>
 		<Company>Duncan MacKellar</Company>
 		<Copyright>Duncan MacKellar 2024</Copyright>
-		<AssemblyVersion>1.0.1.4</AssemblyVersion>
-		<FileVersion>1.0.1.4</FileVersion>
+		<AssemblyVersion>1.0.1.6</AssemblyVersion>
+		<FileVersion>1.0.1.6</FileVersion>
 		<Platforms>AnyCPU;x64</Platforms>
 	</PropertyGroup>
 	<PropertyGroup>
@@ -22,7 +22,7 @@
 		<CollectSQLiteInteropFiles>false</CollectSQLiteInteropFiles>
 		<PlatformTarget>x64</PlatformTarget>
 		<SignAssembly>False</SignAssembly>
-		<Version>1.0.1.4</Version>
+		<Version>1.0.1.6</Version>
 	</PropertyGroup>
 	<ItemGroup>
 		<Content Include="Images\9340_und_icon.ico" />

@@ -166,12 +166,12 @@ public partial class Loadout : UserControl
             comboBoxSta2a.SelectedIndex = 2;
 
             comboBoxsta2.SelectedIndex = 21;
-            comboBoxsta2b.SelectedIndex = 4;
+            comboBoxsta2b.SelectedIndex = 2;
             comboBoxltp.SelectedIndex = 1;
             comboBoxlnp.SelectedIndex = 1;
             comboBoxsta8a.SelectedIndex = 2;
             comboBoxsta8.SelectedIndex = 21;
-            comboBoxsta8b.SelectedIndex = 4;
+            comboBoxsta8b.SelectedIndex = 2;
         }
     }
 

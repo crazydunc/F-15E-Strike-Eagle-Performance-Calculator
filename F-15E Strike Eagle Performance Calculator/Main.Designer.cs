@@ -48,9 +48,8 @@
             NavPanel.Controls.Add(panel1);
             NavPanel.Dock = DockStyle.Top;
             NavPanel.Location = new Point(0, 0);
-            NavPanel.Margin = new Padding(3, 4, 3, 4);
             NavPanel.Name = "NavPanel";
-            NavPanel.Size = new Size(1539, 72);
+            NavPanel.Size = new Size(1347, 54);
             NavPanel.TabIndex = 0;
             // 
             // panel1
@@ -59,10 +58,9 @@
             panel1.Controls.Add(labelCopy);
             panel1.Controls.Add(buttonFuel);
             panel1.Controls.Add(buttonHome);
-            panel1.Location = new Point(3, 4);
-            panel1.Margin = new Padding(3, 4, 3, 4);
+            panel1.Location = new Point(3, 3);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1536, 60);
+            panel1.Size = new Size(1344, 45);
             panel1.TabIndex = 0;
             // 
             // label1
@@ -70,9 +68,9 @@
             label1.AutoSize = true;
             label1.Font = new Font("AmarilloUSAF", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = SystemColors.Control;
-            label1.Location = new Point(463, 8);
+            label1.Location = new Point(405, 6);
             label1.Name = "label1";
-            label1.Size = new Size(686, 35);
+            label1.Size = new Size(550, 27);
             label1.TabIndex = 20;
             label1.Text = "Strike Eagle Performance Calculator";
             // 
@@ -81,9 +79,9 @@
             labelCopy.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             labelCopy.AutoSize = true;
             labelCopy.ForeColor = SystemColors.Control;
-            labelCopy.Location = new Point(1280, 8);
+            labelCopy.Location = new Point(1120, 6);
             labelCopy.Name = "labelCopy";
-            labelCopy.Size = new Size(244, 20);
+            labelCopy.Size = new Size(194, 15);
             labelCopy.TabIndex = 19;
             labelCopy.Text = "© Duncan MacKellar 2024 - v1.0.0.5";
             // 
@@ -99,13 +97,13 @@
             buttonFuel.ForeColor = Color.White;
             buttonFuel.Image = Properties.Resources.icons8_jet_engine_48;
             buttonFuel.ImageAlign = ContentAlignment.MiddleLeft;
-            buttonFuel.Location = new Point(200, 0);
-            buttonFuel.Margin = new Padding(3, 13, 3, 13);
+            buttonFuel.Location = new Point(175, 0);
+            buttonFuel.Margin = new Padding(3, 10, 3, 10);
             buttonFuel.Name = "buttonFuel";
-            buttonFuel.Padding = new Padding(10, 0, 0, 0);
-            buttonFuel.Size = new Size(200, 60);
+            buttonFuel.Padding = new Padding(9, 0, 0, 0);
+            buttonFuel.Size = new Size(175, 45);
             buttonFuel.TabIndex = 4;
-            buttonFuel.Text = "             Fuel";
+            buttonFuel.Text = "             Planner";
             buttonFuel.TextAlign = ContentAlignment.MiddleLeft;
             buttonFuel.UseVisualStyleBackColor = false;
             buttonFuel.Click += buttonFuel_Click;
@@ -123,10 +121,9 @@
             buttonHome.Image = Properties.Resources.icons8_fighter_jet_48;
             buttonHome.ImageAlign = ContentAlignment.MiddleLeft;
             buttonHome.Location = new Point(0, 0);
-            buttonHome.Margin = new Padding(3, 4, 3, 4);
             buttonHome.Name = "buttonHome";
-            buttonHome.Padding = new Padding(10, 0, 0, 0);
-            buttonHome.Size = new Size(200, 60);
+            buttonHome.Padding = new Padding(9, 0, 0, 0);
+            buttonHome.Size = new Size(175, 45);
             buttonHome.TabIndex = 3;
             buttonHome.Text = "             Loadout";
             buttonHome.TextAlign = ContentAlignment.MiddleLeft;
@@ -138,44 +135,42 @@
             UiPanel.Controls.Add(loadout1);
             UiPanel.Controls.Add(fuelPlanner1);
             UiPanel.Dock = DockStyle.Fill;
-            UiPanel.Location = new Point(0, 72);
-            UiPanel.Margin = new Padding(3, 4, 3, 4);
+            UiPanel.Location = new Point(0, 54);
             UiPanel.Name = "UiPanel";
-            UiPanel.Size = new Size(1539, 932);
+            UiPanel.Size = new Size(1347, 699);
             UiPanel.TabIndex = 1;
             // 
             // loadout1
             // 
             loadout1.BackColor = SystemColors.WindowFrame;
             loadout1.Location = new Point(0, 0);
-            loadout1.Margin = new Padding(3, 5, 3, 5);
+            loadout1.Margin = new Padding(3, 4, 3, 4);
             loadout1.Name = "loadout1";
-            loadout1.Size = new Size(1537, 925);
+            loadout1.Size = new Size(1345, 694);
             loadout1.TabIndex = 0;
             // 
             // fuelPlanner1
             // 
             fuelPlanner1.BackColor = SystemColors.WindowFrame;
             fuelPlanner1.Location = new Point(0, 0);
-            fuelPlanner1.Margin = new Padding(3, 5, 3, 5);
+            fuelPlanner1.Margin = new Padding(3, 4, 3, 4);
             fuelPlanner1.Name = "fuelPlanner1";
-            fuelPlanner1.Size = new Size(1537, 925);
+            fuelPlanner1.Size = new Size(1345, 694);
             fuelPlanner1.TabIndex = 1;
             fuelPlanner1.Visible = false;
             // 
             // Main
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             BackColor = SystemColors.WindowFrame;
-            ClientSize = new Size(1539, 1004);
+            ClientSize = new Size(1347, 753);
             Controls.Add(UiPanel);
             Controls.Add(NavPanel);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
             Name = "Main";
             SizeGripStyle = SizeGripStyle.Hide;
